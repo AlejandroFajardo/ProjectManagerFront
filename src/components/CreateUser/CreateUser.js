@@ -104,11 +104,12 @@ const CreateUser = () => {
 
     function handleSubmit() {
         setIsLoading(true)
+        // let account = { username, firstName, lastName, password }
         let account = { username, firstName, lastName, password }
         if(account) {
             let ac = JSON.stringify(account)
             localStorage.setItem('account', ac)
-            fetch('http://127.0.0.1:8000/user',{
+            fetch('http://localhost:4000/createUser',{
                 method:'POST',
                 headers:{
                     'Accept':'application/json',
