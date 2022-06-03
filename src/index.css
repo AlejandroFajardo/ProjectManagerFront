@@ -333,7 +333,21 @@ align-self: flex-start;
   .CreateUserImg {
       display: none;
   }
+ /*---------CREATE PROYECT--------------*/
+
+
+.formCreateProyect {
  
+  width: 100%;
+   margin: auto;
+  align-items:center;
+  background-size: cover;
+  justify-content: center;
+  padding: 0px 30px 10px 20px;
+  box-shadow: 5px 15px 20px 15px rgba(0, 0, 0, 0.16);
+  flex-direction: row;
+
+}
  
 }
 
