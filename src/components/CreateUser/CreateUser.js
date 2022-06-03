@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Input from '../Login/components/Input2';
+import Input from '../Login/components/Input';
 import Item from '../Login/components/Item';
 import Title from '../Login/components/Title';
 import ErrorNotification from '../commons/ErrorNotification';
@@ -68,24 +68,24 @@ const CreateUser = () => {
                     setErrors({ ...errors, lastNameError: false })
                     setUser_last_name(value)
                 }
-                break;
-                case 'identity_document_type':
+            break;
+            case 'identity_document_type':
                     if(value < 1) {
                         setErrors({ ...errors, identity_document_typeError: true })
                     } else {
                         setErrors({ ...errors, identity_document_typeError: false })
                         setIdentity_document_type(value)
                     }
-                    break;
-                    case 'identity_document_word':
+            break;
+            case 'identity_document_word':
                     if(value < 1) {
                         setErrors({ ...errors, identity_document_wordError: true })
                     } else {
                         setErrors({ ...errors, identity_document_wordError: false })
                         setIdentity_document_word(value)
                     }
-                    break;
-                    case 'bird_date':
+            break;
+            case 'bird_date':
                         if(value < 1) {
                             setErrors({ ...errors, bird_dateError: true })
                         } else {
@@ -94,38 +94,38 @@ const CreateUser = () => {
                         }
                         break;
 
-                case 'salary':
+            case 'salary':
                     if(value < 1) {
                         setErrors({ ...errors, salaryError: true })
                     } else {
                         setErrors({ ...errors, salaryError: false })
                         setSalary(value)
                     }
-                    break;
-                    case 'weekly_hours':
+            break;
+            case 'weekly_hours':
                         if(value < 1) {
                             setErrors({ ...errors, weeklyError: true })
                         } else {
                             setErrors({ ...errors,weeklyError: false })
                             setWeekly_hours(value)
                         }
-                        break;
-                        case 'user_mail':
+            break;
+            case 'user_mail':
                             if(value < 1) {
                                 setErrors({ ...errors, user_mailError: true })
                             } else {
                                 setErrors({ ...errors,user_mailError: false })
                                 setUser_mail(value)
                             }
-                            break;
-                            case 'phone_number':
+            break;
+            case 'phone_number':
                                 if(value < 1) {
                                     setErrors({ ...errors, phone_numberError: true })
                                 } else {
                                     setErrors({ ...errors,phone_numberError: false })
                                     setPhone_number(value)
                                 }
-                                break;
+            break;
 
             case 'password':
                 if(value < 1) {
@@ -134,7 +134,7 @@ const CreateUser = () => {
                     setErrors({ ...errors, passwordError: false })
                     setUser_password(value)
                 }
-                break;
+            break;
             case 'passwordAgain':
                 if(user_password.length < 6) {
                     setErrors({ ...errors, passwordError: true })
@@ -146,7 +146,7 @@ const CreateUser = () => {
                     setErrors({ ...errors, passwordError: false, 
                                     passwordAgainError: true })
                 }
-                break;
+            break;
             default:
                 console.log('no hay valores.')
               
@@ -247,10 +247,10 @@ const CreateUser = () => {
                         { errors.lastNameError && 
                             <ErrorNotification text='Required.' /> }
 
-                        <Item text='tipo de documento' />
+                        <Item text='seleccione el tipo de documento' />
                         <Input 
                             attribute={{
-                                name: ' identity_document_type',
+                                name: 'identity_document_type',
                                 inputType: 'text',
                                 ph: ''
                             }}
@@ -260,10 +260,10 @@ const CreateUser = () => {
                         { errors.identity_document_typeError && 
                             <ErrorNotification text='Required.' /> }
 
-               <Item text='Identificar documento de trabajo' />
+                      <Item text='ingrese numero de identidad' />
                         <Input 
                             attribute={{
-                                name: ' identity_document_word',
+                                name: 'identity_document_word',
                                 inputType: 'text',
                                 ph: ''
                             }}
@@ -272,6 +272,7 @@ const CreateUser = () => {
                         />
                         { errors.identity_document_wordError && 
                             <ErrorNotification text='Required.' /> }
+                            
                         <Item text='Fecha de nacimiento' />
                         <Input 
                             attribute={{
