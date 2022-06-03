@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Input from '../Login/components/Input';
+import Input from '../Login/components/Input2';
 import Item from '../Login/components/Item';
 import Title from '../Login/components/Title';
 import ErrorNotification from '../commons/ErrorNotification';
@@ -20,22 +20,35 @@ const CreateUser = () => {
 
     const classes = useStyles();
 
-    const [ username, setUsername ] = useState('');
-    const [ firstName, setFirstName ] = useState('');
-    const [ lastName, setLastName ] = useState('');
-    const [ password, setPassword ] = useState('');
+    const [ user_name, setUser_name ] = useState('');
+    const [ user_last_name, setUser_last_name ] = useState('');
+    const [ identity_document_type, setIdentity_document_type ] = useState('');
+    const [ identity_document_word, setIdentity_document_word ] = useState('');
+    const [ bird_date, setBird_date ] = useState('');
+    const [ salary, setSalary ] = useState('');
+    const [weekly_hours, setWeekly_hours ] = useState('');
+    const [user_mail, setUser_mail ] = useState('');
+    const [phone_number, setPhone_number ] = useState('');
+    const [ user_password, setUser_password ] = useState('');
     const [ passwordAgain, setPasswordAgain ] = useState('');
-
     const [ isLoading, setIsLoading ] = useState(false);
     const [ created, setCreated ] = useState(false)
 
+
     const [ errors, setErrors ] = useState({
-        usernameError: false,
-        firstNameError: false,
+       usernameError: false,
         lastNameError: false,
-        passwordError: false,
+        identity_document_typeError:false,
+        identity_document_wordError:false,
+        bird_dateError:false,
+        salaryError:false,
+        weeklyError: false,
+        user_mailError:false,
+        phone_numberError:false,
+        user_passwordError: false,
         passwordAgainError: false
     })
+
 
     function handleChange(name, value) {
         switch(name) {
@@ -44,37 +57,88 @@ const CreateUser = () => {
                     setErrors({ ...errors, usernameError: true })
                 } else {
                     setErrors({ ...errors, usernameError: false })
-                    setUsername(value)
+                    setUser_name(value)
                 }
                 break;
-            case 'firstName':
-                if(value < 1) {
-                    setErrors({ ...errors, firstNameError: true })
-                } else {
-                    setErrors({ ...errors, firstNameError: false })
-                    setFirstName(value)
-                }
-                break;
+            
             case 'lastName':
                 if(value < 1) {
                     setErrors({ ...errors, lastNameError: true })
                 } else {
                     setErrors({ ...errors, lastNameError: false })
-                    setLastName(value)
+                    setUser_last_name(value)
                 }
                 break;
+                case 'identity_document_type':
+                    if(value < 1) {
+                        setErrors({ ...errors, identity_document_typeError: true })
+                    } else {
+                        setErrors({ ...errors, identity_document_typeError: false })
+                        setIdentity_document_type(value)
+                    }
+                    break;
+                    case 'identity_document_word':
+                    if(value < 1) {
+                        setErrors({ ...errors, identity_document_wordError: true })
+                    } else {
+                        setErrors({ ...errors, identity_document_wordError: false })
+                        setIdentity_document_word(value)
+                    }
+                    break;
+                    case 'bird_date':
+                        if(value < 1) {
+                            setErrors({ ...errors, bird_dateError: true })
+                        } else {
+                            setErrors({ ...errors,bird_dateError: false })
+                            setBird_date(value)
+                        }
+                        break;
+
+                case 'salary':
+                    if(value < 1) {
+                        setErrors({ ...errors, salaryError: true })
+                    } else {
+                        setErrors({ ...errors, salaryError: false })
+                        setSalary(value)
+                    }
+                    break;
+                    case 'weekly_hours':
+                        if(value < 1) {
+                            setErrors({ ...errors, weeklyError: true })
+                        } else {
+                            setErrors({ ...errors,weeklyError: false })
+                            setWeekly_hours(value)
+                        }
+                        break;
+                        case 'user_mail':
+                            if(value < 1) {
+                                setErrors({ ...errors, user_mailError: true })
+                            } else {
+                                setErrors({ ...errors,user_mailError: false })
+                                setUser_mail(value)
+                            }
+                            break;
+                            case 'phone_number':
+                                if(value < 1) {
+                                    setErrors({ ...errors, phone_numberError: true })
+                                } else {
+                                    setErrors({ ...errors,phone_numberError: false })
+                                    setPhone_number(value)
+                                }
+                                break;
+
             case 'password':
                 if(value < 1) {
                     setErrors({ ...errors, passwordError: true })
                 } else {
                     setErrors({ ...errors, passwordError: false })
-                    setPassword(value)
+                    setUser_password(value)
                 }
                 break;
             case 'passwordAgain':
-                if(password.length < 6) {
+                if(user_password.length < 6) {
                     setErrors({ ...errors, passwordError: true })
-                } else if( password === value ) {
+                } else if( user_password === value ) {
                     setErrors({ ...errors, passwordError: false,
                                  passwordAgainError: false })
                     setPasswordAgain(value)
@@ -88,24 +152,25 @@ const CreateUser = () => {
               
         }
     }
-    console.log("usuario",username);
+   
+
     let params =
+      
         errors.usernameError === false &&
-        errors.firstNameError === false &&
         errors.lastNameError === false &&
+        errors.salaryError===false&&
         errors.passwordError === false &&
         errors.passwordAgainError === false &&
-        username.length > 1 &&
-        firstName.length > 1 &&
-        lastName.length > 1 &&
-        password.length > 5 &&
-        password === passwordAgain
+        user_name.length > 1 &&
+        user_last_name.length > 1 &&
+        salary.length>1&&
+        user_password.length > 5 &&
+        user_password=== passwordAgain
     ;
 
     function handleSubmit() {
         setIsLoading(true)
-        // let account = { username, firstName, lastName, password }
-        let account = { username, firstName, lastName, password }
+        let account = { user_name, user_last_name, identity_document_type,identity_document_word,bird_date,salary,weekly_hours,user_mail,phone_number,user_password}
         if(account) {
             let ac = JSON.stringify(account)
             localStorage.setItem('account', ac)
@@ -116,9 +181,17 @@ const CreateUser = () => {
                     'Content-Type':'application/json'
                 },
                 body:JSON.stringify({
-                    userId:null,
-                    userName:lastName,
-                    password:password,
+                    userName:user_name,
+                    user_last_name:user_last_name,
+                    identity_document_type:identity_document_type,
+                    identity_document_word:identity_document_word,
+                    bird_date:bird_date,
+                    salary:salary,
+                    weekly_hours:weekly_hours,
+                    user_mail:user_mail,
+                    phone_number:phone_number,
+                    user_password:user_password,
+                  
                 })
             })
             .then(res=>res.json())
@@ -137,16 +210,15 @@ const CreateUser = () => {
     let open = true;
 
     let screenWidth = window.innerWidth;
+    console.log(identity_document_type);
+
+    /*Formulario CreateUser */
 
     return (
-        <>
-
-        { created && <Navigate to='/home' /> }
-
+    <>
+        { created && <Navigate to='/ ' /> }
                 <div className='createUserContent'>
-                    
                     <div className='formCreateUser'>
-
                     { screenWidth > 1030 && <Title text='Registrar' /> }
 
                         <Item text='Nombre' />
@@ -159,47 +231,10 @@ const CreateUser = () => {
                             handleChange={handleChange}
                             param={errors.usernameError}
                         />
-                        { errors.usernameError && 
+                        { errors.usernameError&& 
                             <ErrorNotification text='Required.' /> }
 
                         <Item text='Apellido' />
-                        <Input 
-                            attribute={{
-                                name: 'firstName',
-                                inputType: 'text',
-                                ph: ''
-                            }}
-                            handleChange={handleChange}
-                            param={errors.firstNameError}
-                        />
-                        { errors.firstNameError && 
-                            <ErrorNotification text='Required.' /> }
-                             <Item text='Salario' />
-                        <Input 
-                            attribute={{
-                                name: 'Salario',
-                                inputType: 'number',
-                                ph: ''
-                            }}
-                            handleChange={handleChange}
-                            param={errors.firstNameError}
-                        />
-                        { errors.firstNameError && 
-                            <ErrorNotification text='Required.' /> }
-                             <Item text='Horas de trabajo semanales' />
-                        <Input 
-                            attribute={{
-                                name: 'horas',
-                                inputType: 'text',
-                                ph: ''
-                            }}
-                            handleChange={handleChange}
-                            param={errors.firstNameError}
-                        />
-                        { errors.firstNameError && 
-                            <ErrorNotification text='Required.' /> }
-
-                        <Item text='Correo Electronico' />
                         <Input 
                             attribute={{
                                 name: 'lastName',
@@ -211,6 +246,97 @@ const CreateUser = () => {
                         />
                         { errors.lastNameError && 
                             <ErrorNotification text='Required.' /> }
+
+                        <Item text='tipo de documento' />
+                        <Input 
+                            attribute={{
+                                name: ' identity_document_type',
+                                inputType: 'text',
+                                ph: ''
+                            }}
+                            handleChange={handleChange}
+                            param={errors.identity_document_typeError}
+                        />
+                        { errors.identity_document_typeError && 
+                            <ErrorNotification text='Required.' /> }
+
+               <Item text='Identificar documento de trabajo' />
+                        <Input 
+                            attribute={{
+                                name: ' identity_document_word',
+                                inputType: 'text',
+                                ph: ''
+                            }}
+                            handleChange={handleChange}
+                            param={errors.identity_document_wordError}
+                        />
+                        { errors.identity_document_wordError && 
+                            <ErrorNotification text='Required.' /> }
+                        <Item text='Fecha de nacimiento' />
+                        <Input 
+                            attribute={{
+                                name: 'bird_date',
+                                inputType: 'text',
+                                ph: ''
+                            }}
+                            handleChange={handleChange}
+                            param={errors.bird_dateError}
+                        />
+                        { errors.bird_dateError && 
+                            <ErrorNotification text='Required.' /> }
+
+                       <Item text='Salario' />
+                        <Input 
+                            attribute={{
+                                name: 'salary',
+                                inputType: 'text',
+                                ph: ''
+                            }}
+                            handleChange={handleChange}
+                            param={errors.salaryError}
+                        />
+                        { errors.salaryError && 
+                            <ErrorNotification text='Required.' /> }
+
+                       <Item text='Horas de trabajo semanales' />
+                        <Input 
+                            attribute={{
+                                name: 'weekly_hours',
+                                inputType: 'text',
+                                ph: ''
+                            }}
+                            handleChange={handleChange}
+                            param={errors.weeklyError}
+                        />
+                        { errors.weeklyError && 
+                            <ErrorNotification text='Required.' /> }
+
+                        <Item text='Correo Electronico' />
+                        <Input 
+                            attribute={{
+                                name: 'user_mail',
+                                inputType: 'text',
+                                ph: ''
+                            }}
+                            handleChange={handleChange}
+                            param={errors.user_passwordError}
+                        />
+                        { errors.user_passwordError && 
+                            <ErrorNotification text='Required.' /> }
+
+                        <Item text='Telefono' />
+                        <Input 
+                            attribute={{
+                                name: 'phone_number',
+                                inputType: 'text',
+                                ph: ''
+                            }}
+                            handleChange={handleChange}
+                            param={errors.phone_numberError}
+                        />
+                        { errors.phone_numberError && 
+                            <ErrorNotification text='Required.' /> }
+
 
                         <Item text='Password' />
                         <Input 
