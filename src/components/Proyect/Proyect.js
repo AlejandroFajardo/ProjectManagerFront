@@ -122,6 +122,7 @@ const Proyect = () => {
             handleChange={handleChange}
             param={errors.initial_dateError}
           />
+
           {errors.initial_dateError && <ErrorNotification text="Required." />}
 
           <Item text="Fecha final" />

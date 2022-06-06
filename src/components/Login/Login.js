@@ -95,70 +95,68 @@ const Login = () => {
     <>
       {isLogin && <Navigate to="/home" />}
 
-      <div className="LoginContainer">
-        <div className="LoginContent">
-          <div className="Login">
-            <div className="LoginHigher" />
-            <div className="LoginLower">
-              <Title text="Bienvenidos" />
+      <div className="LoginContent">
+        <div className="Login">
+          <div className="LoginHigher" />
+          <div className="LoginLower">
+            <Title text="Bienvenidos" />
 
-              {hasErrors && (
-                <ModalError
-                  title="A ocurrido un error!"
-                  text="Usuario o password no existe."
-                  handleOnClick={clearErrorModal}
-                />
-              )}
-
-              <div className="ItemUserLogin">
-                <Item text="Usuario" />
-                <Input
-                  attribute={{
-                    name: "user",
-                    inputType: "text",
-                    ph: "Ingrese correo",
-                  }}
-                  handleChange={handleChange}
-                  param={errors.usernameError}
-                />
-              </div>
-              <div className="ItemPasswordLogin">
-                <Item text="Password" />
-                <Input
-                  attribute={{
-                    name: "password",
-                    inputType: "password",
-                    ph: "",
-                  }}
-                  handleChange={handleChange}
-                  param={errors.passwordError}
-                />
-              </div>
-
-              <Button
-                text="Iniciar Sesion"
-                handleOnClick={handleOnClick}
-                param={params}
+            {hasErrors && (
+              <ModalError
+                title="A ocurrido un error!"
+                text="Usuario o password no existe."
+                handleOnClick={clearErrorModal}
               />
+            )}
 
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
+            <div className="ItemUserLogin">
+              <Item text="Usuario" />
+              <Input
+                attribute={{
+                  name: "user",
+                  inputType: "text",
+                  ph: "Ingrese correo",
                 }}
-              >
-                <Link to="/createUser" style={{ color: "#ff9b2f" }}>
-                  <Item text="Crear una cuenta:Registrar" />
-                </Link>
-              </div>
-
-              {isLoading && (
-                <Backdrop open={open} className={classes.backdrop}>
-                  <CircularProgress color="inherit" />
-                </Backdrop>
-              )}
+                handleChange={handleChange}
+                param={errors.usernameError}
+              />
             </div>
+            <div className="ItemPasswordLogin">
+              <Item text="Password" />
+              <Input
+                attribute={{
+                  name: "password",
+                  inputType: "password",
+                  ph: "",
+                }}
+                handleChange={handleChange}
+                param={errors.passwordError}
+              />
+            </div>
+
+            <Button
+              text="Iniciar Sesion"
+              handleOnClick={handleOnClick}
+              param={params}
+            />
+
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Link to="/createUser" style={{ color: "#ff9b2f" }}>
+                <Item text="Crear una cuenta:Registrar" />
+              </Link>
+            </div>
+
+            {isLoading && (
+              <Backdrop open={open} className={classes.backdrop}>
+                <CircularProgress color="inherit" />
+              </Backdrop>
+            )}
           </div>
         </div>
       </div>
