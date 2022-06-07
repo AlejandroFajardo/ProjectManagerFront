@@ -23,12 +23,13 @@ const CreateUser = () => {
   const [user_last_name, setUser_last_name] = useState("");
   const [identity_document_type, setIdentity_document_type] = useState("");
   const [identity_document_word, setIdentity_document_word] = useState("");
-  const [bird_date, setBird_date] = useState("");
+  const [birth_date, setBird_date] = useState("");
   const [salary, setSalary] = useState("");
   const [weekly_hours, setWeekly_hours] = useState("");
-  const [user_mail, setUser_mail] = useState("");
+  const [user_email, setUser_email] = useState("");
   const [phone_number, setPhone_number] = useState("");
   const [user_password, setUser_password] = useState("");
+
   const [passwordAgain, setPasswordAgain] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [created, setCreated] = useState(false);
@@ -47,10 +48,35 @@ const CreateUser = () => {
     passwordAgainError: false,
   });
 
+  let params =
+    errors.usernameError === false &&
+    errors.lastNameError === false &&
+    errors.salaryError === false &&
+    errors.passwordError === false &&
+    errors.passwordAgainError === false &&
+    user_name.length > 1 &&
+    user_last_name.length > 1 &&
+    salary.length > 1 &&
+    user_password.length > 5 &&
+    user_password === passwordAgain;
+
+  const regular_expression = {
+    name: /^[a-zA-Z0-9_-]{4,10}$/, // Letras, numeros, guion y guion_bajo
+    letters: /^[\w'\-][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*\-(){}|~<>;:[\]]{1,60}$/, // Letras y espacios,
+    lastmame: /^[a-zA-ZÀ-ÿ\s]{1,20}$/, // Letras y espacios,
+    letterscc: /^[PTNC]{1}$/,
+    number: /^\d{1,10}$/, // 1 a 10 numeros.
+    hours: /^\d{1,2}$/, // 1 a2 numeros.
+    email: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+    regex_date_validator:
+      /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/,
+    password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,20}$/,
+  };
+
   function handleChange(name, value) {
     switch (name) {
-      case "username":
-        if (value < 1) {
+      case "user_name":
+        if (!regular_expression.letters.test(value)) {
           setErrors({ ...errors, usernameError: true });
         } else {
           setErrors({ ...errors, usernameError: false });
@@ -59,7 +85,7 @@ const CreateUser = () => {
         break;
 
       case "lastName":
-        if (value < 1) {
+        if (!regular_expression.letters.test(value)) {
           setErrors({ ...errors, lastNameError: true });
         } else {
           setErrors({ ...errors, lastNameError: false });
@@ -67,7 +93,7 @@ const CreateUser = () => {
         }
         break;
       case "identity_document_type":
-        if (value < 1) {
+        if (!regular_expression.letterscc.test(value)) {
           setErrors({ ...errors, identity_document_typeError: true });
         } else {
           setErrors({ ...errors, identity_document_typeError: false });
@@ -75,7 +101,7 @@ const CreateUser = () => {
         }
         break;
       case "identity_document_word":
-        if (value < 1) {
+        if (!regular_expression.number.test(value)) {
           setErrors({ ...errors, identity_document_wordError: true });
         } else {
           setErrors({ ...errors, identity_document_wordError: false });
@@ -83,7 +109,7 @@ const CreateUser = () => {
         }
         break;
       case "bird_date":
-        if (value < 1) {
+        if (!regular_expression.regex_date_validator.test(value)) {
           setErrors({ ...errors, bird_dateError: true });
         } else {
           setErrors({ ...errors, bird_dateError: false });
@@ -92,7 +118,7 @@ const CreateUser = () => {
         break;
 
       case "salary":
-        if (value < 1) {
+        if (!regular_expression.number.test(value)) {
           setErrors({ ...errors, salaryError: true });
         } else {
           setErrors({ ...errors, salaryError: false });
@@ -100,7 +126,7 @@ const CreateUser = () => {
         }
         break;
       case "weekly_hours":
-        if (value < 1) {
+        if (!regular_expression.hours.test(value)) {
           setErrors({ ...errors, weeklyError: true });
         } else {
           setErrors({ ...errors, weeklyError: false });
@@ -108,15 +134,15 @@ const CreateUser = () => {
         }
         break;
       case "user_mail":
-        if (value < 1) {
+        if (!regular_expression.email.test(value)) {
           setErrors({ ...errors, user_mailError: true });
         } else {
           setErrors({ ...errors, user_mailError: false });
-          setUser_mail(value);
+          setUser_email(value);
         }
         break;
       case "phone_number":
-        if (value < 1) {
+        if (!regular_expression.number.test(value)) {
           setErrors({ ...errors, phone_numberError: true });
         } else {
           setErrors({ ...errors, phone_numberError: false });
@@ -125,15 +151,15 @@ const CreateUser = () => {
         break;
 
       case "password":
-        if (value < 1) {
-          setErrors({ ...errors, passwordError: true });
+        if (!regular_expression.password.test(value)) {
+          setErrors({ ...errors, user_passwordError: true });
         } else {
-          setErrors({ ...errors, passwordError: false });
+          setErrors({ ...errors, user_passwordError: false });
           setUser_password(value);
         }
         break;
       case "passwordAgain":
-        if (user_password.length < 6) {
+        if (user_password.length < 8) {
           setErrors({ ...errors, passwordError: true });
         } else if (user_password === value) {
           setErrors({
@@ -154,18 +180,8 @@ const CreateUser = () => {
         console.log("no hay valores.");
     }
   }
+  console.log(user_email);
 
-  let params =
-    errors.usernameError === false &&
-    errors.lastNameError === false &&
-    errors.salaryError === false &&
-    errors.passwordError === false &&
-    errors.passwordAgainError === false &&
-    user_name.length > 1 &&
-    user_last_name.length > 1 &&
-    salary.length > 1 &&
-    user_password.length > 5 &&
-    user_password === passwordAgain;
   function handleSubmit() {
     setIsLoading(true);
     let account = {
@@ -173,10 +189,10 @@ const CreateUser = () => {
       user_last_name,
       identity_document_type,
       identity_document_word,
-      bird_date,
+      bird_date: birth_date,
       salary,
       weekly_hours,
-      user_mail,
+      user_mail: user_email,
       phone_number,
       user_password,
     };
@@ -190,31 +206,70 @@ const CreateUser = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          userName: user_name,
+          user_name: user_name,
           user_last_name: user_last_name,
           identity_document_type: identity_document_type,
           identity_document_word: identity_document_word,
-          bird_date: bird_date,
+          birth_date: birth_date,
           salary: salary,
           weekly_hours: weekly_hours,
-          user_mail: user_mail,
+          user_email: user_email,
           phone_number: phone_number,
           user_password: user_password,
         }),
       })
-        .then((res) => res.json())
+        .then((res) => JSON.stringify(res))
         .then(
           (result) => {
-            if (result === "El correo ya se encuentra registrado") {
-            }
+            //alert(JSON.stringify(result));
           },
           (error) => {
-            alert("Failed");
+            //alert(error);
           }
         );
       setTimeout(() => setCreated(true), 2000);
     }
   }
+  /* function handleSubmit() {
+    setIsLoading(true);
+    let account = {
+      user_name,
+      user_last_name,
+      identity_document_type,
+      identity_document_word,
+      bird_date: birth_date,
+      salary,
+      weekly_hours,
+      user_mail: user_email,
+      phone_number,
+      user_password,
+    };
+    if (account) {
+      let ac = JSON.stringify(account);
+      localStorage.setItem("account", ac);
+      const xhr = new XMLHttpRequest();
+      xhr.open("POST", "http://localhost:4000/CreateUser", true);
+      xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          alert(xhr.response);
+        }
+      };
+      const jsonToSend = {
+        user_name: user_name,
+        user_last_name: user_last_name,
+        identity_document_type: identity_document_type,
+        identity_document_word: identity_document_word,
+        birth_date: birth_date,
+        salary: salary,
+        weekly_hours: weekly_hours,
+        user_email: user_email,
+        phone_number: phone_number,
+        user_password: user_password,
+      };
+      xhr.send(JSON.stringify(jsonToSend));
+    }
+  }*/
 
   let open = true;
 
@@ -233,14 +288,16 @@ const CreateUser = () => {
           <Item text="Nombre" />
           <Input
             attribute={{
-              name: "username",
+              name: "user_name",
               inputType: "text",
               ph: "",
             }}
             handleChange={handleChange}
             param={errors.usernameError}
           />
-          {errors.usernameError && <ErrorNotification text="Required." />}
+          {errors.usernameError && (
+            <ErrorNotification text="Requerido. Ingrese solo letras max 12" />
+          )}
 
           <Item text="Apellido" />
           <Input
@@ -252,9 +309,11 @@ const CreateUser = () => {
             handleChange={handleChange}
             param={errors.lastNameError}
           />
-          {errors.lastNameError && <ErrorNotification text="Required." />}
+          {errors.lastNameError && (
+            <ErrorNotification text="Requerido.  Ingrese solo letras max 20." />
+          )}
 
-          <Item text="seleccione el tipo de documento" />
+          <Item text="Seleccione  tipo de documento" />
           <Input
             attribute={{
               name: "identity_document_type",
@@ -265,10 +324,10 @@ const CreateUser = () => {
             param={errors.identity_document_typeError}
           />
           {errors.identity_document_typeError && (
-            <ErrorNotification text="Required." />
+            <ErrorNotification text="Required.ingrese solo dos caracteres" />
           )}
 
-          <Item text="ingrese numero de identidad" />
+          <Item text="Ingrese número de identidad" />
           <Input
             attribute={{
               name: "identity_document_word",
@@ -279,7 +338,7 @@ const CreateUser = () => {
             param={errors.identity_document_wordError}
           />
           {errors.identity_document_wordError && (
-            <ErrorNotification text="Required." />
+            <ErrorNotification text="Required.Ingrese solo numeros max 10" />
           )}
 
           <Item text="Fecha de nacimiento" />
@@ -287,12 +346,14 @@ const CreateUser = () => {
             attribute={{
               name: "bird_date",
               inputType: "text",
-              ph: "",
+              ph: "dd/mm/aaaa",
             }}
             handleChange={handleChange}
             param={errors.bird_dateError}
           />
-          {errors.bird_dateError && <ErrorNotification text="Required." />}
+          {errors.bird_dateError && (
+            <ErrorNotification text="Requerido. Ingrese segun el formato asignado" />
+          )}
 
           <Item text="Salario" />
           <Input
@@ -304,7 +365,9 @@ const CreateUser = () => {
             handleChange={handleChange}
             param={errors.salaryError}
           />
-          {errors.salaryError && <ErrorNotification text="Required." />}
+          {errors.salaryError && (
+            <ErrorNotification text="Requerido.Ingrese solo numeros" />
+          )}
 
           <Item text="Horas de trabajo semanales" />
           <Input
@@ -316,19 +379,21 @@ const CreateUser = () => {
             handleChange={handleChange}
             param={errors.weeklyError}
           />
-          {errors.weeklyError && <ErrorNotification text="Required." />}
+          {errors.weeklyError && (
+            <ErrorNotification text="Requerido.Ingrese solo numeros max 2" />
+          )}
 
           <Item text="Correo Electronico" />
           <Input
             attribute={{
               name: "user_mail",
-              inputType: "text",
+              inputType: "email",
               ph: "",
             }}
             handleChange={handleChange}
-            param={errors.user_passwordError}
+            param={errors.user_mailError}
           />
-          {errors.user_passwordError && <ErrorNotification text="Required." />}
+          {errors.user_mailError && <ErrorNotification text="Required." />}
 
           <Item text="Telefono" />
           <Input
@@ -340,7 +405,9 @@ const CreateUser = () => {
             handleChange={handleChange}
             param={errors.phone_numberError}
           />
-          {errors.phone_numberError && <ErrorNotification text="Required." />}
+          {errors.phone_numberError && (
+            <ErrorNotification text="Requerido.Ingrese solo numeros" />
+          )}
 
           <Item text="Password" />
           <Input
@@ -353,7 +420,7 @@ const CreateUser = () => {
             param={errors.passwordError}
           />
           {errors.passwordError && (
-            <ErrorNotification text="min. 6 characters" />
+            <ErrorNotification text="min. 8 characters" />
           )}
 
           <Item text="Confirmar password" />

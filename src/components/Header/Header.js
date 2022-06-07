@@ -15,15 +15,12 @@ export const Header = () => {
 
       <ul>
         <li>
-          <Link to="/">Inicio</Link>
+          <Link to="/">Cerrar Sesion</Link>
         </li>
-        <li>
-          <Link to="/Login">Iniciar sesión</Link>
-        </li>
+
         <li>
           <Link to="/Proyect">Crear Proyecto</Link>
         </li>
-
         <li>
           <Link to="/CreateUser">Crear Usuarios</Link>
         </li>
