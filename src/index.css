@@ -1,15 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;500&display=swap');
+
 *{
   padding: 0;
   margin: 0;
-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+/* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
   'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
   sans-serif;
--webkit-font-smoothing: antialiased;
+-webkit-font-smoothing: antialiased; */
+  font-family: 'Montserrat', sans-serif;
 }
 
 code {
-font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-  monospace;
+/* font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  monospace; */
+  font-family: 'Montserrat', sans-serif;
 }
 /* ----------------- Principal -------------------*/
 .App{
@@ -126,7 +130,8 @@ border: 1px solid #7B37A4;
   padding: 10px 20px;
   box-sizing: border-box;
   font-weight: 600;
-  font-family: 'Quicksand'
+  /* font-family: 'Quicksand' */
+  font-family: 'Montserrat', sans-serif;
 }
 
 .errorStyle {
@@ -141,14 +146,16 @@ border: 1px solid #7B37A4;
   padding: 10px 20px;
   box-sizing: border-box;
   font-weight: 600;
-  font-family: 'Quicksand'
+  /* font-family: 'Quicksand' */
+  font-family: 'Montserrat', sans-serif;
 }
 
 .LabelItemComponent {
   font-size: 16px;
   color: #141314;
   font-weight: 600;
-  font-family: 'Quicksand';
+  /* font-family: 'Quicksand'; */
+  font-family: 'Montserrat', sans-serif;
 }
 
 .ItemComponent {
@@ -173,7 +180,8 @@ align-self: flex-start;
   border: 1px solid #75468a; 
   outline: none;
   border-radius: 35px;
-  font-family: 'Quicksand';
+  /* font-family: 'Quicksand'; */
+  font-family: 'Montserrat', sans-serif;
   font-size: 20px;
   color: #ffffff;
   font-weight: 400;
@@ -195,7 +203,8 @@ align-self: flex-start;
 .errorNotificationLabel {
   font-size: 14px;
   color: #f9314b;
-  font-family: 'Quicksand';
+  /* font-family: 'Quicksand'; */
+  font-family: 'Montserrat', sans-serif;
   padding: 0 0 0 7%
 }
 
@@ -217,14 +226,16 @@ align-self: flex-start;
 .modalErrorTitle {
   margin: 0;
   font-size: 16px;
-  font-family: 'Quicksand';
+  /* font-family: 'Quicksand'; */
+  font-family: 'Montserrat', sans-serif;
   font-weight: 800;
   color: #f9314b;
 }
 
 .modalErrorText {
   font-size: 14px;
-  font-family: 'Quicksand';
+  /* font-family: 'Quicksand'; */
+  font-family: 'Montserrat', sans-serif;
   font-weight: 400;
   color: #f9314b;
   margin: 0;
@@ -237,7 +248,8 @@ align-self: flex-start;
   border: solid 1px rgba(35, 47, 52, 0.4);
   outline: none;
   border-radius: 35px;
-  font-family: 'Quicksand';
+  /* font-family: 'Quicksand'; */
+  font-family: 'Montserrat', sans-serif;
   font-size: 16px;
   color: rgba(35, 47, 52, 0.4);
   font-weight: 400;

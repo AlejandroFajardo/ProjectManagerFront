@@ -24,6 +24,9 @@ export const Header = () => {
         <li>
           <Link to="/CreateUser">Crear Usuarios</Link>
         </li>
+        <li>
+          <Link to="/Activity">Crear Actividad</Link>
+        </li>
       </ul>
     </header>
   );

@@ -22,6 +22,7 @@ const Proyect = () => {
   const [project_name, setProyect_name] = useState("");
   const [initial_date, setInitial_date] = useState("");
   const [final_date, setfinal_date] = useState("");
+  const [project_status, setProject_Status] = useState("");
   const [created, setCreated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -29,12 +30,14 @@ const Proyect = () => {
     project_nameError: false,
     initial_dateError: false,
     final_dateError: false,
+    project_statusError: false
   });
 
   let params =
     errors.project_nameError === false &&
     errors.initial_dateError === false &&
     errors.final_dateError === false &&
+    errors.project_statusError === false &&
     project_name.length > 1 &&
     initial_date.length > 1;
 
@@ -72,6 +75,14 @@ const Proyect = () => {
           setfinal_date(value);
         }
         break;
+      case "project_status":
+        if (!regular_expression.letters.test(value)) {
+          setErrors({ ...errors, project_statusError: true });
+        } else {
+          setErrors({ ...errors, project_statusError: false });
+          setProject_Status(value);
+        }
+        break;
 
       default:
         console.log("no hay valores.");
@@ -80,7 +91,7 @@ const Proyect = () => {
 
   function handleSubmit() {
     setIsLoading(true);
-    let account = { project_name, initial_date, final_date };
+    let account = { project_name, initial_date, final_date, project_status };
     if (account) {
       let ac = JSON.stringify(account);
       localStorage.setItem("account", ac);
@@ -94,6 +105,7 @@ const Proyect = () => {
           project_name: project_name,
           initial_date: initial_date,
           final_date: final_date,
+          project_status: project_status
         }),
       })
         .then((res) => res.json())
@@ -163,6 +175,20 @@ const Proyect = () => {
           />
           {errors.final_dateError && (
             <ErrorNotification text="Required.Ingrese segun el formato asignado" />
+          )}
+
+          <Item text="Estado" />
+          <Input
+            attribute={{
+              name: "project_status",
+              inputType: "text",
+              ph: "",
+            }}
+            handleChange={handleChange}
+            param={errors.project_statusError}
+          />
+          {errors.project_statusError && (
+            <ErrorNotification text="Required. Ingrese el estado del proyecto" />
           )}
 
           <Button text="Guardar" handleOnClick={handleSubmit} param={params} />
