@@ -10,7 +10,7 @@ function NavBar() {
   const [dropDownUser, setDropdownUser] = useState(false);
 
   return (
-    <>
+    <header>
       <nav className="navbar">
         <Link to="/" className="navbar-logo">
           <div className="logo">
@@ -54,7 +54,7 @@ function NavBar() {
           })}
         </ul>
       </nav>
-    </>
+    </header>
   );
 }
 

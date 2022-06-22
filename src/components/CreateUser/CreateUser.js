@@ -29,6 +29,8 @@ const CreateUser = () => {
   const [user_email, setUser_email] = useState("");
   const [phone_number, setPhone_number] = useState("");
   const [user_password, setUser_password] = useState("");
+  const [user_status, setUser_status] = useState("");
+  const [boss_id, setBoss_id] = useState("");
 
   const [passwordAgain, setPasswordAgain] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -195,6 +197,8 @@ const CreateUser = () => {
       user_mail: user_email,
       phone_number,
       user_password,
+      user_status,
+      boss_id
     };
     if (account) {
       let ac = JSON.stringify(account);
@@ -216,6 +220,8 @@ const CreateUser = () => {
           user_email: user_email,
           phone_number: phone_number,
           user_password: user_password,
+          user_status: 1,
+          boss_id: ''
         }),
       })
         .then((res) => JSON.stringify(res))
