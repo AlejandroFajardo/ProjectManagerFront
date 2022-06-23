@@ -30,7 +30,7 @@ const Proyect = () => {
     project_nameError: false,
     initial_dateError: false,
     final_dateError: false,
-    project_statusError: false
+    project_statusError: false,
   });
 
   let params =
@@ -105,7 +105,7 @@ const Proyect = () => {
           project_name: project_name,
           initial_date: initial_date,
           final_date: final_date,
-          project_status: project_status
+          project_status: project_status,
         }),
       })
         .then((res) => res.json())
@@ -115,7 +115,7 @@ const Proyect = () => {
             }
           },
           (error) => {
-            alert("Registro fallo");
+            //alert("Registro fallo");
           }
         );
       setTimeout(() => setCreated(true), 2000);
@@ -133,7 +133,7 @@ const Proyect = () => {
       {created && <Navigate to="/ " />}
       <div className="createUserContent">
         <div className="formCreateProyect">
-          {screenWidth > 1030 && <Title text="Registrar" />}
+          {screenWidth > 1030 && <Title text="Nuevo Proyecto" />}
 
           <Item text="Nombre del proyecto" />
           <Input
@@ -190,7 +190,6 @@ const Proyect = () => {
           {errors.project_statusError && (
             <ErrorNotification text="Required. Ingrese el estado del proyecto" />
           )}
-
           <Button text="Guardar" handleOnClick={handleSubmit} param={params} />
         </div>
 

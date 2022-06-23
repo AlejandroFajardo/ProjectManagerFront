@@ -1,17 +1,26 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Login from "./Login/Login";
 import CreateUser from "./CreateUser/CreateUser";
-import Proyect from "./Proyect/Proyect";
+import Project from "./Project/Project";
+import ProjectList from "./Project/ProjectList";
+import UserList from "./CreateUser/UserList";
 import Activity from "./Activity/Activity";
+import NavBar from "./NavBar/NavBar.js";
 
-export default function Page() {
+function Page() {
   return (
-    <Routes>
-      <Route path="/login" exact element={<Login />} />
-      <Route path="/createUser" exact element={<CreateUser />} />
-      <Route path="/proyect" exact element={<Proyect />} />
-      <Route path="/activity" exact element= { <Activity />} />
-    </Routes>
+    <>
+      <NavBar />
+      <div className="container">
+        <Routes>
+          <Route path="/createUser" exact element={<CreateUser />} />
+          <Route path="/userList" exact element={<UserList />} />
+          <Route path="/proyect" exact element={<Project />} />
+          <Route path="/proyectList" exact element={<ProjectList />} />
+          <Route path="/actividad" exact element={<Activity />} />
+        </Routes>
+      </div>
+    </>
   );
 }
+export default Page;

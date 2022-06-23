@@ -29,10 +29,10 @@ const CreateUser = () => {
   const [user_email, setUser_email] = useState("");
   const [phone_number, setPhone_number] = useState("");
   const [user_password, setUser_password] = useState("");
-  const [user_status, setUser_status] = useState("");
-  const [boss_id, setBoss_id] = useState("");
 
   const [passwordAgain, setPasswordAgain] = useState("");
+  const [user_status, setUser_status] = useState("");
+  const [boss_id, setBoss_id] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [created, setCreated] = useState(false);
 
@@ -182,11 +182,11 @@ const CreateUser = () => {
         console.log("no hay valores.");
     }
   }
-  console.log(user_email);
 
   function handleSubmit() {
     setIsLoading(true);
     let account = {
+      boss_id,
       user_name,
       user_last_name,
       identity_document_type,
@@ -198,7 +198,6 @@ const CreateUser = () => {
       phone_number,
       user_password,
       user_status,
-      boss_id
     };
     if (account) {
       let ac = JSON.stringify(account);
@@ -221,13 +220,16 @@ const CreateUser = () => {
           phone_number: phone_number,
           user_password: user_password,
           user_status: 1,
-          boss_id: ''
+          boss_id: "",
         }),
       })
-        .then((res) => JSON.stringify(res))
+        .then((res) => {
+          JSON.stringify(res);
+          alert(res);
+        })
         .then(
           (result) => {
-            //alert(JSON.stringify(result));
+            alert(JSON.stringify(result));
           },
           (error) => {
             //alert(error);
@@ -280,7 +282,6 @@ const CreateUser = () => {
   let open = true;
 
   let screenWidth = window.innerWidth;
-  console.log(identity_document_type);
 
   /*Formulario CreateUser */
 

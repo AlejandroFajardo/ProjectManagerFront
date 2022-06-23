@@ -1,5 +1,5 @@
 import React from "react";
-import { ProjectItems, UserItems } from "./NavItems";
+import { ProjectItems } from "./NavItems";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
@@ -11,7 +11,7 @@ function Dropdown() {
       <ul
         className={dropdown ? "services-submenu clicked" : "services-submenu"}
         onClick={() => setDropdown(!dropdown)}
-        >
+      >
         {ProjectItems.map((item) => {
           return (
             <li key={item.id}>
@@ -32,7 +32,7 @@ function Dropdown() {
 
 export default Dropdown;
 
-{/* {Items.map((item) => {
+/* {{Items.map((item) => {
           if (item.name === 'ProjectItems') {
             {item.values.map((subitem) => {
               return (
@@ -48,4 +48,4 @@ export default Dropdown;
               );
             })}
           }
-        })} */}
+        })} }*/

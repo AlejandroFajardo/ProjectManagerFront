@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import logo from "../images/logo.png";
+import logo from "../assets/logo.png";
 import { navItems } from "./NavItems";
-import Dropdown from "./Dropdown";
+import Dropdown from "./DropdownProject";
 import DropdownUser from "./DropdownUser";
 
 function NavBar() {
@@ -10,7 +10,7 @@ function NavBar() {
   const [dropDownUser, setDropdownUser] = useState(false);
 
   return (
-    <header>
+   
       <nav className="navbar">
         <Link to="/" className="navbar-logo">
           <div className="logo">
@@ -33,18 +33,18 @@ function NavBar() {
               );
             }
             if (item.title === "Usuarios") {
-                return (
-                    <li
-                      key={item.id}
-                      className={item.cName}
-                      onMouseEnter={() => setDropdownUser(true)}
-                      onMouseLeave={() => setDropdownUser(false)}
-                    >
-                      <Link to={item.path}>{item.title}</Link>
-                      {dropDownUser && <DropdownUser />}
-                    </li>
-                  );
-              }
+              return (
+                <li
+                  key={item.id}
+                  className={item.cName}
+                  onMouseEnter={() => setDropdownUser(true)}
+                  onMouseLeave={() => setDropdownUser(false)}
+                >
+                  <Link to={item.path}>{item.title}</Link>
+                  {dropDownUser && <DropdownUser />}
+                </li>
+              );
+            }
 
             return (
               <li key={item.id} className={item.cName}>
@@ -54,7 +54,7 @@ function NavBar() {
           })}
         </ul>
       </nav>
-    </header>
+    
   );
 }
 

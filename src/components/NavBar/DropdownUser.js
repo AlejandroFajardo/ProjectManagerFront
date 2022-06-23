@@ -1,5 +1,5 @@
 import React from "react";
-import { ProjectItems, UserItems } from "./NavItems";
+import { UserItems } from "./NavItems";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
@@ -11,7 +11,7 @@ function DropdownUser() {
       <ul
         className={dropdown ? "services-submenu clicked" : "services-submenu"}
         onClick={() => setDropdown(!dropdown)}
-        >
+      >
         {UserItems.map((item) => {
           return (
             <li key={item.id}>

@@ -65,10 +65,10 @@ const Login = () => {
 
   function ifMatch(user, pass) {
     if (
-      (user === "mati" && pass === "123456") ||
+      (user === "prueba" && pass === "qwe1233") ||
       (user === lsd.username && pass === lsd.password)
     ) {
-      let ac = { user, pass, firstName: "Mati" };
+      let ac = { user, pass, firstName: "" };
       let account = JSON.stringify(ac);
       localStorage.setItem("account", account);
       setTimeout(() => setIsLogin(true), 2000);
@@ -81,7 +81,10 @@ const Login = () => {
     setIsLoading(true);
     let login = { username, password };
     if (login) {
-      ifMatch(username, password);
+      // ifMatch(username, password);
+      let ac = JSON.stringify(login);
+      localStorage.setItem("account", ac);
+      setTimeout(() => setIsLogin(true), 2000);
     }
   }
 
@@ -93,7 +96,7 @@ const Login = () => {
   let params = errors.usernameError === false && errors.passwordError === false;
   return (
     <>
-      {isLogin && <Navigate to="/home" />}
+      {isLogin && <Navigate to="/page" />}
 
       <div className="LoginContent">
         <div className="Login">
@@ -147,7 +150,7 @@ const Login = () => {
                 alignItems: "center",
               }}
             >
-              <Link to="/createUser" style={{ color: "#ff9b2f" }}>
+              <Link to="/auth/register" style={{ color: "#ff9b2f" }}>
                 <Item text="Crear una cuenta:Registrar" />
               </Link>
             </div>

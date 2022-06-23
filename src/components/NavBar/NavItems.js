@@ -14,7 +14,7 @@ export const navItems = [
     {
         id: 3,
         title: "Actividades",
-        path: "/Activity",
+        path: "/Actividad",
         cName: "nav-item"
     },
 ];
@@ -29,7 +29,7 @@ export const ProjectItems = [
     {
         id: 2,
         title: "Lista de proyectos",
-        path: "/",
+        path: "/ProyectList",
         cName: "submenu-item"
     },
 
@@ -45,7 +45,7 @@ export const UserItems = [
     {
         id: 2,
         title: "Lista de usuarios",
-        path: "/",
+        path: "/UserList",
         cName: "submenu-item"
     }
 ]
