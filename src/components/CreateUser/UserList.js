@@ -56,7 +56,6 @@ export default class Prueba extends Component {
               <TableRow hover>
                 <TableCell align="center">NOMBRE</TableCell>
                 <TableCell align="center">APELLIDO</TableCell>
-                <TableCell align="center">TIPO DE DOCUMENTO</TableCell>
                 <TableCell align="center">NUMERO DE DOCUMENTO</TableCell>
                 <TableCell align="center">FECHA NACIMIENTO</TableCell>
                 <TableCell align="center">SALARIO</TableCell>
@@ -74,9 +73,6 @@ export default class Prueba extends Component {
                   <TableRow key={celda.User_Id}>
                     <TableCell align="left">{celda.User_Name}</TableCell>
                     <TableCell align="center">{celda.User_Last_Name}</TableCell>
-                    <TableCell align="center">
-                      {celda.identity_document_type}{" "}
-                    </TableCell>
                     <TableCell align="center">{celda.Document_Id}</TableCell>
                     <TableCell align="center">{celda.Birth_Date}</TableCell>
                     <TableCell align="center">{celda.Salary}</TableCell>
