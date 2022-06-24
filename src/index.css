@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;500&display=swap');
+
 *{
   padding: 0;
   margin: 0;
@@ -402,9 +404,14 @@ align-self: flex-start;
   box-shadow: 5px 15px 20px 15px rgba(0, 0, 0, 0.16);
   background-color: #ffffff;
   font-family:'Montserrat';
-
-  
 }
+
+TableRow:hover {
+  background-color: blue;
+  color: white;
+  cursor: pointer;
+}
+
 th {
   background-color: #1ABC9C;
   font-weight: bold;
@@ -424,10 +431,8 @@ th, td {
   font-weight: bold;
   border-collapse: collapse;
  border: 1px solid rgb(195, 188, 188);
-  
-
- 
 }
+
 .buttonDelete {
   background-color: #f44336;
   border: none;
@@ -441,6 +446,7 @@ th, td {
   border: 2px solid #f34c4c;
   box-shadow:0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
   height: 30px;
+  cursor: pointer;
 }
 
 
