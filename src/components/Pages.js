@@ -6,6 +6,7 @@ import ProjectList from "./Project/ProjectList";
 import UserList from "./CreateUser/UserList";
 import Activity from "./Activity/Activity";
 import NavBar from "./NavBar/NavBar.js";
+import ActivityList from "./Activity/ActivityList";
 
 function Page() {
   return (
@@ -18,6 +19,7 @@ function Page() {
           <Route path="/proyect" exact element={<Project />} />
           <Route path="/proyectList" exact element={<ProjectList />} />
           <Route path="/actividad" exact element={<Activity />} />
+          <Route path="/actividadList" exact element={<ActivityList />} />
         </Routes>
       </div>
     </>

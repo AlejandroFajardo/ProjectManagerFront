@@ -25,7 +25,7 @@ export default class Prueba extends Component {
   constructor() {
     super();
     this.state = {
-      projects: []
+      projects: [],
     };
   }
 
@@ -44,50 +44,6 @@ export default class Prueba extends Component {
   componentDidMount = () => {
     this.getAllProjects();
   };
-
-  // componentDidMount() {
-  //   fetch("http://localhost:4000/getProjects")
-  //     .then((res) => {
-  //       return res.json();
-  //     })
-  //     .then((response) => {
-  //       // this.state.projects = response
-  //       this.setState({ projects: response });
-  //       console.log(this.state.projects);
-  //     });
-  // }
-  // var data = [
-  //   {
-  //     project_name: "Maquetado",
-  //     initial_date: "12/06/2022",
-  //     final_date: "22/07/2022",
-  //     project_status: "Iniciado",
-  //   },
-  //   {
-  //     project_name: "Diseño electrico",
-  //     initial_date: "12/06/2022",
-  //     final_date: "22/07/2022",
-  //     project_status: "Progreso",
-  //   },
-  //   {
-  //     project_name: "Diseño red",
-  //     initial_date: "12/06/2022",
-  //     final_date: "22/07/2022",
-  //     project_status: "Finalizado",
-  //   },
-  //   {
-  //     project_name: "Diseño",
-  //     initial_date: "12/06/2022",
-  //     final_date: "22/07/2022",
-  //     project_status: "Iniciado",
-  //   },
-  //   {
-  //     project_name: "Diseño datos",
-  //     initial_date: "12/06/2022",
-  //     final_date: "22/07/2022",
-  //     project_status: "Iniciado",
-  //   },
-  // ];
 
   render() {
     console.log(this.state.projects);
@@ -112,7 +68,7 @@ export default class Prueba extends Component {
                 return (
                   <TableRow key={celda.Project_Id}>
                     <TableCell align="left">
-                      <Link to="/">{celda.Project_Name}</Link>
+                      <Link to="/ActividadList">{celda.Project_Name}</Link>
                     </TableCell>
                     <TableCell align="center">{celda.Initial_Date}</TableCell>
                     <TableCell align="center">{celda.Final_Date}</TableCell>
