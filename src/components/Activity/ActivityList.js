@@ -29,6 +29,7 @@ export default class Prueba extends Component {
     super();
     this.state = {
       activitys: [],
+      users: []
     };
   }
 
@@ -44,8 +45,24 @@ export default class Prueba extends Component {
       });
     console.log("Proyecto " + this.state.activitys[0]);
   }
+
+  getAllUsers() {
+    let baseUrl = "http://localhost:4000/getUsers";
+    axios
+      .get(baseUrl)
+      .then((response) => {
+        this.setState({ users: response.data });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    console.log("users " + this.state.users[0]);
+  }
+
   componentDidMount = () => {
     this.getAllProjects();
+    this.getAllUsers();
+
   };
 
   render() {
@@ -93,9 +110,17 @@ export default class Prueba extends Component {
                         label="Age"
                         // onChange={handleChange}
                       >
-                        <MenuItem value={10}>Ten</MenuItem>
+                        {this.state.users.map((nameAc, index) => {
+                          return (
+                            <MenuItem value={index} onClick={console.log('Clicnk en' + nameAc.User_Last_Name)}>
+                              {nameAc.User_Name}
+                              {console.log('User aca')}
+                            </MenuItem>
+                          )
+                        })}
+                        {/* <MenuItem value={10}>Ten</MenuItem>
                         <MenuItem value={20}>Twenty</MenuItem>
-                        <MenuItem value={30}>Thirty</MenuItem>
+                        <MenuItem value={30}>Thirty</MenuItem> */}
                       </Select>
                     </FormControl>
                   </TableCell>

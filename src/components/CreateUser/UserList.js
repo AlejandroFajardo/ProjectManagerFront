@@ -17,16 +17,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// function selectProject(project) {
-//   console.log(project.project_name);
-// }
-
 export default class Prueba extends Component {
   constructor() {
     super();
     this.state = {
       users: [],
     };
+  }
+
+  selectUser(userId) {
+    let baseUrl = 'http://localhost:4000/deleteUser'
+    axios.post(baseUrl, {
+        User_Id : userId})
+    .then((response) => {
+      console.log(response);
+    })
+    this.getAllUsers();
   }
 
   getAllUsers() {
@@ -39,8 +45,8 @@ export default class Prueba extends Component {
       .catch((error) => {
         console.log(error);
       });
-    console.log("users " + this.state.users[0]);
   }
+
   componentDidMount = () => {
     this.getAllUsers();
   };
@@ -80,7 +86,7 @@ export default class Prueba extends Component {
                     <TableCell align="center">{celda.User_Email}</TableCell>
                     <TableCell align="center">{celda.Phone_Number}</TableCell>
                     <TableCell align="center">
-                      <button className="buttonDelete">Eliminar</button>
+                      <button className="buttonDelete" onClick={() => this.selectUser(celda.User_Id)}>Eliminar</button>
                     </TableCell>
                   </TableRow>
                 );
