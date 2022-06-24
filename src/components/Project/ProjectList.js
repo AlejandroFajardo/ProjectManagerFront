@@ -110,7 +110,7 @@ export default class Prueba extends Component {
                 console.log(celda.Project_Id);
                 console.log(this.state.projects);
                 return (
-                  <TableRow >
+                  <TableRow key={celda.Project_Id}>
                     <TableCell align="left">
                       <Link to="/">{celda.Project_Name}</Link>
                     </TableCell>
