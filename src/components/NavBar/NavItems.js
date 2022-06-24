@@ -13,8 +13,8 @@ export const navItems = [
     },
     {
         id: 3,
-        title: "Actividades",
-        path: "/Actividad",
+        title: "Cerrar Sesion",
+        path: "/",
         cName: "nav-item"
     },
 ];

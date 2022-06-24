@@ -287,7 +287,7 @@ const CreateUser = () => {
 
   return (
     <>
-      {created && <Navigate to="/ " />}
+      {created && <Navigate to="/userList" />}
       <div className="createUserContent">
         <div className="formCreateUser">
           {screenWidth > 1030 && <Title text="Registrar" />}
