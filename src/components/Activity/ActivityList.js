@@ -33,7 +33,7 @@ export default class Prueba extends Component {
     };
   }
 
-  getAllProjects() {
+  getActivitiesPerProject() {
     let baseUrl = "http://localhost:4000/getActivity";
     axios
       .get(baseUrl)
@@ -43,7 +43,6 @@ export default class Prueba extends Component {
       .catch((error) => {
         console.log(error);
       });
-    console.log("Proyecto " + this.state.activitys[0]);
   }
 
   getAllUsers() {
@@ -56,17 +55,15 @@ export default class Prueba extends Component {
       .catch((error) => {
         console.log(error);
       });
-    console.log("users " + this.state.users[0]);
   }
 
   componentDidMount = () => {
-    this.getAllProjects();
+    this.getActivitiesPerProject();
     this.getAllUsers();
 
   };
 
   render() {
-    console.log(this.state.activitys);
     return (
       <div class="Table">
         <Link to="/actividad" style={{ color: "#ff9b2f" }}>
@@ -87,8 +84,6 @@ export default class Prueba extends Component {
             </TableHead>
             <TableBody>
               {this.state.activitys.map((celda) => {
-                console.log(celda.Project_Id);
-                console.log(this.state.activitys);
                 return (
                   <TableRow key={celda.Activity_Id}>
                     <TableCell align="left">

@@ -1,6 +1,7 @@
 import React, { Component, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import ActivityList from "../Activity/ActivityList"
 import {
   TableContainer,
   Table,
@@ -39,12 +40,22 @@ export default class Prueba extends Component {
       .catch((error) => {
         console.log(error);
       });
-    console.log("Proyecto " + this.state.projects[0]);
   }
+
   componentDidMount = () => {
     this.getAllProjects();
   };
 
+  sendIdProject(projectId){
+    this.setState({ current_projectId: projectId})
+    let baseUrl = 'http://localhost:4000/sendProjectId'
+    axios.post(baseUrl, {
+      Project_Id : projectId
+    })
+    console.log(projectId);
+  }
+
+  
   render() {
     console.log(this.state.projects);
     return (
@@ -63,12 +74,10 @@ export default class Prueba extends Component {
             </TableHead>
             <TableBody>
               {this.state.projects.map((celda) => {
-                console.log(celda.Project_Id);
-                console.log(this.state.projects);
                 return (
                   <TableRow key={celda.Project_Id}>
                     <TableCell align="left">
-                      <Link to="/ActividadList">{celda.Project_Name}</Link>
+                      <Link to="/ActividadList" onClick={() => this.sendIdProject(celda.Project_Id)} >{celda.Project_Name}</Link> 
                     </TableCell>
                     <TableCell align="center">{celda.Initial_Date}</TableCell>
                     <TableCell align="center">{celda.Final_Date}</TableCell>
@@ -86,3 +95,4 @@ export default class Prueba extends Component {
     );
   }
 }
+{/* <ActivityList sendIdProject={this.state.current_projectId}/> */}
