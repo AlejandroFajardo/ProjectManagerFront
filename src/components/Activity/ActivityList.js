@@ -1,6 +1,7 @@
 import React, { Component, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Button from "@material-ui/core/Button";
 import {
   TableContainer,
   Table,
@@ -10,7 +11,8 @@ import {
   TableCell,
   MenuItem,
   Select,
-  FormControl,InputLabel,
+  FormControl,
+  InputLabel,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -29,7 +31,7 @@ export default class Prueba extends Component {
     super();
     this.state = {
       activitys: [],
-      users: []
+      users: [],
     };
   }
 
@@ -43,6 +45,15 @@ export default class Prueba extends Component {
       .catch((error) => {
         console.log(error);
       });
+  }
+  selectActivity(userId) {
+    let baseUrl = 'http://localhost:4000/deleteUser'
+    axios.post(baseUrl, {
+        User_Id : userId})
+    .then((response) => {
+      console.log(response);
+    })
+    this.getAllUsers();
   }
 
   getAllUsers() {
@@ -60,15 +71,19 @@ export default class Prueba extends Component {
   componentDidMount = () => {
     this.getActivitiesPerProject();
     this.getAllUsers();
-
   };
 
   render() {
     return (
       <div class="Table">
-        <Link to="/actividad" style={{ color: "#ff9b2f" }}>
-          Crear Actividad{" "}
-        </Link>
+        <div className="regularButtonActivity">
+          <Button>
+            <Link className="a2" to="/actividad">
+              Crear ACTIVIDAD 
+            </Link>
+          </Button>
+        </div>
+
         <h3 class="LabelTitleComponent">Lista de Actividades </h3>
         <TableContainer>
           <Table>
@@ -87,7 +102,9 @@ export default class Prueba extends Component {
                 return (
                   <TableRow key={celda.Activity_Id}>
                     <TableCell align="left">
-                      <Link to="/">{celda.Activity_Name}</Link>
+                      <Link className="a2" to="/">
+                        {celda.Activity_Name}
+                      </Link>
                     </TableCell>
                     <TableCell align="center">
                       {celda.Estimated_Hours}
@@ -95,30 +112,36 @@ export default class Prueba extends Component {
                     <TableCell align="center">{celda.Priority_Id}</TableCell>
                     <TableCell align="center">{celda.Status_Id}</TableCell>
                     <TableCell align="center">
-                    <FormControl fullWidth>
-                      <InputLabel id="demo-simple-select-label">Empleado</InputLabel>
-                      <Select
-                      
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        // value={age}
-                        label="Age"
-                        // onChange={handleChange}
-                      >
-                        {this.state.users.map((nameAc, index) => {
-                          return (
-                            <MenuItem value={index} onClick={console.log('Clicnk en' + nameAc.User_Last_Name)}>
-                              {nameAc.User_Name}
-                              {console.log('User aca')}
-                            </MenuItem>
-                          )
-                        })}
-                        {/* <MenuItem value={10}>Ten</MenuItem>
+                      <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">
+                          Empleado
+                        </InputLabel>
+                        <Select
+                          labelId="demo-simple-select-label"
+                          id="demo-simple-select"
+                          // value={age}
+                          label="Age"
+                          // onChange={handleChange}
+                        >
+                          {this.state.users.map((nameAc, index) => {
+                            return (
+                              <MenuItem
+                                value={index}
+                                onClick={console.log(
+                                  "Clicnk en" + nameAc.User_Last_Name
+                                )}
+                              >
+                                {nameAc.User_Name}
+                                {console.log("User aca")}
+                              </MenuItem>
+                            );
+                          })}
+                          {/* <MenuItem value={10}>Ten</MenuItem>
                         <MenuItem value={20}>Twenty</MenuItem>
                         <MenuItem value={30}>Thirty</MenuItem> */}
-                      </Select>
-                    </FormControl>
-                  </TableCell>
+                        </Select>
+                      </FormControl>
+                    </TableCell>
                     <TableCell align="center">
                       <button className="buttonDelete">Eliminar</button>
                     </TableCell>

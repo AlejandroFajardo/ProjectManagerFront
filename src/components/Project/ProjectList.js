@@ -77,7 +77,7 @@ export default class Prueba extends Component {
                 return (
                   <TableRow key={celda.Project_Id}>
                     <TableCell align="left">
-                      <Link to="/ActividadList" onClick={() => this.sendIdProject(celda.Project_Id)} >{celda.Project_Name}</Link> 
+                      <Link className="a2" to="/ActividadList" onClick={() => this.sendIdProject(celda.Project_Id)} >{celda.Project_Name}</Link> 
                     </TableCell>
                     <TableCell align="center">{celda.Initial_Date}</TableCell>
                     <TableCell align="center">{celda.Final_Date}</TableCell>

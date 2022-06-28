@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Activity = () => {
-  const project_id = 5;
+  const project_id = 6;
   const classes = useStyles();
   const [activity_name, setActivity_name] = useState("");
   const [estimated_hours, setEstimate_hours] = useState("");
@@ -138,7 +138,7 @@ const Activity = () => {
 
   return (
     <>
-      {created && <Navigate to="/ " />}
+      {created && <Navigate to="/ProyectList" />}
       <div className="createUserContent">
         <div className="formCreateProyect">
           {screenWidth > 1030 && <Title text="Nueva actividad" />}
