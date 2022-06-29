@@ -46,15 +46,16 @@ export default class Prueba extends Component {
         console.log(error);
       });
   }
-  selectActivity(userId) {
-    let baseUrl = 'http://localhost:4000/deleteUser'
-    axios.post(baseUrl, {
-        User_Id : userId})
-    .then((response) => {
-      console.log(response);
-    })
-    this.getAllUsers();
-  }
+
+  // selectActivity(userId) {
+  //   let baseUrl = 'http://localhost:4000/deleteUser'
+  //   axios.post(baseUrl, {
+  //       User_Id : userId})
+  //   .then((response) => {
+  //     console.log(response);
+  //   })
+  //   this.getAllUsers();
+  // }
 
   getAllUsers() {
     let baseUrl = "http://localhost:4000/getUsers";
@@ -72,6 +73,15 @@ export default class Prueba extends Component {
     this.getActivitiesPerProject();
     this.getAllUsers();
   };
+
+  sendAsignament = (activityId, userId) => {
+    console.log(activityId, userId);
+    let baseUrl = 'http://localhost:4000/assignActivityToUser'
+    axios.post(baseUrl, {
+      activity_id : activityId, 
+      user_id : userId
+    })
+  }
 
   render() {
     return (
@@ -123,22 +133,16 @@ export default class Prueba extends Component {
                           label="Age"
                           // onChange={handleChange}
                         >
-                          {this.state.users.map((nameAc, index) => {
+                          {this.state.users.map((userAux, index) => {
                             return (
                               <MenuItem
                                 value={index}
-                                onClick={console.log(
-                                  "Clicnk en" + nameAc.User_Last_Name
-                                )}
+                                onClick={() => this.sendAsignament(celda.Activity_Id, userAux.User_Id)}
                               >
-                                {nameAc.User_Name}
-                                {console.log("User aca")}
+                                {userAux.User_Name}
                               </MenuItem>
                             );
                           })}
-                          {/* <MenuItem value={10}>Ten</MenuItem>
-                        <MenuItem value={20}>Twenty</MenuItem>
-                        <MenuItem value={30}>Thirty</MenuItem> */}
                         </Select>
                       </FormControl>
                     </TableCell>

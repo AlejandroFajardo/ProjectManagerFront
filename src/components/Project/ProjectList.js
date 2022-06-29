@@ -47,7 +47,7 @@ export default class Prueba extends Component {
   };
 
   sendIdProject(projectId){
-    this.setState({ current_projectId: projectId})
+    // this.setState({ current_projectId: projectId})
     let baseUrl = 'http://localhost:4000/sendProjectId'
     axios.post(baseUrl, {
       Project_Id : projectId

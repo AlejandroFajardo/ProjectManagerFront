@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Activity = () => {
-  const project_id = 6;
+  // const project_id = 6;
   const classes = useStyles();
   const [activity_name, setActivity_name] = useState("");
   const [estimated_hours, setEstimate_hours] = useState("");
@@ -94,7 +94,7 @@ const Activity = () => {
   function handleSubmit() {
     setIsLoading(true);
     let account = {
-      project_id,
+      // project_id,
       activity_name,
       estimated_hours,
       priority,
@@ -110,7 +110,7 @@ const Activity = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          project_id: project_id,
+          // project_id: project_id,
           activity_name: activity_name,
           estimated_hours: estimated_hours,
           priority: priority,
