@@ -8,6 +8,7 @@ import Item from "./components/Item";
 import Button from "../commons/RegularButton";
 import ModalError from "../commons/ModalError";
 import { makeStyles } from "@material-ui/core/styles";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -23,8 +24,8 @@ let lsd = JSON.parse(localstorageData);
 const Login = () => {
   const classes = useStyles();
 
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [login_user, setUsername] = useState("");
+  const [user_password, setPassword] = useState("");
   const [isLogin, setIsLogin] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [hasErrors, setHasErrors] = useState(false);
@@ -38,12 +39,12 @@ const Login = () => {
 
   function handleChange(name, value) {
     switch (name) {
-      case "username":
+      case "login_user":
         setErrors({ usernameError: false, passwordError: false });
         setHasErrors(false);
         setUsername(value);
         break;
-      case "password":
+      case "user_password":
         setErrors({ usernameError: false, passwordError: false });
         setHasErrors(false);
         setPassword(value);
@@ -79,13 +80,26 @@ const Login = () => {
 
   function handleOnClick() {
     setIsLoading(true);
-    let login = { username, password };
-    if (login) {
-      // ifMatch(username, password);
-      let ac = JSON.stringify(login);
-      localStorage.setItem("account", ac);
-      setTimeout(() => setIsLogin(true), 2000);
-    }
+    let baseUrl = 'http://localhost:4000/login'
+    let login = { login_user: login_user, user_password: user_password};
+    axios.post(baseUrl, login).then((response) => {
+      console.log(response);
+      if(response.data){
+        let ac = JSON.stringify(login);
+        localStorage.setItem("account", ac);
+        setTimeout(() => setIsLogin(true), 2000);
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+    console.log(login);
+    // if (login) {
+    //   // ifMatch(username, password);
+    //   let ac = JSON.stringify(login);
+    //   localStorage.setItem("account", ac);
+    //   setTimeout(() => setIsLogin(true), 2000);
+    // }
   }
 
   function clearErrorModal() {
@@ -116,7 +130,7 @@ const Login = () => {
               <Item text="Usuario" />
               <Input
                 attribute={{
-                  name: "user",
+                  name: "login_user",
                   inputType: "text",
                   ph: "Ingrese correo",
                 }}
@@ -128,7 +142,7 @@ const Login = () => {
               <Item text="Password" />
               <Input
                 attribute={{
-                  name: "password",
+                  name: "user_password",
                   inputType: "password",
                   ph: "",
                 }}
