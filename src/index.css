@@ -430,6 +430,17 @@ align-self: flex-start;
   font-family: 'Montserrat';
   background-color: #ffffff;
 }
+
+/*------------- User Activities -------------*/
+
+.userActivities {
+  width: 100%;
+  height: 60%;
+  display: flex;
+  margin: auto;
+  padding: 100px 30px 10px 30px;
+
+}
  
 @media screen and (min-width: 1300px) {
   .container {

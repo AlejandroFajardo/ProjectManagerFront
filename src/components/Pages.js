@@ -8,6 +8,7 @@ import Activity from "./Activity/Activity";
 import NavBar from "./NavBar/NavBar.js";
 import ActivityList from "./Activity/ActivityList";
 import RegisterAdmon from "./Register/RegisterAdmon";
+import UserActivities from "./UserComponents/UserActivities";
 function Page() {
   return (
     <>
@@ -21,6 +22,7 @@ function Page() {
           <Route path="/proyectList" exact element={<ProjectList />} />
           <Route path="/actividad" exact element={<Activity />} />
           <Route path="/actividadList" exact element={<ActivityList />} />
+          <Route path="/userActivities" exact element={<UserActivities />} />
         </Routes>
       </div>
     </>

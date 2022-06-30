@@ -32,6 +32,7 @@ export default class Prueba extends Component {
     this.state = {
       activitys: [],
       users: [],
+      activitiesAssignment: [],
     };
   }
 
@@ -83,9 +84,20 @@ export default class Prueba extends Component {
     })
   }
 
+  getActivitiesAssignment = () => {
+    let baseUrl = 'http://localhost:4000/';
+    axios.get(baseUrl)
+    .then((response) => {
+      this.setState({ activitiesAssignment: response.data });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
+
   render() {
     return (
-      <div class="Table">
+      <div className="Table">
         <div className="regularButtonActivity">
           <Button>
             <Link className="a2" to="/actividad">
@@ -94,7 +106,7 @@ export default class Prueba extends Component {
           </Button>
         </div>
 
-        <h3 class="LabelTitleComponent">Lista de Actividades </h3>
+        <h3 className="LabelTitleComponent">Lista de Actividades </h3>
         <TableContainer>
           <Table>
             <TableHead>
@@ -136,7 +148,7 @@ export default class Prueba extends Component {
                           {this.state.users.map((userAux, index) => {
                             return (
                               <MenuItem
-                                value={index}
+                                value={userAux.User_Name}
                                 onClick={() => this.sendAsignament(celda.Activity_Id, userAux.User_Id)}
                               >
                                 {userAux.User_Name}
