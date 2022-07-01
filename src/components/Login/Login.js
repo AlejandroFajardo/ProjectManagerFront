@@ -80,19 +80,21 @@ const Login = () => {
 
   function handleOnClick() {
     setIsLoading(true);
-    let baseUrl = 'http://localhost:4000/login'
-    let login = { login_user: login_user, user_password: user_password};
-    axios.post(baseUrl, login).then((response) => {
-      console.log(response);
-      if(response.data){
-        let ac = JSON.stringify(login);
-        localStorage.setItem("account", ac);
-        setTimeout(() => setIsLogin(true), 2000);
-      }
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+    let baseUrl = "http://localhost:4000/login";
+    let login = { login_user: login_user, user_password: user_password };
+    axios
+      .post(baseUrl, login)
+      .then((response) => {
+        console.log(response);
+        if (response.data) {
+          let ac = JSON.stringify(login);
+          localStorage.setItem("account", ac);
+          setTimeout(() => setIsLogin(true), 2000);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     console.log(login);
     // if (login) {
     //   // ifMatch(username, password);
@@ -164,8 +166,8 @@ const Login = () => {
                 alignItems: "center",
               }}
             >
-              <Link to="/auth/register" style={{ color: "#ff9b2f" }}>
-                <Item text="Crear una cuenta:Registrar" />
+              <Link to="/auth/register" style={{ color: "#aa6dc4" }}>
+                <Item text="Olvidaste Contraseña" />
               </Link>
             </div>
 

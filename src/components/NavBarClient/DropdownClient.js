@@ -1,9 +1,9 @@
 import React from "react";
-import { UserItems } from "./NavItems";
+import { ActivitytItems } from "./NavItemsClient";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-function DropdownUser() {
+function Dropdown() {
   const [dropdown, setDropdown] = useState(false);
 
   return (
@@ -12,7 +12,7 @@ function DropdownUser() {
         className={dropdown ? "services-submenu clicked" : "services-submenu"}
         onClick={() => setDropdown(!dropdown)}
       >
-        {UserItems.map((item) => {
+        {ActivitytItems.map((item) => {
           return (
             <li key={item.id}>
               <Link
@@ -30,4 +30,22 @@ function DropdownUser() {
   );
 }
 
-export default DropdownUser;
+export default Dropdown;
+
+/* {{Items.map((item) => {
+          if (item.name === 'ProjectItems') {
+            {item.values.map((subitem) => {
+              return (
+                <li key={subitem.id}>
+                  <Link
+                    to={subitem.path}
+                    className={subitem.cName}
+                    onClick={() => setDropdown(false)}
+                  >
+                    {subitem.title}
+                  </Link>
+                </li>
+              );
+            })}
+          }
+        })} }*/

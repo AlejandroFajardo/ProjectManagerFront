@@ -15,14 +15,14 @@ function Page() {
       <NavBar />
       <div className="container">
         <Routes>
-        <Route path="/" exact element={<RegisterAdmon replace />} />
+          <Route path="/" exact element={<RegisterAdmon replace />} />
+          <Route path="/page" exact element={<RegisterAdmon replace />} />
           <Route path="/createUser" exact element={<CreateUser />} />
           <Route path="/userList" exact element={<UserList />} />
           <Route path="/proyect" exact element={<Project />} />
           <Route path="/proyectList" exact element={<ProjectList />} />
           <Route path="/actividad" exact element={<Activity />} />
           <Route path="/actividadList" exact element={<ActivityList />} />
-          <Route path="/userActivities" exact element={<UserActivities />} />
         </Routes>
       </div>
     </>

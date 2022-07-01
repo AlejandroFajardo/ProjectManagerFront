@@ -4,10 +4,11 @@ import PublicRoute from "./PublicRoutes";
 import PrivateRoute from "./PrivateRoutes";
 import Page from "../components/Pages";
 import AuthRouter from "./AuthRouter";
+import PagesClient from "../components/Register/PagesClient";
 
 function AppRouter() {
   document.title = "P-WorkFlow";
-  let isLoggedIn = true;
+  let isLoggedIn = false;
   return (
     <div className="App">
       <BrowserRouter>
@@ -24,8 +25,9 @@ function AppRouter() {
           <Route
             path="/*"
             element={
-              <PrivateRoute isLoggedIn={isLoggedIn}>
-                <Page></Page>
+              <PrivateRoute isLoggedIn>
+                <Page />
+                {/* <PagesClient/>  */}
               </PrivateRoute>
             }
           />

@@ -1,7 +1,7 @@
 import React, { Component, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import ActivityList from "../Activity/ActivityList"
+import ActivityList from "../Activity/ActivityList";
 import {
   TableContainer,
   Table,
@@ -46,16 +46,29 @@ export default class Prueba extends Component {
     this.getAllProjects();
   };
 
-  sendIdProject(projectId){
+  sendIdProject(projectId) {
     // this.setState({ current_projectId: projectId})
-    let baseUrl = 'http://localhost:4000/sendProjectId'
+    let baseUrl = "http://localhost:4000/sendProjectId";
     axios.post(baseUrl, {
-      Project_Id : projectId
-    })
+      Project_Id: projectId,
+    });
     console.log(projectId);
   }
 
-  
+  deletProject(projectId) {
+    let baseUrl = "http://localhost:4000/deleteProject";
+    axios
+      .delete(baseUrl, {
+        data: {
+          project_id: projectId,
+        },
+      })
+      .then((response) => {
+        console.log(response);
+      });
+    this.getAllProjects();
+  }
+
   render() {
     console.log(this.state.projects);
     return (
@@ -77,13 +90,24 @@ export default class Prueba extends Component {
                 return (
                   <TableRow key={celda.Project_Id}>
                     <TableCell align="left">
-                      <Link className="a2" to="/ActividadList" onClick={() => this.sendIdProject(celda.Project_Id)} >{celda.Project_Name}</Link> 
+                      <Link
+                        className="a2"
+                        to="/ActividadList"
+                        onClick={() => this.sendIdProject(celda.Project_Id)}
+                      >
+                        {celda.Project_Name}
+                      </Link>
                     </TableCell>
                     <TableCell align="center">{celda.Initial_Date}</TableCell>
                     <TableCell align="center">{celda.Final_Date}</TableCell>
                     <TableCell align="center">{celda.Status_Id}</TableCell>
                     <TableCell align="center">
-                      <button className="buttonDelete">Eliminar</button>
+                      <button
+                        className="buttonDelete"
+                        onClick={() => this.deletProject(celda.Project_Id)}
+                      >
+                        Eliminar
+                      </button>
                     </TableCell>
                   </TableRow>
                 );
@@ -95,4 +119,6 @@ export default class Prueba extends Component {
     );
   }
 }
-{/* <ActivityList sendIdProject={this.state.current_projectId}/> */}
+{
+  /* <ActivityList sendIdProject={this.state.current_projectId}/> */
+}

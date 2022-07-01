@@ -53,6 +53,13 @@ a:hover{
 .a2:hover{
   color:#aa6dc4;
 }
+.a3{      
+  color: #be3bbe; 
+  text-decoration: none;
+}
+.a3:hover{
+  color:#aa6dc4;
+}
 .nav-items{
   display: flex;
   list-style: none;

@@ -225,11 +225,11 @@ const CreateUser = () => {
       })
         .then((res) => {
           JSON.stringify(res);
-          alert(res);
+          // alert(res);
         })
         .then(
           (result) => {
-            alert(JSON.stringify(result));
+            // alert(JSON.stringify(result));
           },
           (error) => {
             //alert(error);

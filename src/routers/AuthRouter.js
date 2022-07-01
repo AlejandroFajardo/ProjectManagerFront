@@ -11,8 +11,6 @@ const AuthRouter = () => {
         <Routes>
           <Route path="login" element={<Login />} />
 
-          <Route path="register" element={<PagesClient />} />
-
           <Route path="*" element={<Navigate to={"login"} replace />} />
         </Routes>
       </div>

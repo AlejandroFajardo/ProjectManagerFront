@@ -1,16 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
-import { navItems } from "./NavItems";
-import Dropdown from "./DropdownProject";
-import DropdownUser from "./DropdownUser";
+import { navItems } from "./NavItemsClient";
+import Dropdown from "./DropdownClient";
 
 function NavBar() {
   const [dropDown, setDropdown] = useState(false);
-  const [dropDownUser, setDropdownUser] = useState(false);
-  let ac = localStorage.getItem("account");
-  let name = "Mati";
-  let account = JSON.parse(ac);
 
   return (
     <nav className="navbar">
@@ -21,12 +16,12 @@ function NavBar() {
       </Link>
       <nav>
         <h1>
-          <label className="HomeLabel"> Bienvenido: {name}</label>
+          <label className="HomeLabel"> Bienvenido: </label>
         </h1>
       </nav>
       <ul className="nav-items">
         {navItems.map((item) => {
-          if (item.title === "Proyecto") {
+          if (item.title === "Actividad") {
             return (
               <li
                 key={item.id}
@@ -36,19 +31,6 @@ function NavBar() {
               >
                 <Link to={item.path}>{item.title}</Link>
                 {dropDown && <Dropdown />}
-              </li>
-            );
-          }
-          if (item.title === "Usuarios") {
-            return (
-              <li
-                key={item.id}
-                className={item.cName}
-                onMouseEnter={() => setDropdownUser(true)}
-                onMouseLeave={() => setDropdownUser(false)}
-              >
-                <Link to={item.path}>{item.title}</Link>
-                {dropDownUser && <DropdownUser />}
               </li>
             );
           }

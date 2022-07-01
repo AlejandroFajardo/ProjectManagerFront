@@ -7,6 +7,8 @@ import {
 } from "@material-ui/core";
 import React from "react";
 import Title from "../Login/components/Title";
+import { Navigate, Link } from "react-router-dom";
+import Item from "../Login/components/Item";
 
 const list = [
   {
@@ -71,7 +73,9 @@ const UserActivities = () => {
               </Typography>
             </CardContent>
             <CardActions>
-              <Button size="small">Learn More</Button>
+              <Link className="a3" to="/progress">
+                <Item text="Crear Avance" />
+              </Link>
             </CardActions>
           </Card>
         );

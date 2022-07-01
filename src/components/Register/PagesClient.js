@@ -1,25 +1,25 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-
-import NavBarClient from "../NavBarClient/NavBar.js";
-
-import Activity from "../Activity/Activity.js";
+import NavBarClient from "../NavBarClient/NavBarClient";
+import RegisterAdmon from "../UserComponents/RegisterAdmon";
+import UserActivities from "../UserComponents/UserActivities";
 import { Link } from "react-router-dom";
 import logo from "../assets/client.jpg";
-
+import Progress from "../UserComponents/Progress";
 function Page() {
   return (
     <>
       <NavBarClient />
-      <Link to="/" className="navbar-logo">
-          <div className="logo">
-            <img src={logo} alt="P-WorkFlow"   width="1000" height="570" />
-          </div>
-        </Link>
 
       <div className="container">
         <Routes>
-          <Route path="/activity" exact element={<Activity/>} />
+          <Route path="/" exact element={<RegisterAdmon replace />} />
+          <Route
+            path="/userActivities"
+            exact
+            element={<UserActivities replace />}
+          />
+          <Route path="/progress" exact element={<Progress />} />
         </Routes>
       </div>
     </>

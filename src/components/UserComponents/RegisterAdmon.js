@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../assets/arquitectura.jpg";
+import logo from "../assets/client.jpg";
 
 const RegisterAdmon = () => {
   return (
