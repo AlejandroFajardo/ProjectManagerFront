@@ -21,12 +21,13 @@ let localstorageData = localStorage.getItem("account");
 
 let lsd = JSON.parse(localstorageData);
 
-const Login = () => {
+const Login = (setLoggedParameters) => {
   const classes = useStyles();
 
   const [login_user, setUsername] = useState("");
   const [user_password, setPassword] = useState("");
   const [isLogin, setIsLogin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [hasErrors, setHasErrors] = useState(false);
 
@@ -64,20 +65,6 @@ const Login = () => {
     showErrors();
   }
 
-  function ifMatch(user, pass) {
-    if (
-      (user === "prueba" && pass === "qwe1233") ||
-      (user === lsd.username && pass === lsd.password)
-    ) {
-      let ac = { user, pass, firstName: "" };
-      let account = JSON.stringify(ac);
-      localStorage.setItem("account", account);
-      setTimeout(() => setIsLogin(true), 2000);
-    } else {
-      setTimeout(() => stopIsLoading(), 2000);
-    }
-  }
-
   function handleOnClick() {
     setIsLoading(true);
     let baseUrl = "http://localhost:4000/login";
@@ -85,23 +72,20 @@ const Login = () => {
     axios
       .post(baseUrl, login)
       .then((response) => {
-        console.log(response);
+        console.log(response.data);
         if (response.data) {
           let ac = JSON.stringify(login);
           localStorage.setItem("account", ac);
-          setTimeout(() => setIsLogin(true), 2000);
+          setTimeout(() => {
+            setIsLogin(true);
+            setIsAdmin(response.data.boss_id);
+          }, 2000);
         }
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.data);
       });
     console.log(login);
-    // if (login) {
-    //   // ifMatch(username, password);
-    //   let ac = JSON.stringify(login);
-    //   localStorage.setItem("account", ac);
-    //   setTimeout(() => setIsLogin(true), 2000);
-    // }
   }
 
   function clearErrorModal() {

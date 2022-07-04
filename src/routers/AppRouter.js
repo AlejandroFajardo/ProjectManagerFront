@@ -9,6 +9,12 @@ import PagesClient from "../components/Register/PagesClient";
 function AppRouter() {
   document.title = "P-WorkFlow";
   let isLoggedIn = false;
+  let isAdmin = true;
+
+  // function setLoggedParameters(isLogged, isTheAdmin) {
+  //   isLoggedIn = isLogged;
+  //   isAdmin = isTheAdmin;
+  // }
   return (
     <div className="App">
       <BrowserRouter>
@@ -25,10 +31,15 @@ function AppRouter() {
           <Route
             path="/*"
             element={
-              <PrivateRoute isLoggedIn>
-                <Page />
-                {/* <PagesClient/>  */}
-              </PrivateRoute>
+              isAdmin ? (
+                <PrivateRoute isLoggedIn>
+                  <Page />
+                </PrivateRoute>
+              ) : (
+                <PrivateRoute isLoggedIn>
+                  <PagesClient />
+                </PrivateRoute>
+              )
             }
           />
 

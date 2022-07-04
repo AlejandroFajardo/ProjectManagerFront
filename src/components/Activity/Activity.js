@@ -8,6 +8,7 @@ import { Navigate, Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import {useLocation} from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -16,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Activity = () => {
+const Activity = (props) => {
   // const project_id = 6;
   const classes = useStyles();
   const [activity_name, setActivity_name] = useState("");
@@ -91,7 +92,13 @@ const Activity = () => {
 
   // Aca se realiza el envio de datos, revisar como se envia el Json de esta parte
 
+  const aux = () =>{
+    // const { project_id } = this.props.location
+    console.log(props);
+  }
+
   function handleSubmit() {
+    aux(); 
     setIsLoading(true);
     let account = {
       // project_id,

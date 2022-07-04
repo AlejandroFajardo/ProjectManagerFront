@@ -92,7 +92,7 @@ export default class Prueba extends Component {
                     <TableCell align="left">
                       <Link
                         className="a2"
-                        to="/ActividadList"
+                        to={{pathname:"/ActividadList", project_id: celda.Project_Id}}
                         onClick={() => this.sendIdProject(celda.Project_Id)}
                       >
                         {celda.Project_Name}
