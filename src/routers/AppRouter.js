@@ -9,8 +9,8 @@ import Cookies from 'universal-cookie';
 
 function AppRouter() {
   document.title = "P-WorkFlow";
-  let isLoggedIn = false;
-  let isAdmin = false;
+  let isLoggedIn = true;
+  let isAdmin = true;
   const cookies = new Cookies();
 
   // console.log("Cookie de admin: " + cookies.get('isAdmin'));
@@ -20,7 +20,7 @@ function AppRouter() {
     isAdmin = cookies.get('isAdmin');
   }
 
-  setLoggedParameters();
+  // setLoggedParameters();
 
   console.log("Cookie de islogged: " + cookies.get('isLogged'));
   console.log("Cookie de admin: " + cookies.get('isAdmin'));

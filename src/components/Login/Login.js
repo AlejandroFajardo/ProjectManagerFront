@@ -82,15 +82,15 @@ const Login = () => {
           localStorage.setItem("account", ac);
           setTimeout(() => {
             setIsLogin(true);
-            cookies.set('isLogged', isLogin, {path: '/'});
+            // cookies.set('isLogged', isLogin, {path: '/'});
             console.log('Boss ' + response.data.boss_id);
             if(response.data.boss_id == null){
               setIsAdmin(true);
               console.log("boss id indefinido");
-              cookies.set('isAdmin', isAdmin, {path: '/'});
+              // cookies.set('isAdmin', isAdmin, {path: '/'});
             }
             setIsAdmin(false);
-            cookies.set('isAdmin', isAdmin);
+            // cookies.set('isAdmin', isAdmin);
           }, 2000);
         }
       })

@@ -11,6 +11,7 @@ import {
   TableCell,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import Cookies from "universal-cookie";
 
 const useStyles = makeStyles((theme) => ({
   tablaMaterial: {
@@ -22,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
 //   console.log(project.project_name);
 // }
 
+const cookies = new Cookies();
 export default class Prueba extends Component {
   constructor() {
     super();
@@ -48,11 +50,14 @@ export default class Prueba extends Component {
 
   sendIdProject(projectId) {
     // this.setState({ current_projectId: projectId})
-    let baseUrl = "http://localhost:4000/sendProjectId";
-    axios.post(baseUrl, {
-      Project_Id: projectId,
-    });
-    console.log(projectId);
+    cookies.set("currentProjectId", projectId, { path: "/" });
+
+    let pid = cookies.get("currentProjectId");
+    // let baseUrl = "http://localhost:4000/sendProjectId";
+    // axios.post(baseUrl, {
+    //   Project_Id: projectId,
+    // });
+    console.log(pid);
   }
 
   deletProject(projectId) {
@@ -72,8 +77,8 @@ export default class Prueba extends Component {
   render() {
     console.log(this.state.projects);
     return (
-      <div class="Table">
-        <h3 class="LabelTitleComponent">Lista de Proyectos </h3>
+      <div className="Table">
+        <h3 className="LabelTitleComponent">Lista de Proyectos </h3>
         <TableContainer>
           <Table>
             <TableHead>
@@ -92,7 +97,11 @@ export default class Prueba extends Component {
                     <TableCell align="left">
                       <Link
                         className="a2"
-                        to={{pathname:"/ActividadList", project_id: celda.Project_Id}}
+                        to={{
+                          pathname: "/ActividadList",
+                          // pathname: "/proyectList",
+                          project_id: celda.Project_Id,
+                        }}
                         onClick={() => this.sendIdProject(celda.Project_Id)}
                       >
                         {celda.Project_Name}

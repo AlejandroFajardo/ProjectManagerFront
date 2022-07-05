@@ -9,6 +9,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import {useLocation} from 'react-router-dom';
+import Cookies from "universal-cookie";
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -19,6 +20,8 @@ const useStyles = makeStyles((theme) => ({
 
 const Activity = (props) => {
   // const project_id = 6;
+  const cookies = new Cookies();
+  let project_id = cookies.get('currentProjectId');
   const classes = useStyles();
   const [activity_name, setActivity_name] = useState("");
   const [estimated_hours, setEstimate_hours] = useState("");
@@ -101,7 +104,7 @@ const Activity = (props) => {
     aux(); 
     setIsLoading(true);
     let account = {
-      // project_id,
+      project_id,
       activity_name,
       estimated_hours,
       priority,
@@ -117,7 +120,7 @@ const Activity = (props) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          // project_id: project_id,
+          project_id: project_id,
           activity_name: activity_name,
           estimated_hours: estimated_hours,
           priority: priority,

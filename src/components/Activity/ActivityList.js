@@ -15,6 +15,7 @@ import {
   InputLabel,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import Cookies from "universal-cookie";
 
 const useStyles = makeStyles((theme) => ({
   tablaMaterial: {
@@ -22,11 +23,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 // function selectProject(project) {
 //   console.log(project.project_name);
 // }
 
-export default class Prueba extends Component {
+export default class ActivityList extends Component {
   constructor() {
     super();
     this.state = {
@@ -37,10 +39,14 @@ export default class Prueba extends Component {
   }
 
   getActivitiesPerProject() {
+    const cookies = new Cookies();
     let baseUrl = "http://localhost:4000/getActivity";
+    let projectId = cookies.get('currentProjectId');
+    let data = {project_id: projectId}
     axios
-      .get(baseUrl)
+      .post(baseUrl, data)
       .then((response) => {
+        console.log(response.data);
         this.setState({ activitys: response.data });
       })
       .catch((error) => {
@@ -101,7 +107,7 @@ export default class Prueba extends Component {
         <div className="regularButtonActivity">
           <Button>
             <Link className="a2" to="/actividad">
-              Crear ACTIVIDAD 
+              Crear Actividad 
             </Link>
           </Button>
         </div>
