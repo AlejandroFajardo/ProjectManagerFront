@@ -25,7 +25,7 @@ let lsd = JSON.parse(localstorageData);
 const Login = () => {
   const classes = useStyles();
 
-  const cookies = new Cookies();
+  
 
   const [login_user, setUsername] = useState("");
   const [user_password, setPassword] = useState("");
@@ -70,6 +70,7 @@ const Login = () => {
 
   function handleOnClick() {
     setIsLoading(true);
+    const cookies = new Cookies();
     let baseUrl = "http://localhost:4000/login";
     let login = { login_user: login_user, user_password: user_password };
     axios
@@ -81,12 +82,12 @@ const Login = () => {
           localStorage.setItem("account", ac);
           setTimeout(() => {
             setIsLogin(true);
-            cookies.set('isLogged', isLogin);
+            cookies.set('isLogged', isLogin, {path: '/'});
             console.log('Boss ' + response.data.boss_id);
             if(response.data.boss_id == null){
               setIsAdmin(true);
               console.log("boss id indefinido");
-              cookies.set('isAdmin', isAdmin);
+              cookies.set('isAdmin', isAdmin, {path: '/'});
             }
             setIsAdmin(false);
             cookies.set('isAdmin', isAdmin);
