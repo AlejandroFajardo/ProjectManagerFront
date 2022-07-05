@@ -220,7 +220,7 @@ const CreateUser = () => {
           phone_number: phone_number,
           user_password: user_password,
           user_status: 1,
-          boss_id: "",
+          boss_id: 1,
         }),
       })
         .then((res) => {

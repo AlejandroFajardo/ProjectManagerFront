@@ -9,6 +9,7 @@ import Button from "../commons/RegularButton";
 import ModalError from "../commons/ModalError";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
+import Cookies from 'universal-cookie';
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -21,13 +22,15 @@ let localstorageData = localStorage.getItem("account");
 
 let lsd = JSON.parse(localstorageData);
 
-const Login = (setLoggedParameters) => {
+const Login = () => {
   const classes = useStyles();
+
+  const cookies = new Cookies();
 
   const [login_user, setUsername] = useState("");
   const [user_password, setPassword] = useState("");
   const [isLogin, setIsLogin] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [hasErrors, setHasErrors] = useState(false);
 
@@ -78,7 +81,15 @@ const Login = (setLoggedParameters) => {
           localStorage.setItem("account", ac);
           setTimeout(() => {
             setIsLogin(true);
-            setIsAdmin(response.data.boss_id);
+            cookies.set('isLogged', isLogin);
+            console.log('Boss ' + response.data.boss_id);
+            if(response.data.boss_id == null){
+              setIsAdmin(true);
+              console.log("boss id indefinido");
+              cookies.set('isAdmin', isAdmin);
+            }
+            setIsAdmin(false);
+            cookies.set('isAdmin', isAdmin);
           }, 2000);
         }
       })
@@ -86,6 +97,9 @@ const Login = (setLoggedParameters) => {
         console.log(error.data);
       });
     console.log(login);
+    console.log("Cookie de islogged: " + cookies.get('isLogged'));
+    console.log("Cookie de admin: " + cookies.get('isAdmin'));
+
   }
 
   function clearErrorModal() {

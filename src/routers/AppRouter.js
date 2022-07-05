@@ -5,16 +5,26 @@ import PrivateRoute from "./PrivateRoutes";
 import Page from "../components/Pages";
 import AuthRouter from "./AuthRouter";
 import PagesClient from "../components/Register/PagesClient";
+import Cookies from 'universal-cookie';
 
 function AppRouter() {
   document.title = "P-WorkFlow";
   let isLoggedIn = false;
-  let isAdmin = true;
+  let isAdmin = false;
+  const cookies = new Cookies();
 
-  // function setLoggedParameters(isLogged, isTheAdmin) {
-  //   isLoggedIn = isLogged;
-  //   isAdmin = isTheAdmin;
-  // }
+  // console.log("Cookie de admin: " + cookies.get('isAdmin'));
+
+  function setLoggedParameters() {
+    isLoggedIn = cookies.get('isLogged');
+    isAdmin = cookies.get('isAdmin');
+  }
+
+  setLoggedParameters();
+
+  console.log("Cookie de islogged: " + cookies.get('isLogged'));
+  console.log("Cookie de admin: " + cookies.get('isAdmin'));
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -32,11 +42,11 @@ function AppRouter() {
             path="/*"
             element={
               isAdmin ? (
-                <PrivateRoute isLoggedIn>
+                <PrivateRoute isLoggedIn={isLoggedIn}>
                   <Page />
                 </PrivateRoute>
               ) : (
-                <PrivateRoute isLoggedIn>
+                <PrivateRoute isLoggedIn={isLoggedIn}>
                   <PagesClient />
                 </PrivateRoute>
               )

@@ -11,12 +11,12 @@ export const navItems = [
     path: "/",
     cName: "nav-item",
   },
-  {
-    id: 3,
-    title: "Cerrar Sesion",
-    path: "/",
-    cName: "nav-item",
-  },
+  // {
+  //   id: 3,
+  //   title: "Cerrar Sesion",
+  //   path: "/",
+  //   cName: "nav-item",
+  // },
 ];
 
 export const ActivitytItems = [

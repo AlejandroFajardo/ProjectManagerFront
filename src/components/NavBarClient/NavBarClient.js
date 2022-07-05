@@ -3,10 +3,17 @@ import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { navItems } from "./NavItemsClient";
 import Dropdown from "./DropdownClient";
+import Cookies from 'universal-cookie';
 
 function NavBar() {
+  const cookies = new Cookies();
+
   const [dropDown, setDropdown] = useState(false);
 
+  function logOut(){
+    cookies.remove('isLogged');
+    cookies.remove('isAdmin');
+  }
   return (
     <nav className="navbar">
       <Link to="/" className="navbar-logo">
@@ -41,6 +48,9 @@ function NavBar() {
             </li>
           );
         })}
+        <li className='nav-item' onClick={logOut}>
+        <Link to='/auth/login'> Cerrar sesión</Link>
+        </li>
       </ul>
     </nav>
   );
