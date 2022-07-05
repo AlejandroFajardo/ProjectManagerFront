@@ -23,11 +23,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
-// function selectProject(project) {
-//   console.log(project.project_name);
-// }
-
 export default class ActivityList extends Component {
   constructor() {
     super();
@@ -101,6 +96,16 @@ export default class ActivityList extends Component {
     });
   }
 
+  deleteActivity(activityId){
+    let baseUrl = "http://localhost:4000/deleteActivity";
+    axios.delete(baseUrl, {
+      data: { activity_id : activityId},
+    }).then((response) => {
+      console.log(response);
+    });
+    this.getActivitiesPerProject();
+  }
+
   render() {
     return (
       <div className="Table">
@@ -165,7 +170,10 @@ export default class ActivityList extends Component {
                       </FormControl>
                     </TableCell>
                     <TableCell align="center">
-                      <button className="buttonDelete">Eliminar</button>
+                      <button
+                       className="buttonDelete"
+                       onClick={() => this.deleteActivity(celda.Activity_Id)}
+                      >Eliminar</button>
                     </TableCell>
                   </TableRow>
                 );

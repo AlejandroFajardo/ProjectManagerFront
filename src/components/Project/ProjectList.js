@@ -19,10 +19,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// function selectProject(project) {
-//   console.log(project.project_name);
-// }
-
 const cookies = new Cookies();
 export default class Prueba extends Component {
   constructor() {
@@ -49,15 +45,8 @@ export default class Prueba extends Component {
   };
 
   sendIdProject(projectId) {
-    // this.setState({ current_projectId: projectId})
     cookies.set("currentProjectId", projectId, { path: "/" });
-
     let pid = cookies.get("currentProjectId");
-    // let baseUrl = "http://localhost:4000/sendProjectId";
-    // axios.post(baseUrl, {
-    //   Project_Id: projectId,
-    // });
-    console.log(pid);
   }
 
   deletProject(projectId) {
