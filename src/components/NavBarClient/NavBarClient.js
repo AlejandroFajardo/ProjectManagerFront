@@ -11,8 +11,10 @@ function NavBar() {
   const [dropDown, setDropdown] = useState(false);
 
   function logOut(){
-    cookies.remove('isLogged');
-    cookies.remove('isAdmin');
+    // cookies.remove('isLogged');
+    // cookies.remove('isAdmin');
+    window.localStorage.clear();
+
   }
   return (
     <nav className="navbar">

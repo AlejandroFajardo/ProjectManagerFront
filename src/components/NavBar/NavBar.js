@@ -6,8 +6,9 @@ import Dropdown from "./DropdownProject";
 import DropdownUser from "./DropdownUser";
 import Cookies from 'universal-cookie';
 
+const cookies = new Cookies();
+
 function NavBar() {
-  const cookies = new Cookies();
 
   const [dropDown, setDropdown] = useState(false);
   const [dropDownUser, setDropdownUser] = useState(false);
@@ -16,8 +17,11 @@ function NavBar() {
   let account = JSON.parse(ac);
 
   function logOut(){
-    cookies.remove('isLogged');
-    cookies.remove('isAdmin');
+  // cookies.set('logged', false);
+  // cookies.set('isAdmin', false);
+  // cookies.remove('logged');
+  // cookies.remove('isAdmin');
+  window.localStorage.clear();
   }
   return (
     <nav className="navbar">
