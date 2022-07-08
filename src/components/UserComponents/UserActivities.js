@@ -4,6 +4,9 @@ import {
   CardActions,
   CardContent,
   Typography,
+  Grid,
+  CardActionArea,
+  Divider,
 } from "@material-ui/core";
 import React from "react";
 import Title from "../Login/components/Title";
@@ -43,43 +46,85 @@ const list = [
     priorityId: "Alta",
     statsId: "Pendiente",
   },
+  {
+    activityId: "4",
+    projectId: "13",
+    activityName: "Lo ultimo por hacer",
+    estimatedHours: 30,
+    priorityId: "Alta",
+    statsId: "Pendiente",
+  },
+  {
+    activityId: "4",
+    projectId: "13",
+    activityName: "Lo ultimo por hacer",
+    estimatedHours: 30,
+    priorityId: "Alta",
+    statsId: "Pendiente",
+  },
+  {
+    activityId: "4",
+    projectId: "13",
+    activityName: "Lo ultimo por hacer",
+    estimatedHours: 30,
+    priorityId: "Alta",
+    statsId: "Pendiente",
+  },
 ];
 const UserActivities = () => {
   console.log("Estamos en userActitivities");
   return (
     <div className="userActivities">
-      {list.map((item) => {
-        return (
-          <Card sx={{ minWidth: 275 }}>
-            <CardContent>
-              <Typography
-                sx={{ fontSize: 14 }}
-                color="text.secondary"
-                gutterBottom
-              >
-                {item.activityName}
-              </Typography>
-              <Typography variant="h5" component="div">
-                {/* be{bull}nev{bull}o{bull}lent */}
-                {item.priorityId}
-              </Typography>
-              <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                {item.statsId}
-              </Typography>
-              <Typography variant="body2">
-                {item.estimatedHours}
-                <br />
-                {'"a benevolent smile"'}
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Link className="a3" to="/employee/progress">
-                <Item text="Crear Avance" />
-              </Link>
-            </CardActions>
-          </Card>
-        );
-      })}
+      <Grid container spacing={3}>
+        {list.map((item) => {
+          return (
+            <Grid item xs={12} sm={6} md={4}>
+              <Card variant="outlined" sx={{ minWidth: 200 }}>
+                <CardActionArea
+                  className="a4"
+                  component={Link}
+                  to="/employee/progress"
+                >
+                  <CardContent>
+                    <Typography color="text.secondary" gutterBottom>
+                      {item.activityName}
+                    </Typography>
+                    <Typography variant="h6" component="div" color="secondary">
+                      {"Prioridad: "}
+                      {item.priorityId}
+                    </Typography>
+                    <Typography sx={{ mb: 1.5 }} color="primary">
+                      {"Estado: "}
+                      {item.statsId}
+                    </Typography>
+                    <Typography variant="body2">
+                      {"Horas estimadas: "}
+                      {item.estimatedHours}
+                      <br />
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+                <Divider variant="middle" />
+                <CardActionArea
+                  className="a4"
+                  component={Link}
+                  to="/employee/progress"
+                  justifyContent="center"
+                  alignItems="center"
+                >
+                  <CardActions justify="center">
+                    <Button className="a5" size="small" color="primary">
+                      <Link className="a5" to="/employee/progress">
+                        <Item className="a5" text="Crear Avance" />
+                      </Link>
+                    </Button>
+                  </CardActions>
+                </CardActionArea>
+              </Card>
+            </Grid>
+          );
+        })}
+      </Grid>
     </div>
   );
 };

@@ -1,18 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;500&display=swap");
 
-*{
+* {
   padding: 0;
   margin: 0;
-font-family: 'Montserrat';
--webkit-font-smoothing: antialiased;
+  font-family: "Montserrat";
+  -webkit-font-smoothing: antialiased;
 }
 
 code {
-font-family:'Montserrat',
- ;
+  font-family: "Montserrat";
 }
 /* ----------------- Principal -------------------*/
-.App{
+.App {
   max-width: 1555px;
   width: 100%;
   min-height: 100vh;
@@ -21,88 +20,93 @@ font-family:'Montserrat',
   box-sizing: border-box;
   text-align: center;
   background-color: #ffffff;
-
-
 }
 
- /* ----------------NavBar-----------*/
+/* ----------------NavBar-----------*/
 .navbar {
   width: 98%;
-  min-height: 60px; 
+  min-height: 60px;
   display: flex;
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
   position: fixed;
-  box-sizing: border-box ;
-  background-color: #0D151BBA;
-  box-shadow: 0 4px 10px #3EECF2;
+  box-sizing: border-box;
+  background-color: #0d151bba;
+  box-shadow: 0 4px 10px #3eecf2;
 }
 
-a{      
-  color: #ffffff; 
-  
+a {
+  color: #ffffff;
 }
-a:hover{
-  color:#3EECF2;
+a:hover {
+  color: #3eecf2;
 }
-.a2{      
-  color: #141314; 
+.a2 {
+  color: #141314;
   text-decoration: none;
 }
-.a2:hover{
-  color:#aa6dc4;
+.a2:hover {
+  color: #aa6dc4;
 }
-.a3{      
-  color: #be3bbe; 
+.a3 {
+  color: #be3bbe;
   text-decoration: none;
 }
-.a3:hover{
-  color:#aa6dc4;
+.a3:hover {
+  color: #aa6dc4;
 }
-.nav-items{
+.a4 {
+  text-decoration: none;
+}
+.a4:hover {
+  color: #141314;
+}
+.a5 {
+  text-decoration: none;
+  cursor: pointer;
+}
+.a5:hover {
+  color: #000000;
+  cursor: pointer;
+}
+.nav-items {
   display: flex;
   list-style: none;
   text-align: center;
   width: 50vw;
   justify-content: flex-end;
-  margin-right:1rem;
+  margin-right: 1rem;
 }
 
 .HomeLabel {
   font-size: 18px;
-  font-family:'Montserrat';
-  color:#dbd1e3;
+  font-family: "Montserrat";
+  color: #dbd1e3;
   display: flex;
   justify-content: center;
   align-items: center;
-  
 }
 
-
-.navbar-logo{
+.navbar-logo {
   box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  color:#8dd453;
- 
+  color: #8dd453;
 }
 
-.nav-item{
+.nav-item {
   display: flex;
   align-items: center;
   height: 10vh;
-
 }
-.nav-item a{
+.nav-item a {
   text-decoration: none;
   font-size: 1.1rem;
   margin-right: 2rem;
   padding: 6px 16px;
-  
-  
 }
 
 /*--------------Dropdown-------------*/
@@ -112,19 +116,15 @@ a:hover{
   top: 60px;
   list-style: none;
   text-align: start;
-  
 }
 
-.services-submenu li{
- background-color: #0D151BBA;
- cursor: pointer;
-
-
+.services-submenu li {
+  background-color: #0d151bba;
+  cursor: pointer;
 }
 
 .services-submenu.clicked {
   display: none;
- 
 }
 
 .submenu-item {
@@ -132,14 +132,14 @@ a:hover{
   width: 100%;
   height: 100%;
   text-decoration: none;
-  color:#ffffff;
+  color: #ffffff;
   padding: 16px;
 }
 
 .submenu-item:hover {
-  background: #3EECF2;
+  background: #3eecf2;
   width: 87%;
-  color:#141314;
+  color: #141314;
 }
 
 /*--------------Login---------------*/
@@ -187,8 +187,8 @@ a:hover{
 
 .LabelTitleComponent {
   font-size: 35px;
- font-family: 'Montserrat';
-  color:#7B37A4;
+  font-family: "Montserrat";
+  color: #7b37a4;
 }
 /*input*/
 .regularStyle {
@@ -197,13 +197,13 @@ a:hover{
   background: #ffffff;
   /*color: #75468a;*/
   font-size: 16px;
-border: 1px solid #7B37A4;
+  border: 1px solid #7b37a4;
   outline: none;
   border-radius: 30px;
   padding: 10px 20px;
   box-sizing: border-box;
   font-weight: 600;
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
 }
 
 .errorStyle {
@@ -218,20 +218,20 @@ border: 1px solid #7B37A4;
   padding: 10px 20px;
   box-sizing: border-box;
   font-weight: 600;
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
 }
 
 .LabelItemComponent {
   font-size: 16px;
   color: #141314;
   font-weight: 600;
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
 }
 
 .ItemComponent {
   display: flex;
   justify-content: left;
-align-self: flex-start;
+  align-self: flex-start;
 }
 
 .inputContainer {
@@ -240,40 +240,36 @@ align-self: flex-start;
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 
 .regularButtonLogin {
-  background: #7B37A4;
+  background: #7b37a4;
   width: 70%;
   height: 45px;
-  border: 1px solid #75468a; 
+  border: 1px solid #75468a;
   outline: none;
   border-radius: 35px;
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
   font-size: 20px;
   color: #ffffff;
   font-weight: 400;
-  
 }
 
 .regularButtonActivity {
   background: #d9b4f0;
-  width:20%;
+  width: 20%;
   height: 40px;
-  border: 1px solid #75468a; 
+  border: 1px solid #75468a;
   outline: none;
   border-radius: 35px;
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
   font-size: 20px;
   color: #ffffff;
   display: flex;
   justify-content: center;
   background-size: cover;
-      align-items: center;
-      font-weight: 400;
- 
-  
+  align-items: center;
+  font-weight: 400;
 }
 .regularButtonLogin:hover .regularButtonLogin:active {
   background: #75468a;
@@ -292,14 +288,14 @@ align-self: flex-start;
 .errorNotificationLabel {
   font-size: 14px;
   color: #f9314b;
-  font-family: 'Montserrat';
-  padding: 0 0 0 7%
+  font-family: "Montserrat";
+  padding: 0 0 0 7%;
 }
 
 .errorNotificationContainer {
   width: 100%;
   margin-top: -5px;
-  margin-bottom: 5px
+  margin-bottom: 5px;
 }
 
 .modalErrorContainer {
@@ -314,14 +310,14 @@ align-self: flex-start;
 .modalErrorTitle {
   margin: 0;
   font-size: 16px;
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
   font-weight: 800;
   color: #f9314b;
 }
 
 .modalErrorText {
   font-size: 14px;
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
   font-weight: 400;
   color: #f9314b;
   margin: 0;
@@ -334,7 +330,7 @@ align-self: flex-start;
   border: solid 1px rgba(35, 47, 52, 0.4);
   outline: none;
   border-radius: 35px;
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
   font-size: 16px;
   color: rgba(35, 47, 52, 0.4);
   font-weight: 400;
@@ -350,107 +346,99 @@ align-self: flex-start;
 
 .LabelTitleComponent {
   width: 100%;
-  padding:2px 0 15px 0;
+  padding: 2px 0 15px 0;
 }
 
 @media screen and (min-width: 1030px) {
   .Login {
-      width: 40%;
-      height: auto;
-      margin-top: 90px;
-      padding: 20px 0 20px 0;
-      box-shadow: 5px 15px 20px 15px rgba(0, 0, 0, 0.16);
-      border-radius: 10px;
-      box-sizing: content-box;
-      background: #ffffff
+    width: 40%;
+    height: auto;
+    margin-top: 90px;
+    padding: 20px 0 20px 0;
+    box-shadow: 5px 15px 20px 15px rgba(0, 0, 0, 0.16);
+    border-radius: 10px;
+    box-sizing: content-box;
+    background: #ffffff;
   }
   .LoginContent {
-      display: flex;
-      justify-content: center;
-      background-size: cover;
-      align-items: center;
-      
+    display: flex;
+    justify-content: center;
+    background-size: cover;
+    align-items: center;
   }
   .LabelTitleComponent {
-      margin-top:5px
+    margin-top: 5px;
   }
   .ItemPasswordLogin {
-      margin-top: 3px;
-      margin-bottom: 10px;
-      width: 100%;
+    margin-top: 3px;
+    margin-bottom: 10px;
+    width: 100%;
   }
   .LabelItemComponent {
-      margin-top:1px
+    margin-top: 1px;
   }
   .LoginLower {
-      width: 85%;
-      padding: -15px 30px 10px 30px;
+    width: 85%;
+    padding: -15px 30px 10px 30px;
   }
   .ItemUserLogin {
-      width: 100%;
-      
+    width: 100%;
   }
 }
 
 /*---------CREATE USER --------------*/
 .formCreateUser {
- 
   width: 80%;
-   margin: auto;
-  align-items:center;
+  margin: auto;
+  align-items: center;
   background-size: cover;
   justify-content: center;
   padding: 0px 30px 10px 20px;
   box-shadow: 5px 15px 20px 15px rgba(0, 0, 0, 0.16);
   flex-direction: row;
-
 }
-
 
 @media screen and (min-width: 1300px) {
   .createUserContent {
-      width: 40%;
-      height: 60%;
-      margin: auto;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-size: cover;
-      flex-direction: row;
-      color: #8dd453;
-      padding: 90px 30px 10px 30px;
-    
+    width: 40%;
+    height: 60%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    flex-direction: row;
+    color: #8dd453;
+    padding: 90px 30px 10px 30px;
   }
-  
- /*---------CREATE PROYECT--------------*/
 
-.formCreateProyect {
- 
-  width:80%;
-  margin: auto;
-  align-items:center;
-  background-size: cover;
-  justify-content: center;
-  padding: 10px 30px 10px 30px;
-  box-shadow: 5px 15px 20px 15px rgba(0, 0, 0, 0.16);
-  flex-direction: row;
-  font-family: 'Montserrat';
-  background-color: #ffffff;
-}
+  /*---------CREATE PROYECT--------------*/
 
-/*------------- User Activities -------------*/
+  .formCreateProyect {
+    width: 80%;
+    margin: auto;
+    align-items: center;
+    background-size: cover;
+    justify-content: center;
+    padding: 10px 30px 10px 30px;
+    box-shadow: 5px 15px 20px 15px rgba(0, 0, 0, 0.16);
+    flex-direction: row;
+    font-family: "Montserrat";
+    background-color: #ffffff;
+  }
 
-.userActivities {
-  width: 100%;
-  height: 60%;
-  display: flex;
-  margin: auto;
-  padding: 100px 30px 10px 30px;
+  /*------------- User Activities -------------*/
 
-}
- 
-@media screen and (min-width: 1300px) {
-  .container {
+  .userActivities {
+    width: 100%;
+    height: 60%;
+    display: flex;
+    margin: auto;
+    padding: 100px 30px 10px 30px;
+  }
+
+  @media screen and (min-width: 1300px) {
+    .container {
       width: 80%;
       height: 60%;
       margin: auto;
@@ -461,66 +449,60 @@ align-self: flex-start;
       flex-direction: row;
       color: #141314;
       padding: 0px 30px 10px 30px;
-    
+    }
   }
- 
 
+  .Table {
+    width: 900%;
+    margin-top: 40px;
+    font-weight: bold;
+    box-sizing: border-box;
+    text-align: center;
+    padding: 40px 30px 10px 30px;
+    box-shadow: 5px 15px 20px 15px rgba(0, 0, 0, 0.16);
+    background-color: #ffffff;
+    font-family: "Montserrat";
+  }
+
+  TableRow:hover {
+    background-color: blue;
+    color: white;
+    cursor: pointer;
+  }
+
+  th {
+    background-color: #1abc9c;
+    font-weight: bold;
+    text-align: center;
+    margin: 15px;
+    font-family: "Montserrat";
+  }
+  th,
+  td {
+    width: 15%;
+    font-family: "Montserrat";
+    height: 10%;
+    text-align: left;
+    vertical-align: top;
+    font-weight: bold;
+    border-collapse: collapse;
+    border: 1px solid rgb(195, 188, 188);
+  }
+
+  .buttonDelete {
+    background-color: #f44336;
+    border: none;
+    color: white;
+    padding: 0px 22px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 2px solid #f34c4c;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2),
+      0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    height: 30px;
+    cursor: pointer;
+  }
 }
-
-.Table{
-  width:900%;
-  margin-top:40px;
-  font-weight: bold;
-  box-sizing: border-box;
-  text-align: center;
-  padding: 40px 30px 10px 30px;
-  box-shadow: 5px 15px 20px 15px rgba(0, 0, 0, 0.16);
-  background-color: #ffffff;
-  font-family:'Montserrat';
-}
-
-TableRow:hover {
-  background-color: blue;
-  color: white;
-  cursor: pointer;
-}
-
-th {
-  background-color: #1ABC9C;
-  font-weight: bold;
-  text-align: center;
-  margin: 15px;
-  font-family:'Montserrat';
-
-  
-  
-}
-th, td {
-  width: 15%;
-  font-family:'Montserrat';
-  height: 10%;
-  text-align: left;
-  vertical-align: top;
-  font-weight: bold;
-  border-collapse: collapse;
- border: 1px solid rgb(195, 188, 188);
-}
-
-.buttonDelete {
-  background-color: #f44336;
-  border: none;
-  color: white;
-  padding: 0px 22px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  border-radius: 8px;
-  border: 2px solid #f34c4c;
-  box-shadow:0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-  height: 30px;
-  cursor: pointer;
-}
-
-}
-
