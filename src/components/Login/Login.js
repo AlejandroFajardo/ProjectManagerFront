@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Navigate, Link } from "react-router-dom";
+import { Navigate, Link, useNavigate } from "react-router-dom";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Title from "./components/Title";
@@ -9,7 +9,7 @@ import Button from "../commons/RegularButton";
 import ModalError from "../commons/ModalError";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
-import Cookies from 'universal-cookie';
+import Cookies from "universal-cookie";
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -23,9 +23,8 @@ let localstorageData = localStorage.getItem("account");
 let lsd = JSON.parse(localstorageData);
 
 const Login = () => {
+  const navigate = useNavigate();
   const classes = useStyles();
-
-  
 
   const [login_user, setUsername] = useState("");
   const [user_password, setPassword] = useState("");
@@ -41,6 +40,12 @@ const Login = () => {
     passwordError: false,
   });
 
+  const redirectByRol = (rol) => {
+    if (rol === null) {
+      console.log("admin" + rol);
+      navigate("/admin");
+    } else if (rol !== null) navigate("/employee");
+  };
   function handleChange(name, value) {
     switch (name) {
       case "login_user":
@@ -80,27 +85,14 @@ const Login = () => {
         if (response.data) {
           let ac = JSON.stringify(login);
           localStorage.setItem("account", ac);
-          setTimeout(() => {
-            setIsLogin(true);
-            // cookies.set('isLogged', isLogin, {path: '/'});
-            console.log('Boss ' + response.data.boss_id);
-            if(response.data.boss_id == null){
-              setIsAdmin(true);
-              console.log("boss id indefinido");
-              // cookies.set('isAdmin', isAdmin, {path: '/'});
-            }
-            setIsAdmin(false);
-            // cookies.set('isAdmin', isAdmin);
-          }, 2000);
+          console.log("entro" + response.data.boss_id);
+
+          redirectByRol(response.data.boss_id);
         }
       })
       .catch((error) => {
         console.log(error.data);
       });
-    console.log(login);
-    console.log("Cookie de islogged: " + cookies.get('isLogged'));
-    console.log("Cookie de admin: " + cookies.get('isAdmin'));
-
   }
 
   function clearErrorModal() {
@@ -111,8 +103,6 @@ const Login = () => {
   let params = errors.usernameError === false && errors.passwordError === false;
   return (
     <>
-      {isLogin && <Navigate to="/page" />}
-
       <div className="LoginContent">
         <div className="Login">
           <div className="LoginHigher" />

@@ -130,7 +130,7 @@ const Proyect = () => {
 
   return (
     <>
-      {created && <Navigate to="/proyectList " />}
+      {created && <Navigate to="/admin/proyectList " />}
       <div className="createUserContent">
         <div className="formCreateProyect">
           {screenWidth > 1030 && <Title text="Nuevo Proyecto" />}

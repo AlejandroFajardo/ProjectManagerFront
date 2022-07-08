@@ -8,7 +8,7 @@ import { Navigate, Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import {useLocation} from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 import Cookies from "universal-cookie";
 
 const useStyles = makeStyles((theme) => ({
@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 const Activity = (props) => {
   // const project_id = 6;
   const cookies = new Cookies();
-  let project_id = cookies.get('currentProjectId');
+  let project_id = cookies.get("currentProjectId");
   const classes = useStyles();
   const [activity_name, setActivity_name] = useState("");
   const [estimated_hours, setEstimate_hours] = useState("");
@@ -95,13 +95,13 @@ const Activity = (props) => {
 
   // Aca se realiza el envio de datos, revisar como se envia el Json de esta parte
 
-  const aux = () =>{
+  const aux = () => {
     // const { project_id } = this.props.location
     console.log(props);
-  }
+  };
 
   function handleSubmit() {
-    aux(); 
+    aux();
     setIsLoading(true);
     let account = {
       project_id,
@@ -148,7 +148,7 @@ const Activity = (props) => {
 
   return (
     <>
-      {created && <Navigate to="/ProyectList" />}
+      {created && <Navigate to="/admin/ProyectList" />}
       <div className="createUserContent">
         <div className="formCreateProyect">
           {screenWidth > 1030 && <Title text="Nueva actividad" />}

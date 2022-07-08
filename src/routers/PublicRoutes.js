@@ -3,11 +3,9 @@ import PropTypes from 'prop-types';
 import { Navigate } from 'react-router-dom';
 
 const PublicRoute = ({ isLoggedIn, children }) => {
-	if (isLoggedIn) {
-		return <Navigate to={'/'} replace />;
-	}
-
-	return children;
+	console.log(isLoggedIn);
+	return isLoggedIn ? children : <Navigate to={"/"} />;
+	
 };
 
 PublicRoute.propTypes = {

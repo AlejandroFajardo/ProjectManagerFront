@@ -1,63 +1,51 @@
 import React from "react";
-import { Routes, BrowserRouter, Route, Navigate } from "react-router-dom";
-import PublicRoute from "./PublicRoutes";
-import PrivateRoute from "./PrivateRoutes";
-import Page from "../components/Pages";
-import AuthRouter from "./AuthRouter";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Login from "../components/Login/Login";
+import PagesAdmon from "../components/PagesAdmon";
 import PagesClient from "../components/Register/PagesClient";
-import Cookies from 'universal-cookie';
 
-function AppRouter() {
-  document.title = "P-WorkFlow";
-  let isLoggedIn = true;
-  let isAdmin = true;
-  const cookies = new Cookies();
+const EmployeeProtectedRoute = ({ children }) => {
+  let user = true;
 
-  // console.log("Cookie de admin: " + cookies.get('isAdmin'));
-
-  function setLoggedParameters() {
-    isLoggedIn = cookies.get('isLogged');
-    isAdmin = cookies.get('isAdmin');
+  if (!user) {
+    return <Navigate to="/" replace />;
   }
 
-  // setLoggedParameters();
+  return children;
+};
 
-  console.log("Cookie de islogged: " + cookies.get('isLogged'));
-  console.log("Cookie de admin: " + cookies.get('isAdmin'));
+const AdminProtectedRoute = ({ children }) => {
+  let user = true;
+  if (!user) {
+    return <Navigate to="/" replace />;
+  }
+  return children;
+};
 
+const App = () => {
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path="auth/*"
-            element={
-              <PublicRoute isLoggedIn={isLoggedIn}>
-                <AuthRouter />
-              </PublicRoute>
-            }
-          />
-
-          <Route
-            path="/*"
-            element={
-              isAdmin ? (
-                <PrivateRoute isLoggedIn={isLoggedIn}>
-                  <Page />
-                </PrivateRoute>
-              ) : (
-                <PrivateRoute isLoggedIn={isLoggedIn}>
-                  <PagesClient />
-                </PrivateRoute>
-              )
-            }
-          />
-
-          <Route path="*" element={<Navigate to={"/auth/login"} replace />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route
+          path="/admin/*"
+          element={
+            <AdminProtectedRoute>
+              <PagesAdmon />
+            </AdminProtectedRoute>
+          }
+        />
+        <Route
+          path="/employee/*"
+          element={
+            <EmployeeProtectedRoute>
+              <PagesClient />
+            </EmployeeProtectedRoute>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
   );
-}
+};
 
-export default AppRouter;
+export default App;

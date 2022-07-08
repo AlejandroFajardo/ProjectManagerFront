@@ -36,8 +36,8 @@ export default class ActivityList extends Component {
   getActivitiesPerProject() {
     const cookies = new Cookies();
     let baseUrl = "http://localhost:4000/getActivity";
-    let projectId = cookies.get('currentProjectId');
-    let data = {project_id: projectId}
+    let projectId = cookies.get("currentProjectId");
+    let data = { project_id: projectId };
     axios
       .post(baseUrl, data)
       .then((response) => {
@@ -78,31 +78,34 @@ export default class ActivityList extends Component {
 
   sendAsignament = (activityId, userId) => {
     console.log(activityId, userId);
-    let baseUrl = 'http://localhost:4000/assignActivityToUser'
+    let baseUrl = "http://localhost:4000/assignActivityToUser";
     axios.post(baseUrl, {
-      activity_id : activityId, 
-      user_id : userId
-    })
-  }
+      activity_id: activityId,
+      user_id: userId,
+    });
+  };
 
   getActivitiesAssignment = () => {
-    let baseUrl = 'http://localhost:4000/';
-    axios.get(baseUrl)
-    .then((response) => {
-      this.setState({ activitiesAssignment: response.data });
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  }
+    let baseUrl = "http://localhost:4000/";
+    axios
+      .get(baseUrl)
+      .then((response) => {
+        this.setState({ activitiesAssignment: response.data });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
-  deleteActivity(activityId){
+  deleteActivity(activityId) {
     let baseUrl = "http://localhost:4000/deleteActivity";
-    axios.delete(baseUrl, {
-      data: { activity_id : activityId},
-    }).then((response) => {
-      console.log(response);
-    });
+    axios
+      .delete(baseUrl, {
+        data: { activity_id: activityId },
+      })
+      .then((response) => {
+        console.log(response);
+      });
     this.getActivitiesPerProject();
   }
 
@@ -111,8 +114,8 @@ export default class ActivityList extends Component {
       <div className="Table">
         <div className="regularButtonActivity">
           <Button>
-            <Link className="a2" to="/actividad">
-              Crear Actividad 
+            <Link className="a2" to="/admin/actividad">
+              Crear Actividad
             </Link>
           </Button>
         </div>
@@ -160,7 +163,12 @@ export default class ActivityList extends Component {
                             return (
                               <MenuItem
                                 value={userAux.User_Name}
-                                onClick={() => this.sendAsignament(celda.Activity_Id, userAux.User_Id)}
+                                onClick={() =>
+                                  this.sendAsignament(
+                                    celda.Activity_Id,
+                                    userAux.User_Id
+                                  )
+                                }
                               >
                                 {userAux.User_Name}
                               </MenuItem>
@@ -171,9 +179,11 @@ export default class ActivityList extends Component {
                     </TableCell>
                     <TableCell align="center">
                       <button
-                       className="buttonDelete"
-                       onClick={() => this.deleteActivity(celda.Activity_Id)}
-                      >Eliminar</button>
+                        className="buttonDelete"
+                        onClick={() => this.deleteActivity(celda.Activity_Id)}
+                      >
+                        Eliminar
+                      </button>
                     </TableCell>
                   </TableRow>
                 );

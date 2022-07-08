@@ -73,7 +73,7 @@ const UserActivities = () => {
               </Typography>
             </CardContent>
             <CardActions>
-              <Link className="a3" to="/progress">
+              <Link className="a3" to="/employee/progress">
                 <Item text="Crear Avance" />
               </Link>
             </CardActions>

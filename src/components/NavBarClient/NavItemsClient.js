@@ -23,13 +23,13 @@ export const ActivitytItems = [
   {
     id: 1,
     title: "Avance",
-    path: "/registerAdmon",
+    path: "/employee/progress",
     cName: "submenu-item",
   },
   {
     id: 2,
     title: "Lista de actividades",
-    path: "/userActivities",
+    path: "/employee/Activities",
     cName: "submenu-item",
   },
 ];

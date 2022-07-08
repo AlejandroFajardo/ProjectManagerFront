@@ -13,12 +13,6 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import Cookies from "universal-cookie";
 
-const useStyles = makeStyles((theme) => ({
-  tablaMaterial: {
-    minWidth: 800,
-  },
-}));
-
 const cookies = new Cookies();
 export default class Prueba extends Component {
   constructor() {
@@ -87,7 +81,7 @@ export default class Prueba extends Component {
                       <Link
                         className="a2"
                         to={{
-                          pathname: "/ActividadList",
+                          pathname: "/admin/ActividadList",
                           // pathname: "/proyectList",
                           project_id: celda.Project_Id,
                         }}

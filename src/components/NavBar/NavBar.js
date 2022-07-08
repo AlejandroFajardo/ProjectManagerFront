@@ -12,7 +12,7 @@ function NavBar() {
   const [dropDown, setDropdown] = useState(false);
   const [dropDownUser, setDropdownUser] = useState(false);
   let ac = localStorage.getItem("account");
-  let name = "Mati";
+  let name = "ALEX";
   let account = JSON.parse(ac);
 
   function logOut(){
