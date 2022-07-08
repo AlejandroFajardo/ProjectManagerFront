@@ -9,7 +9,6 @@ import Button from "../commons/RegularButton";
 import ModalError from "../commons/ModalError";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
-import Cookies from "universal-cookie";
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -17,10 +16,6 @@ const useStyles = makeStyles((theme) => ({
     color: "#08eeff",
   },
 }));
-
-let localstorageData = localStorage.getItem("account");
-
-let lsd = JSON.parse(localstorageData);
 
 const Login = () => {
   const navigate = useNavigate();
@@ -75,17 +70,18 @@ const Login = () => {
 
   function handleOnClick() {
     setIsLoading(true);
-    const cookies = new Cookies();
     let baseUrl = "http://localhost:4000/login";
     let login = { login_user: login_user, user_password: user_password };
     axios
       .post(baseUrl, login)
       .then((response) => {
-        console.log(response.data);
         if (response.data) {
           let ac = JSON.stringify(login);
           localStorage.setItem("account", ac);
+          localStorage.setItem("user_id", response.data.id);
+          localStorage.setItem("user_name", response.data.user_name);
           console.log("entro" + response.data.boss_id);
+          console.log(localStorage.getItem("user_name"));
 
           redirectByRol(response.data.boss_id);
         }

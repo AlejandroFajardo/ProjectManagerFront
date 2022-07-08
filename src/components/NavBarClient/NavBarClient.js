@@ -3,16 +3,13 @@ import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { navItems } from "./NavItemsClient";
 import Dropdown from "./DropdownClient";
-import Cookies from 'universal-cookie';
 
 function NavBar() {
-  const cookies = new Cookies();
-
+  let localstorageData = localStorage.getItem("user_name");
   const [dropDown, setDropdown] = useState(false);
 
-  function logOut(){
-    cookies.remove('isLogged');
-    cookies.remove('isAdmin');
+  function logOut() {
+    localStorage.clear();
   }
   return (
     <nav className="navbar">
@@ -23,7 +20,7 @@ function NavBar() {
       </Link>
       <nav>
         <h1>
-          <label className="HomeLabel"> Bienvenido: </label>
+          <label className="HomeLabel"> Bienvenido : {localstorageData} </label>
         </h1>
       </nav>
       <ul className="nav-items">
@@ -48,8 +45,8 @@ function NavBar() {
             </li>
           );
         })}
-        <li className='nav-item' onClick={logOut}>
-        <Link to='/auth/login'> Cerrar sesión</Link>
+        <li className="nav-item" onClick={logOut}>
+          <Link to="/"> Cerrar sesión</Link>
         </li>
       </ul>
     </nav>

@@ -28,25 +28,26 @@ const Proyect = () => {
 
   const [errors, setErrors] = useState({
     project_nameError: false,
-    initial_dateError: false,
-    final_dateError: false,
+    Initial_TimeError: false,
+    Final_TimeError: false,
     project_statusError: false,
   });
 
   let params =
     errors.project_nameError === false &&
-    errors.initial_dateError === false &&
-    errors.final_dateError === false &&
+    errors.Initial_TimeError === false &&
+    errors.Final_TimeError === false &&
     errors.project_statusError === false &&
     project_name.length > 1 &&
     Initial_Time.length > 1;
 
   const regular_expression = {
-    name: /^[a-zA-Z0-9_-]{4,10}$/, // Letras, numeros, guion y guion_bajo
-    letters: /^[a-zA-ZÀ-ÿ\s]{1,12}$/, // Letras y espacios,
+    name: /^[a-zA-Z0-9_-]{1,20}$/, // Letras, numeros, guion y guion_bajo
+    letters: /^[\w'\-][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*\-(){}|~<>;:[\]]{1,60}$/, // Letras y espacios,
     number: /^\d{1,6}$/, // 1 a 10 numeros.,
     regex_date_validator:
       /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/,
+    hour: /^(?:0?[1-9]|1[0-2]):[0-5][0-9]\s?(?:[aApP](\.?)[mM]\1)$/,
   };
 
   function handleChange(name, value) {
@@ -61,18 +62,18 @@ const Proyect = () => {
         break;
 
       case "initial_time":
-        if (!regular_expression.number.test(value)) {
-          setErrors({ ...errors, initial_dateError: true });
+        if (!regular_expression.hour.test(value)) {
+          setErrors({ ...errors, Initial_TimeError: true });
         } else {
-          setErrors({ ...errors, initial_dateError: false });
+          setErrors({ ...errors, Initial_TimeError: false });
           setInitial_Time(value);
         }
         break;
       case "final_time":
-        if (!regular_expression.number.test(value)) {
-          setErrors({ ...errors, final_dateError: true });
+        if (!regular_expression.hour.test(value)) {
+          setErrors({ ...errors, Final_TimeError: true });
         } else {
-          setErrors({ ...errors, final_dateError: false });
+          setErrors({ ...errors, Final_TimeError: false });
           setFinal_Time(value);
         }
         break;
@@ -160,12 +161,12 @@ const Proyect = () => {
             attribute={{
               name: "initial_time",
               inputType: "text",
-              ph: "HH:mm:ss",
+              ph: "HH:mm",
             }}
             handleChange={handleChange}
-            param={errors.initial_dateError}
+            param={errors.Initial_TimeError}
           />
-          {errors.initial_dateError && (
+          {errors.Initial_TimeError && (
             <ErrorNotification text="Requerido. Ingrese segun el formato asignado" />
           )}
 
@@ -174,12 +175,12 @@ const Proyect = () => {
             attribute={{
               name: "final_time",
               inputType: "text",
-              ph: "HH:mm:ss",
+              ph: "HH:mm",
             }}
             handleChange={handleChange}
-            param={errors.final_dateError}
+            param={errors.Final_TimeError}
           />
-          {errors.final_dateError && (
+          {errors.Final_TimeError && (
             <ErrorNotification text="Required.Ingrese segun el formato asignado" />
           )}
           <Item text="Descripcion" />
@@ -190,10 +191,10 @@ const Proyect = () => {
               ph: "",
             }}
             handleChange={handleChange}
-            param={errors.project_nameError}
+            param={errors.project_statusError}
           />
-          {errors.project_nameError && (
-            <ErrorNotification text="Requerido. Ingrese solo letras max 12" />
+          {errors.project_statusError && (
+            <ErrorNotification text="Requerido. Ingrese solo letras max 30" />
           )}
           <Button text="Guardar" handleOnClick={handleSubmit} param={params} />
         </div>

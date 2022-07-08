@@ -4,21 +4,19 @@ import logo from "../assets/logo.png";
 import { navItems } from "./NavItems";
 import Dropdown from "./DropdownProject";
 import DropdownUser from "./DropdownUser";
-import Cookies from 'universal-cookie';
+import Cookies from "universal-cookie";
 
 function NavBar() {
+  let name = localStorage.getItem("user_name");
   const cookies = new Cookies();
 
   const [dropDown, setDropdown] = useState(false);
   const [dropDownUser, setDropdownUser] = useState(false);
-  let ac = localStorage.getItem("account");
-  let name = "ALEX";
-  let account = JSON.parse(ac);
 
-  function logOut(){
-    cookies.remove('isLogged');
-    cookies.remove('isAdmin');
+  function logOut() {
+    localStorage.clear();
   }
+
   return (
     <nav className="navbar">
       <Link to="/" className="navbar-logo">
@@ -28,7 +26,7 @@ function NavBar() {
       </Link>
       <nav>
         <h1>
-          <label className="HomeLabel"> Bienvenido: {name}</label>
+          <label className="HomeLabel"> Bienvenido:{name} </label>
         </h1>
       </nav>
       <ul className="nav-items">
@@ -66,8 +64,8 @@ function NavBar() {
             </li>
           );
         })}
-        <li className='nav-item' onClick={logOut}>
-        <Link to='/auth/login' > Cerrar sesión</Link>
+        <li className="nav-item" onClick={logOut}>
+          <Link to="/"> Cerrar sesión</Link>
         </li>
       </ul>
     </nav>
