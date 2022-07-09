@@ -16,6 +16,7 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Cookies from "universal-cookie";
+import { formatPriority, formatStatus } from "../../utilities";
 
 const useStyles = makeStyles((theme) => ({
   tablaMaterial: {
@@ -145,8 +146,8 @@ export default class ActivityList extends Component {
                     <TableCell align="center">
                       {celda.Estimated_Hours}
                     </TableCell>
-                    <TableCell align="center">{celda.Priority_Id}</TableCell>
-                    <TableCell align="center">{celda.Status_Id}</TableCell>
+                    <TableCell align="center">{formatPriority(celda.Priority_Id)}</TableCell>
+                    <TableCell align="center">{formatStatus(celda.Status_Id)}</TableCell>
                     <TableCell align="center">
                       <FormControl fullWidth>
                         <InputLabel id="demo-simple-select-label">

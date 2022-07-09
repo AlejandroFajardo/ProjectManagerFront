@@ -12,6 +12,7 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Cookies from "universal-cookie";
+import { formatStatus } from "../../utilities";
 
 const cookies = new Cookies();
 export default class Prueba extends Component {
@@ -92,7 +93,7 @@ export default class Prueba extends Component {
                     </TableCell>
                     <TableCell align="center">{celda.Initial_Date}</TableCell>
                     <TableCell align="center">{celda.Final_Date}</TableCell>
-                    <TableCell align="center">{celda.Status_Id}</TableCell>
+                    <TableCell align="center">{formatStatus(celda.Status_Id)}</TableCell>
                     <TableCell align="center">
                       <button
                         className="buttonDelete"
