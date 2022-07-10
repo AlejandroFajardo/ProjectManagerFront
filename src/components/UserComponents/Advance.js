@@ -19,27 +19,30 @@ const useStyles = makeStyles((theme) => ({
 const Proyect = () => {
   const classes = useStyles();
 
-  const [project_name, setProyect_name] = useState("");
+  let currentActivity = localStorage.getItem('currentActivityUser');
+  console.log('id activity' + currentActivity);
+  const [currentDay, setCurrentDay] = useState("");
   const [Initial_Time, setInitial_Time] = useState("");
   const [Final_Time, setFinal_Time] = useState("");
-  const [project_status, setProject_Status] = useState("");
+  const [advanceDescription, setAdvanceDescription] = useState("");
   const [created, setCreated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const [errors, setErrors] = useState({
-    project_nameError: false,
+    currentDayError: false,
     Initial_TimeError: false,
     Final_TimeError: false,
-    project_statusError: false,
+    advanceDescriptionError: false,
   });
 
   let params =
-    errors.project_nameError === false &&
+    errors.currentDayError === false &&
     errors.Initial_TimeError === false &&
     errors.Final_TimeError === false &&
-    errors.project_statusError === false &&
-    project_name.length > 1 &&
-    Initial_Time.length > 1;
+    errors.advanceDescriptionError === false &&
+    currentDay.length > 1 &&
+    Initial_Time.length > 1 &&
+    Final_Time.length > 1;
 
   const regular_expression = {
     name: /^[a-zA-Z0-9_-]{1,20}$/, // Letras, numeros, guion y guion_bajo
@@ -52,16 +55,16 @@ const Proyect = () => {
 
   function handleChange(name, value) {
     switch (name) {
-      case "day":
+      case "currentDay":
         if (!regular_expression.regex_date_validator.test(value)) {
-          setErrors({ ...errors, project_nameError: true });
+          setErrors({ ...errors, currentDayError: true });
         } else {
-          setErrors({ ...errors, project_nameError: false });
-          setProyect_name(value);
+          setErrors({ ...errors, currentDayError: false });
+          setCurrentDay(value);
         }
         break;
 
-      case "initial_time":
+      case "Initial_Time":
         if (!regular_expression.hour.test(value)) {
           setErrors({ ...errors, Initial_TimeError: true });
         } else {
@@ -69,7 +72,7 @@ const Proyect = () => {
           setInitial_Time(value);
         }
         break;
-      case "final_time":
+      case "Final_Time":
         if (!regular_expression.hour.test(value)) {
           setErrors({ ...errors, Final_TimeError: true });
         } else {
@@ -77,12 +80,12 @@ const Proyect = () => {
           setFinal_Time(value);
         }
         break;
-      case "description":
+      case "advanceDescription":
         if (!regular_expression.letters.test(value)) {
-          setErrors({ ...errors, project_statusError: true });
+          setErrors({ ...errors, advanceDescriptionError: true });
         } else {
-          setErrors({ ...errors, project_statusError: false });
-          setProject_Status(value);
+          setErrors({ ...errors, advanceDescriptionError: false });
+          setAdvanceDescription(value);
         }
         break;
 
@@ -94,25 +97,26 @@ const Proyect = () => {
   function handleSubmit() {
     setIsLoading(true);
     let account = {
-      project_name,
+      current_day: currentDay,
       initial_date: Initial_Time,
       final_date: Final_Time,
-      project_status,
+      advance_description: advanceDescription,
     };
     if (account) {
       let ac = JSON.stringify(account);
       localStorage.setItem("account", ac);
-      fetch("http://localhost:4000/createProject", {
+      fetch("http://localhost:4000/", {
         method: "POST",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          project_name: project_name,
+          id_activity: currentActivity,
+          current_day: currentDay,
           initial_date: Initial_Time,
           final_date: Final_Time,
-          project_status: project_status,
+          advance_description: advanceDescription,
         }),
       })
         .then((res) => res.json())
@@ -137,7 +141,7 @@ const Proyect = () => {
 
   return (
     <>
-      {created && <Navigate to="/admin/proyectList " />}
+      {created && <Navigate to="/employee/Activities " />}
       <div className="createUserContent">
         <div className="formCreateProyect">
           {screenWidth > 1030 && <Title text="Nuevo Avance" />}
@@ -145,21 +149,21 @@ const Proyect = () => {
           <Item text="Dia" />
           <Input
             attribute={{
-              name: "dia",
+              name: "currentDay",
               inputType: "text",
               ph: "dd/mm/aaaa",
             }}
             handleChange={handleChange}
-            param={errors.project_nameError}
+            param={errors.currentDayError}
           />
-          {errors.project_nameError && (
+          {errors.currentDayError && (
             <ErrorNotification text="Requerido. Ingrese segun el formato" />
           )}
 
           <Item text="Hora de inicio" />
           <Input
             attribute={{
-              name: "initial_time",
+              name: "Initial_Time",
               inputType: "text",
               ph: "HH:mm",
             }}
@@ -173,7 +177,7 @@ const Proyect = () => {
           <Item text="Hora final" />
           <Input
             attribute={{
-              name: "final_time",
+              name: "Final_Time",
               inputType: "text",
               ph: "HH:mm",
             }}
@@ -186,14 +190,14 @@ const Proyect = () => {
           <Item text="Descripcion" />
           <Input
             attribute={{
-              name: "description",
+              name: "advanceDescription",
               inputType: "text",
               ph: "",
             }}
             handleChange={handleChange}
-            param={errors.project_statusError}
+            param={errors.advanceDescriptionError}
           />
-          {errors.project_statusError && (
+          {errors.advanceDescriptionError && (
             <ErrorNotification text="Requerido. Ingrese solo letras max 30" />
           )}
           <Button text="Guardar" handleOnClick={handleSubmit} param={params} />

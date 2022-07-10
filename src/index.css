@@ -432,7 +432,7 @@ a:hover {
   .userActivities {
     width: 100%;
     height: 60%;
-    display: flex;
+    /* display: flex; */
     margin: auto;
     padding: 100px 30px 10px 30px;
   }

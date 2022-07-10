@@ -5,7 +5,7 @@ import RegisterAdmon from "../UserComponents/RegisterAdmon";
 import UserActivities from "../UserComponents/UserActivities";
 import { Link } from "react-router-dom";
 import logo from "../assets/client.jpg";
-import Progress from "../UserComponents/Progress";
+import Advance from "../UserComponents/Advance";
 function PagesClient() {
   return (
     <>
@@ -15,7 +15,7 @@ function PagesClient() {
         <Routes>
           <Route path="/" exact element={<RegisterAdmon replace />} />
           <Route path="Activities" exact element={<UserActivities replace />} />
-          <Route path="progress" exact element={<Progress />} />
+          <Route path="advance" exact element={<Advance />} />
         </Routes>
       </div>
     </>
