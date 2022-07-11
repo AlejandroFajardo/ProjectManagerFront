@@ -20,6 +20,7 @@ const Proyect = () => {
   const classes = useStyles();
 
   let currentActivity = localStorage.getItem('currentActivityUser');
+  let currentUser = localStorage.getItem('user_id');
   console.log('id activity' + currentActivity);
   const [currentDay, setCurrentDay] = useState("");
   const [Initial_Time, setInitial_Time] = useState("");
@@ -97,26 +98,29 @@ const Proyect = () => {
   function handleSubmit() {
     setIsLoading(true);
     let account = {
-      current_day: currentDay,
-      initial_date: Initial_Time,
-      final_date: Final_Time,
-      advance_description: advanceDescription,
+      activity_id: currentActivity,
+      user_id: currentUser,
+      advance_day: currentDay,
+      comments: advanceDescription,
+      initial_hour: Initial_Time,
+      final_hour: Final_Time,
     };
     if (account) {
       let ac = JSON.stringify(account);
       localStorage.setItem("account", ac);
-      fetch("http://localhost:4000/", {
+      fetch("http://localhost:4000/createAdvance", {
         method: "POST",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          id_activity: currentActivity,
-          current_day: currentDay,
-          initial_date: Initial_Time,
-          final_date: Final_Time,
-          advance_description: advanceDescription,
+          user_id: currentUser,
+          activity_id: currentActivity,
+          advance_day: currentDay,
+          comments: advanceDescription,
+          initial_hour: Initial_Time,
+          final_hour: Final_Time,
         }),
       })
         .then((res) => res.json())
