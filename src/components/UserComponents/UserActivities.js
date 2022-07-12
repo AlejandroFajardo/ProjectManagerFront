@@ -7,6 +7,7 @@ import {
   Grid,
   CardActionArea,
   Divider,
+  Paper,
 } from "@material-ui/core";
 import React, { Component } from "react";
 import axios from "axios";
@@ -15,7 +16,12 @@ import { Navigate, Link } from "react-router-dom";
 import Item from "../Login/components/Item";
 import AdvanceList from "./AdvanceList";
 import { formatPriority, formatStatus } from "../../utilities";
-
+import {
+  Scheduler,
+  WeekView,
+  Appointments,
+} from '@devexpress/dx-react-scheduler-material-ui';
+import { ViewState } from '@devexpress/dx-react-scheduler';
 
 let user_id = localStorage.getItem("user_id");
 let dataUser = { user_id: user_id };
@@ -27,8 +33,8 @@ export default class UserActivities extends Component {
 
   sendIdActivity(activityId) {
     localStorage.setItem("currentActivityUser", activityId);
-    let aux = localStorage.getItem('currentActivityUser');
-    console.log('id activity' + aux);
+    let aux = localStorage.getItem("currentActivityUser");
+    console.log("id activity" + aux);
   }
 
   componentDidMount = () => {
@@ -88,8 +94,20 @@ export default class UserActivities extends Component {
                     >
                       <CardActions justify="center">
                         <Button className="a5" size="small" color="primary">
-                          <Link className="a5" to="/employee/advance" onClick={() => this.sendIdActivity(item.Activity_Id)}>
-                            <Item className="a5" text="Crear Avance" onClick={() => this.sendIdActivity(item.Activity_Id)}/>
+                          <Link
+                            className="a5"
+                            to="/employee/advance"
+                            onClick={() =>
+                              this.sendIdActivity(item.Activity_Id)
+                            }
+                          >
+                            <Item
+                              className="a5"
+                              text="Crear Avance"
+                              onClick={() =>
+                                this.sendIdActivity(item.Activity_Id)
+                              }
+                            />
                           </Link>
                         </Button>
                       </CardActions>
@@ -102,6 +120,18 @@ export default class UserActivities extends Component {
         </div>
         <div>
           <AdvanceList />
+        </div>
+        <div>
+          <Paper>
+            <Scheduler height={660}>
+              <ViewState />
+              <WeekView 
+              startDayHour={8}
+              endDayHour={18}
+              />
+              <Appointments/>
+            </Scheduler>
+          </Paper>
         </div>
       </div>
     );
