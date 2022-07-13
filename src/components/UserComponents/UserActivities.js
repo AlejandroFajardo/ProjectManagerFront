@@ -16,15 +16,20 @@ import { Navigate, Link } from "react-router-dom";
 import Item from "../Login/components/Item";
 import AdvanceList from "./AdvanceList";
 import { formatPriority, formatStatus } from "../../utilities";
-import {
-  Scheduler,
-  WeekView,
-  Appointments,
-} from '@devexpress/dx-react-scheduler-material-ui';
-import { ViewState } from '@devexpress/dx-react-scheduler';
+import FullCalendar from "@fullcalendar/react";
+import dayGridPlugin from '@fullcalendar/daygrid';
 
 let user_id = localStorage.getItem("user_id");
 let dataUser = { user_id: user_id };
+let data = [
+  {
+    title: "Website Re-Design Plan",
+    startDate: new Date(2022, 7, 12, 9, 35),
+    endDate: new Date(2022, 7, 12, 10, 30),
+    id: 0,
+    location: "Room 1",
+  },
+];
 export default class UserActivities extends Component {
   constructor() {
     super();
@@ -118,20 +123,21 @@ export default class UserActivities extends Component {
             })}
           </Grid>
         </div>
-        <div>
+        {/* <div>
           <AdvanceList />
-        </div>
+        </div> */}
         <div>
-          <Paper>
-            <Scheduler height={660}>
-              <ViewState />
-              <WeekView 
-              startDayHour={8}
-              endDayHour={18}
-              />
-              <Appointments/>
-            </Scheduler>
-          </Paper>
+          <FullCalendar
+          plugins = {[ dayGridPlugin ]}
+          initialView="dayGridMonth"
+          events={[
+            { id: 1, title: 'event 1', start: '2022-07-12T10:30:00', end: '2022-07-13T11:30:00' },
+            { id: 2, title: 'event 2', date: '2022-07-13' },
+            { id: 3, title: 'event 3', date: '2022-07-14' }
+          ]}
+          >
+
+          </FullCalendar>
         </div>
       </div>
     );
