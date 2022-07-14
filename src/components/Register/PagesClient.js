@@ -6,6 +6,7 @@ import UserActivities from "../UserComponents/UserActivities";
 import { Link } from "react-router-dom";
 import logo from "../assets/client.jpg";
 import Advance from "../UserComponents/Advance";
+import CalendarAdvance from "../UserComponents/CalendarAdvance";
 function PagesClient() {
   return (
     <>
@@ -15,6 +16,7 @@ function PagesClient() {
         <Routes>
           <Route path="/" exact element={<RegisterAdmon replace />} />
           <Route path="Activities" exact element={<UserActivities replace />} />
+          <Route path="calendar" exact element={<CalendarAdvance replace />} />
           <Route path="advance" exact element={<Advance />} />
         </Routes>
       </div>

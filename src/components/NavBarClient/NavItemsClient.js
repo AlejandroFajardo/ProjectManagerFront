@@ -8,7 +8,7 @@ export const navItems = [
   {
     id: 2,
     title: "Calendario",
-    path: "/",
+    path: "/employee/calendar",
     cName: "nav-item",
   },
   // {

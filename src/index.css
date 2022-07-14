@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;500&display=swap");
-/* Scheduler CSS imports */
 
 * {
   padding: 0;
@@ -453,7 +452,7 @@ a:hover {
     }
   }
 
-  .Table {
+   .Table {
     width: 900%;
     margin-top: 40px;
     font-weight: bold;
@@ -478,9 +477,10 @@ a:hover {
     margin: 15px;
     font-family: "Montserrat";
   }
+  
   th,
   td {
-    width: 15%;
+    /* width: 15%; */
     font-family: "Montserrat";
     height: 10%;
     text-align: left;
@@ -488,7 +488,7 @@ a:hover {
     font-weight: bold;
     border-collapse: collapse;
     border: 1px solid rgb(195, 188, 188);
-  }
+  } 
 
   .buttonDelete {
     background-color: #f44336;
