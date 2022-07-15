@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Advance = () => {
+const EditAdvance = () => {
   const classes = useStyles();
 
   let currentActivity = localStorage.getItem('currentActivityUser');
@@ -148,7 +148,7 @@ const Advance = () => {
       {created && <Navigate to="/employee/Activities " />}
       <div className="createUserContent">
         <div className="formCreateProyect">
-          {screenWidth > 1030 && <Title text="Nuevo Avance" />}
+          {screenWidth > 1030 && <Title text="Editar Avance" />}
 
           <Item text="Dia" />
           <Input
@@ -217,4 +217,4 @@ const Advance = () => {
   );
 };
 
-export default Advance;
+export default EditAdvance;

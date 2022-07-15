@@ -1,4 +1,5 @@
 import {
+  Button,
   Table,
   TableBody,
   TableCell,
@@ -7,7 +8,9 @@ import {
   TableRow,
 } from "@material-ui/core";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import React, { Component } from "react";
+import EditIcon from "@material-ui/icons/Edit";
 
 let user_id = localStorage.getItem("user_id");
 let dataUser = { user_id: user_id };
@@ -79,6 +82,8 @@ export default class AdvanceList extends Component {
                 <TableCell align="center">HORA INICIAL</TableCell>
                 <TableCell align="center">HORA FINAL</TableCell>
                 <TableCell align="center">DESCRIPCIÓN</TableCell>
+                <TableCell align="center">ACCIONES</TableCell>
+
               </TableRow>
             </TableHead>
             <TableBody>
@@ -91,6 +96,19 @@ export default class AdvanceList extends Component {
                     <TableCell align='center'>{celda.Initial_Time}</TableCell>
                     <TableCell align='center'>{celda.Final_Time}</TableCell>
                     <TableCell align='center'>{celda.Advance_Comments}</TableCell>
+                    <TableCell align="center">
+                      <Button
+                        className="buttonDelete "
+                        startIcon={<EditIcon />}
+                        onClick={() =>
+                          this.getActivityToEdit(celda.Advance_Id)
+                        }
+                      >
+                        <Link className="a2" to="/employee/editAdvance">
+                          Editar
+                        </Link>
+                      </Button>
+                    </TableCell>
                   </TableRow>
                 );
               })}

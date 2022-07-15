@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import logo from "../assets/client.jpg";
 import Advance from "../UserComponents/Advance";
 import CalendarAdvance from "../UserComponents/CalendarAdvance";
+import EditAdvance from "../UserComponents/EditAdvance";
 function PagesClient() {
   return (
     <>
@@ -18,6 +19,7 @@ function PagesClient() {
           <Route path="Activities" exact element={<UserActivities replace />} />
           <Route path="calendar" exact element={<CalendarAdvance replace />} />
           <Route path="advance" exact element={<Advance />} />
+          <Route path="editAdvance" exact element={<EditAdvance />} />
         </Routes>
       </div>
     </>
