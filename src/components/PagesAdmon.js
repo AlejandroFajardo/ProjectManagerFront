@@ -9,6 +9,8 @@ import NavBar from "./NavBar/NavBar.js";
 import ActivityList from "./Activity/ActivityList";
 import RegisterAdmon from "./Register/RegisterAdmon";
 import UserActivities from "./UserComponents/UserActivities";
+import EditActivity from "./Activity/EditActivity";
+
 function PagesAdmon() {
   return (
     <>
@@ -23,6 +25,7 @@ function PagesAdmon() {
           <Route path="proyectList" exact element={<ProjectList />} />
           <Route path="actividad" exact element={<Activity />} />
           <Route path="actividadList" exact element={<ActivityList />} />
+          <Route path="editActividad" exact element={<EditActivity />} />
         </Routes>
       </div>
     </>
