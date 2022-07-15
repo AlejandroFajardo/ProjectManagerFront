@@ -23,15 +23,6 @@ const regular_expression = {
   hour: /^(?:0?[1-9]|1[0-2]):[0-5][0-9]\s?(?:[aApP](\.?)[mM]\1)$/,
 };
 
-let params =
-  this.state.errors.currentDayError === false &&
-  this.state.errors.Initial_TimeError === false &&
-  this.state.errors.Final_TimeError === false &&
-  this.state.errors.advanceDescriptionError === false &&
-  this.state.currentDay.length > 1 &&
-  this.state.Initial_Time.length > 1 &&
-  this.state.Final_Time.length > 1;
-
 let openn = true;
 
 let screenWidthh = window.innerWidth;
@@ -65,6 +56,7 @@ export default class EditAdvance extends Component {
   }
 
   componentDidMount = () => {
+    console.log(currentAdvance);
     this.getAdvance();
   };
 
@@ -159,7 +151,7 @@ export default class EditAdvance extends Component {
   }
 
   getAdvance() {
-    let advance_id = { activity_id: currentAdvance };
+    let advance_id = { advance_id: currentAdvance };
     let baseUrl = "http://localhost:4000/getAdvanceToEdit";
     axios
       .post(baseUrl, advance_id)
@@ -173,6 +165,14 @@ export default class EditAdvance extends Component {
 
   render() {
     this.getAdvance();
+    let params =
+      this.state.errors.currentDayError === false &&
+      this.state.errors.Initial_TimeError === false &&
+      this.state.errors.Final_TimeError === false &&
+      this.state.errors.advanceDescriptionError === false &&
+      this.state.currentDay.length > 1 &&
+      this.state.Initial_Time.length > 1 &&
+      this.state.Final_Time.length > 1;
     return (
       <>
         {this.state.advances.map((celda) => {

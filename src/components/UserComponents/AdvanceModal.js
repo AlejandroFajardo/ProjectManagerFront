@@ -32,6 +32,7 @@ export default class AdvanceModal extends Component {
 
   componentDidMount = () => {
     this.getAdvancesPerActivity();
+    this.f();
   };
 
   async f() {
@@ -41,7 +42,7 @@ export default class AdvanceModal extends Component {
     let result = await promise;
     console.log(result);
   }
-  async getAdvancesPerActivity() {
+  getAdvancesPerActivity() {
     let idActivity = localStorage.getItem("activity_id");
     let activity_id = { activity_id: idActivity };
     let baseUrl = "http://localhost:4000/getAdvancesByActivity";
