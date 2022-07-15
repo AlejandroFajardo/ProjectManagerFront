@@ -5,23 +5,26 @@ import {
   CardContent,
   Typography,
   Grid,
+  CardActionArea,
   Divider,
+  Paper,
 } from "@material-ui/core";
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 import axios from "axios";
 import Title from "../Login/components/Title";
 import { Navigate, Link } from "react-router-dom";
 import Item from "../Login/components/Item";
 import AdvanceList from "./AdvanceList";
-import AdvanceModal from "./AdvanceModal";
 import { formatPriority, formatStatus } from "../../utilities";
+
 
 let user_id = localStorage.getItem("user_id");
 let dataUser = { user_id: user_id };
+
 export default class UserActivities extends Component {
   constructor() {
     super();
-    this.state = { activityList: [], AdvanceListPerActivity: [] };
+    this.state = { activityList: [] };
   }
 
   sendIdActivity(activityId) {
@@ -45,7 +48,6 @@ export default class UserActivities extends Component {
         console.log(error);
       });
   }
-
   render() {
     return (
       <div className="userActivities">
@@ -56,7 +58,9 @@ export default class UserActivities extends Component {
                 <Grid item xs={12} sm={6} md={4}>
                   <Card variant="outlined" sx={{ minWidth: 200 }}>
                     <CardContent>
-                      <Typography gutterBottom>{item.Activity_Name}</Typography>
+                      <Typography color="text.secondary" gutterBottom>
+                        {item.Activity_Name}
+                      </Typography>
                       <Typography
                         variant="h6"
                         component="div"
@@ -77,32 +81,33 @@ export default class UserActivities extends Component {
                     </CardContent>
 
                     <Divider variant="middle" />
-                    <CardActions justify="center">
-                      <Button className="a5" size="small" color="primary">
-                        <Link
-                          className="a5"
-                          to="/employee/advance"
-                          onClick={() => this.sendIdActivity(item.Activity_Id)}
-                        >
-                          <Item
+                    <CardActionArea
+                      className="a4"
+                      component={Link}
+                      to="/employee/advance"
+                      justifyContent="center"
+                      alignItems="center"
+                    >
+                      <CardActions justify="center">
+                        <Button className="a5" size="small" color="primary">
+                          <Link
                             className="a5"
-                            text="Crear Avance"
+                            to="/employee/advance"
                             onClick={() =>
                               this.sendIdActivity(item.Activity_Id)
                             }
-                          />
-                        </Link>
-                      </Button>
-                      <Button
-                        onClick={() => {
-                          this.sendIdActivity(item.Activity_Id);
-                          localStorage.setItem("activity_id", item.Activity_Id);
-                        }}
-                      >
-                        <AdvanceModal />
-                      </Button>
-                    </CardActions>
-                    {/*   </CardActionArea> */}
+                          >
+                            <Item
+                              className="a5"
+                              text="Crear Avance"
+                              onClick={() =>
+                                this.sendIdActivity(item.Activity_Id)
+                              }
+                            />
+                          </Link>
+                        </Button>
+                      </CardActions>
+                    </CardActionArea>
                   </Card>
                 </Grid>
               );
