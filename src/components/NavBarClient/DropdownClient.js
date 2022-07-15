@@ -3,6 +3,10 @@ import { ActivitytItems } from "./NavItemsClient";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
+function reload() {
+  window.location.reload();
+}
+
 function Dropdown() {
   const [dropdown, setDropdown] = useState(false);
 
@@ -14,7 +18,7 @@ function Dropdown() {
       >
         {ActivitytItems.map((item) => {
           return (
-            <li key={item.id}>
+            <li key={item.id} onClick={reload}>
               <Link
                 to={item.path}
                 className={item.cName}
