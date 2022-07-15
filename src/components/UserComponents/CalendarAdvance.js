@@ -17,6 +17,7 @@ export default class CalendarAdvance extends Component {
 
   componentDidMount = () => {
     this.getAdvancesForUser();
+    this.generateEvent();
   };
 
   getAdvancesForUser() {
@@ -51,7 +52,7 @@ export default class CalendarAdvance extends Component {
         <div className="Calendar">
           <FullCalendar
             plugins={[dayGridPlugin, timeGridPlugin, listPlugin]}
-            timeZone='GTM'
+            timeZone='local'
             headerToolbar={{
               left: "prev,next today",
               center: "title",

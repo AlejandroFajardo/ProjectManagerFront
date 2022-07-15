@@ -59,7 +59,6 @@ export default class AdvanceList extends Component {
       .post(baseUrl, dataUser)
       .then((response) => {
         this.setState({ advances: response.data });
-        console.log(response.data);
       })
       .catch((error) => {
         console.log(error);
