@@ -8,7 +8,6 @@ const Input = ({ attribute, handleChange, param, expresion }) => {
         placeholder={attribute.ph}
         name={attribute.name}
         type={attribute.inputType}
-        defaultValue={attribute.defaultValue}
         onChange={(e) => handleChange(e.target.name, e.target.value)}
         className={param ? "errorStyle" : "regularStyle"}
       />

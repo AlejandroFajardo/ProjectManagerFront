@@ -2,8 +2,6 @@ import React, { Component, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
-import DeleteIcon from "@material-ui/icons/Delete";
-import EditIcon from "@material-ui/icons/Edit";
 import {
   TableContainer,
   Table,
@@ -112,21 +110,6 @@ export default class ActivityList extends Component {
     this.getActivitiesPerProject();
   }
 
-  getActivityToEdit(activityId) {
-    let baseUrl = "http://localhost:4000/getActivityToEdit";
-    axios.post(baseUrl, { activity_id: activityId }).then((response) => {
-      if (response.data) {
-        localStorage.setItem("activity_id", response.data.Activity_Id);
-        localStorage.setItem("activity_name", response.data.Activity_Name);
-        localStorage.setItem("activity_estimated_Hours",response.data.Estimated_Hours);
-        localStorage.setItem("activity_priority_Id", response.data.Priority_Id);
-        localStorage.setItem("activity_status_Id", response.data.Status_Id);
-        console.log("entro:" + response.data.Status_Id);
-      }
-    });
-    this.getActivitiesPerProject();
-  }
-
   render() {
     return (
       <div className="Table">
@@ -163,12 +146,8 @@ export default class ActivityList extends Component {
                     <TableCell align="center">
                       {celda.Estimated_Hours}
                     </TableCell>
-                    <TableCell align="center">
-                      {formatPriority(celda.Priority_Id)}
-                    </TableCell>
-                    <TableCell align="center">
-                      {formatStatus(celda.Status_Id)}
-                    </TableCell>
+                    <TableCell align="center">{formatPriority(celda.Priority_Id)}</TableCell>
+                    <TableCell align="center">{formatStatus(celda.Status_Id)}</TableCell>
                     <TableCell align="center">
                       <FormControl fullWidth>
                         <InputLabel id="demo-simple-select-label">
@@ -200,26 +179,12 @@ export default class ActivityList extends Component {
                       </FormControl>
                     </TableCell>
                     <TableCell align="center">
-                      <Button
-                        align="center"
-                        variant="contained"
-                        color="secondary"
-                        className="button"
-                        startIcon={<DeleteIcon align="center" />}
+                      <button
+                        className="buttonDelete"
                         onClick={() => this.deleteActivity(celda.Activity_Id)}
-                      >Eliminar</Button>
-
-                      <Button
-                        className="buttonDelete "
-                        startIcon={<EditIcon />}
-                        onClick={() =>
-                          this.getActivityToEdit(celda.Activity_Id)
-                        }
                       >
-                        <Link className="a2" to="/admin/editActividad">
-                          Editar
-                        </Link>
-                      </Button>
+                        Eliminar
+                      </button>
                     </TableCell>
                   </TableRow>
                 );
