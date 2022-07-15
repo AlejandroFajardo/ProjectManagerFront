@@ -21,6 +21,13 @@ const EditAdvance = () => {
 
   let currentActivity = localStorage.getItem('currentActivityUser');
   let currentUser = localStorage.getItem('user_id');
+
+  let advanceId = localStorage.getItem("advance_id");
+  let initialTime = localStorage.getItem("initial_time");
+  let finalTime = localStorage.getItem("final_time");
+  let description = localStorage.getItem("description");
+  let currentActivityId = localStorage.getItem("currentActivityId");
+
   console.log('id activity' + currentActivity);
   const [currentDay, setCurrentDay] = useState("");
   const [Initial_Time, setInitial_Time] = useState("");
@@ -108,7 +115,7 @@ const EditAdvance = () => {
     if (account) {
       let ac = JSON.stringify(account);
       localStorage.setItem("account", ac);
-      fetch("http://localhost:4000/createAdvance", {
+      fetch("http://localhost:4000/editAdvance", {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -116,7 +123,8 @@ const EditAdvance = () => {
         },
         body: JSON.stringify({
           user_id: currentUser,
-          activity_id: currentActivity,
+          advance_id: advanceId,
+          activity_id: currentActivityId,
           advance_day: currentDay,
           comments: advanceDescription,
           initial_hour: Initial_Time,
@@ -170,6 +178,7 @@ const EditAdvance = () => {
               name: "Initial_Time",
               inputType: "text",
               ph: "HH:mm",
+              defaultValue: initialTime,
             }}
             handleChange={handleChange}
             param={errors.Initial_TimeError}
@@ -184,6 +193,8 @@ const EditAdvance = () => {
               name: "Final_Time",
               inputType: "text",
               ph: "HH:mm",
+              defaultValue: finalTime,
+
             }}
             handleChange={handleChange}
             param={errors.Final_TimeError}
@@ -197,6 +208,7 @@ const EditAdvance = () => {
               name: "advanceDescription",
               inputType: "text",
               ph: "",
+              defaultValue: description,
             }}
             handleChange={handleChange}
             param={errors.advanceDescriptionError}

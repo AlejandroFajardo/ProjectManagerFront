@@ -14,36 +14,6 @@ import EditIcon from "@material-ui/icons/Edit";
 
 let user_id = localStorage.getItem("user_id");
 let dataUser = { user_id: user_id };
-const list = [
-  {
-    advance_id: 1,
-    activity_id: 2,
-    initial_time: '10:00 am',
-    final_time: '12:00 pm',
-    advance_comments: 'Se adelanto el proceso de delineado del logo'
-  },
-  {
-    advance_id: 2,
-    activity_id: 2,
-    initial_time: '10:00 am',
-    final_time: '12:00 pm',
-    advance_comments: 'Se adelanto el proceso de delineado del logo'
-  },
-  {
-    advance_id: 3,
-    activity_id: 1,
-    initial_time: '10:00 am',
-    final_time: '12:00 pm',
-    advance_comments: 'Se adelanto el proceso de delineado del logo'
-  },
-  {
-    advance_id: 4,
-    activity_id: 1,
-    initial_time: '10:00 am',
-    final_time: '12:00 pm',
-    advance_comments: 'Se adelanto el proceso de delineado del logo'
-  },
-]
 export default class AdvanceList extends Component {
   constructor() {
     super();
@@ -67,6 +37,19 @@ export default class AdvanceList extends Component {
         console.log(error);
       });
 
+  }
+
+  getAdvancetoEdit(advanceId){
+    let baseUrl = "http://localhost:4000/getAdvanceToEdit";
+    axios.post(baseUrl, {advance_id: advanceId}).then((response) => {
+      if(response.data){
+        localStorage.setItem("advance_id", response.data.Advance_Id);
+        localStorage.setItem("initial_time", response.data.Initial_Time);
+        localStorage.setItem("final_time", response.data.Final_Time);
+        localStorage.setItem("description", response.data.Advance_Comments);
+        console.log(response.data);
+      }});
+      this.getAdvacesForUser();
   }
 
   render() {
@@ -101,7 +84,8 @@ export default class AdvanceList extends Component {
                         className="buttonDelete "
                         startIcon={<EditIcon />}
                         onClick={() =>
-                          this.getActivityToEdit(celda.Advance_Id)
+                          {this.getAdvancetoEdit(celda.Advance_Id);
+                            localStorage.setItem('currentActivityId', celda.Activity_Id)}
                         }
                       >
                         <Link className="a2" to="/employee/editAdvance">
