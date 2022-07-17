@@ -8,6 +8,7 @@ import { Navigate, Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import { DesktopDatePicker } from "@mui/x-date-pickers";
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -149,7 +150,7 @@ const Proyect = () => {
             <ErrorNotification text="Requerido. Ingrese solo letras max 12" />
           )}
 
-          <Item text="Fecha de inicio" />
+          {/* <Item text="Fecha de inicio" />
           <Input
             attribute={{
               name: "initial_date",
@@ -158,6 +159,11 @@ const Proyect = () => {
             }}
             handleChange={handleChange}
             param={errors.initial_dateError}
+          /> */}
+          <DesktopDatePicker
+          label="Fecha inicial"
+          inputFormat="MM/dd/yyyy"
+          onChange={handleChange}
           />
           {errors.initial_dateError && (
             <ErrorNotification text="Requerido. Ingrese segun el formato asignado" />
