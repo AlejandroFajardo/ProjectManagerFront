@@ -21,19 +21,25 @@ import Cookies from "universal-cookie";
 import { formatPriority, formatStatus } from "../../utilities";
 
 const useStyles = makeStyles((theme) => ({
-  tablaMaterial: {
-    minWidth: 800,
+  margin: {
+    margin: theme.spacing(1),
+  },
+  extendedIcon: {
+    marginRight: theme.spacing(1),
   },
 }));
 
 export default class ActivityList extends Component {
+ 
   constructor() {
+   
     super();
     this.state = {
       activitys: [],
       users: [],
       activitiesAssignment: [],
     };
+    
   }
 
   getActivitiesPerProject() {
@@ -118,7 +124,10 @@ export default class ActivityList extends Component {
       if (response.data) {
         localStorage.setItem("activity_id", response.data.Activity_Id);
         localStorage.setItem("activity_name", response.data.Activity_Name);
-        localStorage.setItem("activity_estimated_Hours",response.data.Estimated_Hours);
+        localStorage.setItem(
+          "activity_estimated_Hours",
+          response.data.Estimated_Hours
+        );
         localStorage.setItem("activity_priority_Id", response.data.Priority_Id);
         localStorage.setItem("activity_status_Id", response.data.Status_Id);
         console.log("entro:" + response.data.Status_Id);
@@ -128,6 +137,7 @@ export default class ActivityList extends Component {
   }
 
   render() {
+    
     return (
       <div className="Table">
         <div className="regularButtonActivity">
@@ -156,9 +166,9 @@ export default class ActivityList extends Component {
                 return (
                   <TableRow key={celda.Activity_Id}>
                     <TableCell align="left">
-                      <Link className="a2" to="/">
+                     
                         {celda.Activity_Name}
-                      </Link>
+                   
                     </TableCell>
                     <TableCell align="center">
                       {celda.Estimated_Hours}
@@ -204,21 +214,22 @@ export default class ActivityList extends Component {
                         align="center"
                         variant="contained"
                         color="secondary"
-                        className="button"
                         startIcon={<DeleteIcon align="center" />}
                         onClick={() => this.deleteActivity(celda.Activity_Id)}
-                      >Eliminar</Button>
+                      >
+                        Eliminar
+                      </Button>
 
-                      <Button
-                        className="buttonDelete "
+                      <Button 
+                        variant="contained"
+                        color="primary"
                         startIcon={<EditIcon />}
                         onClick={() =>
                           this.getActivityToEdit(celda.Activity_Id)
                         }
+                        href="/admin/editActividad"
                       >
-                        <Link className="a2" to="/admin/editActividad">
                           Editar
-                        </Link>
                       </Button>
                     </TableCell>
                   </TableRow>

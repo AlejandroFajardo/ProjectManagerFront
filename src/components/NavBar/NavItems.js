@@ -2,13 +2,13 @@ export const navItems = [
   {
     id: 1,
     title: "Proyecto",
-    path: "/",
+    path: "/admin",
     cName: "nav-item",
   },
   {
     id: 2,
     title: "Usuarios",
-    path: "/",
+    path: "/admin",
     cName: "nav-item",
   },
   // {

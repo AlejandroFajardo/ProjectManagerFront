@@ -7,6 +7,7 @@ import Button from "../commons/RegularButton";
 import { Navigate, Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Backdrop from "@material-ui/core/Backdrop";
+import Select from "react-select";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useLocation } from "react-router-dom";
 import Cookies from "universal-cookie";
@@ -17,6 +18,12 @@ const useStyles = makeStyles((theme) => ({
     color: "#fff",
   },
 }));
+const statusSe = [
+  { label: "Finalizado" },
+  { label: "Pendiente" },
+  { label: "En progreso" },
+];
+const prioritySe = [{ label: "Alta" }, { label: "Media" }, { label: "Alta" }];
 
 const Activity = (props) => {
   // const project_id = 6;
@@ -48,10 +55,65 @@ const Activity = (props) => {
     name: /^[a-zA-Z0-9_-]{4,10}$/, // Letras, numeros, guion y guion_bajo
     letters: /^[a-zA-ZÀ-ÿ\s]{1,12}$/, // Letras y espacios,
     numbers: /^(([1-9]*)|(([1-9]*)\.([0-9]*)))$/,
-    regex_date_validator:
-      /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/,
+    regex_date_validator: /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/,
   };
 
+  function handleStatus(value) {
+    console.log(value);
+    if (value === null) {
+      console.log("entro if");
+      setErrors({ ...errors, status_Error: true });
+    } else {
+      console.log("entro else");
+      // setErrors({ ...errors, status_Error: false });
+      console.log(value);
+      switch (value.label) {
+        case "Finalizado":
+          console.log("entro f");
+          setStatus("F");
+          break;
+        case "Pendiente":
+          console.log("entro p");
+          setStatus("P");
+          break;
+        case "En progreso":
+          setStatus("E");
+          break;
+        default:
+          console.log("No hay valores");
+          break;
+      }
+    }
+  }
+
+  //pr
+  function handlePriority(value) {
+    console.log(value);
+    if (value === null) {
+      console.log("entro if");
+      setErrors({ ...errors, status_Error: true });
+    } else {
+      console.log("entro else");
+      // setErrors({ ...errors, status_Error: false });
+      console.log(value);
+      switch (value.label) {
+        case "Alta":
+          console.log("entro f");
+          setPriority("A");
+          break;
+        case "Media":
+          console.log("entro p");
+          setPriority("M");
+          break;
+        case "Baja":
+          setPriority("B");
+          break;
+        default:
+          console.log("No hay valores");
+          break;
+      }
+    }
+  }
   function handleChange(name, value) {
     switch (name) {
       case "activity_name":
@@ -68,22 +130,6 @@ const Activity = (props) => {
         } else {
           setErrors({ ...errors, estimated_HoursError: false });
           setEstimate_hours(value);
-        }
-        break;
-      case "priority":
-        if (!regular_expression.letters.test(value)) {
-          setErrors({ ...errors, priority_NameError: true });
-        } else {
-          setErrors({ ...errors, priority_NameError: false });
-          setPriority(value);
-        }
-        break;
-      case "status":
-        if (!regular_expression.letters.test(value)) {
-          setErrors({ ...errors, status_Error: true });
-        } else {
-          setErrors({ ...errors, status_Error: false });
-          setStatus(value);
         }
         break;
 
@@ -171,7 +217,7 @@ const Activity = (props) => {
             attribute={{
               name: "estimated_hours",
               inputType: "text",
-              ph: "Horas estimas para esta actividad",
+              ph: " ",
             }}
             handleChange={handleChange}
             param={errors.estimated_HoursError}
@@ -181,29 +227,22 @@ const Activity = (props) => {
           )}
 
           <Item text="Prioridad" />
-          <Input
-            attribute={{
-              name: "priority",
-              inputType: "text",
-              ph: "",
-            }}
-            handleChange={handleChange}
-            param={errors.priority_Error}
+          <Select
+            className="select"
+            options={prioritySe}
+            onChange={handlePriority}
           />
           {errors.priority_Error && (
             <ErrorNotification text="Requerido. Ingrese solo letras" />
           )}
 
           <Item text="Estado" />
-          <Input
-            attribute={{
-              name: "status",
-              inputType: "text",
-              ph: "",
-            }}
-            handleChange={handleChange}
-            param={errors.status_Error}
+          <Select
+            className="select"
+            options={statusSe}
+            onChange={handleStatus}
           />
+
           {errors.status_Error && (
             <ErrorNotification text="Requerido. Ingrese solo letras" />
           )}

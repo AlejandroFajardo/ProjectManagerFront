@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 const Proyect = () => {
   const classes = useStyles();
   const currentTime = new Date();
-  
+
   const [project_name, setProyect_name] = useState("");
   const [initial_date, setInitial_date] = useState(currentTime);
   const [final_date, setfinal_date] = useState(currentTime);
@@ -44,7 +44,7 @@ const Proyect = () => {
     errors.project_statusError === false &&
     project_name.length > 1 &&
     project_status.length > 0;
-    // initial_date.length > 1;
+  // initial_date.length > 1;
 
   const regular_expression = {
     name: /^[a-zA-Z0-9_-]{4,10}$/, // Letras, numeros, guion y guion_bajo
@@ -57,9 +57,9 @@ const Proyect = () => {
     //   console.log('Fecha invalida');
     //   setErrors({ ...errors, initial_dateError: true });
     // } else {
-      console.log('Fecha valida');
-      setErrors({ ...errors, initial_dateError: false });
-      setInitial_date(newInitialDate.toISOString());
+    console.log("Fecha valida");
+    setErrors({ ...errors, initial_dateError: false });
+    setInitial_date(newInitialDate.toISOString());
     // }
   };
 
@@ -67,8 +67,8 @@ const Proyect = () => {
     // if (!regular_expression.regex_date_validator.test(newFinalDate)) {
     //   setErrors({ ...errors, final_dateError: true });
     // } else {
-      setErrors({ ...errors, final_dateError: false });
-      setfinal_date(newFinalDate.toISOString());
+    setErrors({ ...errors, final_dateError: false });
+    setfinal_date(newFinalDate.toISOString());
     // }
   };
 
@@ -189,17 +189,18 @@ const Proyect = () => {
             <ErrorNotification text="Requerido. Ingrese segun el formato asignado" />
           )}
           */}
-          <LocalizationProvider dateAdapter={AdapterMoment}>
+          <LocalizationProvider dateAdapter={AdapterMoment} >
             <Item text="Fecha de inicio" />
-            <DesktopDatePicker
+            <DesktopDatePicker 
+            
               inputFormat="DD/MM/yyyy"
               value={initial_date}
               onChange={handleChangeInitialDate}
               renderInput={(params) => <TextField {...params} />}
             />
-             {errors.initial_dateError && (
-            <ErrorNotification text="Requerido. Ingrese segun el formato asignado" />
-          )}
+            {errors.initial_dateError && (
+              <ErrorNotification text="Requerido. Ingrese segun el formato asignado" />
+            )}
           </LocalizationProvider>
           <LocalizationProvider dateAdapter={AdapterMoment}>
             <Item text="Fecha final" />
@@ -209,9 +210,9 @@ const Proyect = () => {
               onChange={handleChangeFinalDate}
               renderInput={(params) => <TextField {...params} />}
             />
-          {errors.final_dateError && (
-            <ErrorNotification text="Required.Ingrese segun el formato asignado" />
-          )}
+            {errors.final_dateError && (
+              <ErrorNotification text="Required.Ingrese segun el formato asignado" />
+            )}
           </LocalizationProvider>
 
           {/* <Item text="Fecha final" />
@@ -228,7 +229,6 @@ const Proyect = () => {
             <ErrorNotification text="Required.Ingrese segun el formato asignado" />
           )}
           */}
-          
 
           <Item text="Estado" />
           <Input

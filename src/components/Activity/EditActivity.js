@@ -9,6 +9,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Cookies from "universal-cookie";
+import Select from "react-select";
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -16,6 +17,12 @@ const useStyles = makeStyles((theme) => ({
     color: "#fff",
   },
 }));
+const statusSe = [
+  { label: "Finalizado" },
+  { label: "Pendiente" },
+  { label: "En progreso" },
+];
+const prioritySe = [{ label: "Alta" }, { label: "Media" }, { label: "Baja" }];
 
 const Activity = (props) => {
   let Activity_Id = localStorage.getItem("activity_id");
@@ -58,6 +65,32 @@ const Activity = (props) => {
       /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/,
   };
 
+  function priorityIndex() {
+    switch (activity_priority_Id) {
+      case "A":
+        return prioritySe[0];
+
+      case "M":
+        return prioritySe[1];
+
+      case "B":
+        return prioritySe[2];
+      default:
+    }
+  }
+  function statusIndex() {
+    switch (activity_status_Id) {
+      case "F":
+        return statusSe[0];
+
+      case "P":
+        return statusSe[1];
+
+      case "E":
+        return statusSe[2];
+      default:
+    }
+  }
   function handleChange(name, value) {
     switch (name) {
       case "activity_name":
@@ -76,26 +109,66 @@ const Activity = (props) => {
           setEstimate_hours(value);
         }
         break;
-      case "priority":
-        if (!regular_expression.letters.test(value)) {
-          setErrors({ ...errors, priority_NameError: true });
-        } else {
-          setErrors({ ...errors, priority_NameError: false });
-          setPriority(value);
-        }
-        break;
-      case "status":
-        if (!regular_expression.letters.test(value)) {
-          setErrors({ ...errors, status_Error: true });
-        } else {
-          setErrors({ ...errors, status_Error: false });
-          setStatus(value);
-        }
-        break;
 
       default:
         console.log("No hay valores");
         break;
+    }
+  }
+  function handleStatus(value) {
+    console.log(value);
+    if (value === null) {
+      console.log("entro if");
+      setErrors({ ...errors, status_Error: true });
+    } else {
+      console.log("entro else");
+      // setErrors({ ...errors, status_Error: false });
+      console.log(value);
+      switch (value.label) {
+        case "Finalizado":
+          console.log("entro f");
+          setStatus("F");
+          break;
+        case "Pendiente":
+          console.log("entro p");
+          setStatus("P");
+          break;
+        case "En progreso":
+          setStatus("E");
+          break;
+        default:
+          console.log("No hay valores");
+          break;
+      }
+    }
+  }
+
+  //pr
+  function handlePriority(value) {
+    console.log(value);
+    if (value === null) {
+      console.log("entro if");
+      setErrors({ ...errors, status_Error: true });
+    } else {
+      console.log("entro else");
+      // setErrors({ ...errors, status_Error: false });
+      console.log(value);
+      switch (value.label) {
+        case "Alta":
+          console.log("entro f");
+          setPriority("A");
+          break;
+        case "Media":
+          console.log("entro p");
+          setPriority("M");
+          break;
+        case "Baja":
+          setPriority("B");
+          break;
+        default:
+          console.log("No hay valores");
+          break;
+      }
     }
   }
 
@@ -162,7 +235,7 @@ const Activity = (props) => {
 
   return (
     <>
-      {created && <Navigate to="/admin/ProyectList" />}
+      {created && <Navigate to="/admin/actividadList" />}
       <div className="createUserContent">
         <div className="formCreateProyect">
           {screenWidth > 1030 && <Title text="Editar actividad" />}
@@ -198,33 +271,24 @@ const Activity = (props) => {
           )}
 
           <Item text="Prioridad" />
-          <Input
-            attribute={{
-              name: "priority",
-              inputType: "text",
-              ph: "",
-              contenteditable: "true",
-              defaultValue: activity_priority_Id,
-            }}
-            handleChange={handleChange}
-            param={errors.priority_Error}
+          <Select
+            className="select"
+            options={prioritySe}
+            defaultValue={priorityIndex}
+            onChange={handlePriority}
           />
           {errors.priority_Error && (
             <ErrorNotification text="Requerido. Ingrese solo letras" />
           )}
 
           <Item text="Estado" />
-          <Input
-            attribute={{
-              name: "status",
-              inputType: "text",
-              ph: "",
-              contenteditable: "true",
-              defaultValue: activity_status_Id,
-            }}
-            handleChange={handleChange}
-            param={errors.status_Error}
+          <Select
+            className="select"
+            options={statusSe}
+            defaultValue={statusIndex}
+            onChange={handleStatus}
           />
+
           {errors.status_Error && (
             <ErrorNotification text="Requerido. Ingrese solo letras" />
           )}

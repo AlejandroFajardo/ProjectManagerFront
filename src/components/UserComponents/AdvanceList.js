@@ -36,20 +36,20 @@ export default class AdvanceList extends Component {
       .catch((error) => {
         console.log(error);
       });
-
   }
 
-  getAdvancetoEdit(advanceId){
+  getAdvancetoEdit(advanceId) {
     let baseUrl = "http://localhost:4000/getAdvanceToEdit";
-    axios.post(baseUrl, {advance_id: advanceId}).then((response) => {
-      if(response.data){
+    axios.post(baseUrl, { advance_id: advanceId }).then((response) => {
+      if (response.data) {
         localStorage.setItem("advance_id", response.data.Advance_Id);
         localStorage.setItem("initial_time", response.data.Initial_Time);
         localStorage.setItem("final_time", response.data.Final_Time);
         localStorage.setItem("description", response.data.Advance_Comments);
         console.log(response.data);
-      }});
-      this.getAdvacesForUser();
+      }
+    });
+    this.getAdvacesForUser();
   }
 
   render() {
@@ -66,27 +66,33 @@ export default class AdvanceList extends Component {
                 <TableCell align="center">HORA FINAL</TableCell>
                 <TableCell align="center">DESCRIPCIÓN</TableCell>
                 <TableCell align="center">ACCIONES</TableCell>
-
               </TableRow>
             </TableHead>
             <TableBody>
               {this.state.advances.map((celda) => {
-              {/* {list.map((celda) => { */}
+                {
+                  /* {list.map((celda) => { */
+                }
                 return (
                   <TableRow>
-                    <TableCell align='center'>{celda.Advance_Id}</TableCell>
-                    <TableCell align='center'>{celda.Activity_Id}</TableCell>
-                    <TableCell align='center'>{celda.Initial_Time}</TableCell>
-                    <TableCell align='center'>{celda.Final_Time}</TableCell>
-                    <TableCell align='center'>{celda.Advance_Comments}</TableCell>
+                    <TableCell align="center">{celda.Advance_Id}</TableCell>
+                    <TableCell align="center">{celda.Activity_Id}</TableCell>
+                    <TableCell align="center">{celda.Initial_Time}</TableCell>
+                    <TableCell align="center">{celda.Final_Time}</TableCell>
+                    <TableCell align="center">
+                      {celda.Advance_Comments}
+                    </TableCell>
                     <TableCell align="center">
                       <Button
                         className="buttonDelete "
                         startIcon={<EditIcon />}
-                        onClick={() =>
-                          {this.getAdvancetoEdit(celda.Advance_Id);
-                            localStorage.setItem('currentActivityId', celda.Activity_Id)}
-                        }
+                        onClick={() => {
+                          this.getAdvancetoEdit(celda.Advance_Id);
+                          localStorage.setItem(
+                            "currentActivityId",
+                            celda.Activity_Id
+                          );
+                        }}
                       >
                         <Link className="a2" to="/employee/editAdvance">
                           Editar

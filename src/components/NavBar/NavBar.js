@@ -39,7 +39,7 @@ function NavBar() {
                 onMouseEnter={() => setDropdown(true)}
                 onMouseLeave={() => setDropdown(false)}
               >
-                <Link to={item.path}>{item.title}</Link>
+                <Link className="a6 "to={item.path}>{item.title}</Link>
                 {dropDown && <Dropdown />}
               </li>
             );
@@ -52,7 +52,7 @@ function NavBar() {
                 onMouseEnter={() => setDropdownUser(true)}
                 onMouseLeave={() => setDropdownUser(false)}
               >
-                <Link to={item.path}>{item.title}</Link>
+                <Link className="a6 " to={item.path}>{item.title}</Link>
                 {dropDownUser && <DropdownUser />}
               </li>
             );
@@ -60,12 +60,12 @@ function NavBar() {
 
           return (
             <li key={item.id} className={item.cName}>
-              <Link to={item.path}>{item.title}</Link>
+              <Link className="a6 " to={item.path}>{item.title}</Link>
             </li>
           );
         })}
         <li className="nav-item" onClick={logOut}>
-          <Link to="/"> Cerrar sesión</Link>
+          <Link className="a6 " to="/"> Cerrar sesión</Link>
         </li>
       </ul>
     </nav>

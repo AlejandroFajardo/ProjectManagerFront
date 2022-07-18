@@ -2,7 +2,7 @@ export const navItems = [
   {
     id: 1,
     title: "Actividad",
-    path: "/",
+    path: "/employee",
     cName: "nav-item",
   },
   {

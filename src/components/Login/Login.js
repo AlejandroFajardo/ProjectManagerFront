@@ -9,6 +9,8 @@ import Button from "../commons/RegularButton";
 import ModalError from "../commons/ModalError";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
+import logo from "../assets/logo2.png";
+
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -100,6 +102,11 @@ const Login = () => {
   return (
     <>
       <div className="LoginContent">
+      <div className="login-container">
+          <div className="login-left-container">
+            <img src={logo} alt="P-WorkFlow" width="450" />
+          </div>
+          </div>
         <div className="Login">
           <div className="LoginHigher" />
           <div className="LoginLower">

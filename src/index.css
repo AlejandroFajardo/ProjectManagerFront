@@ -37,7 +37,8 @@ code {
 }
 
 a {
-  color: #ffffff;
+  color: #000000;
+  text-decoration: none;
 }
 a:hover {
   color: #3eecf2;
@@ -70,6 +71,15 @@ a:hover {
   color: #000000;
   cursor: pointer;
 }
+
+.a6 {
+  color: #ffffff;
+  text-decoration: none;
+}
+.a6:hover {
+  color: #3eecf2;
+}
+
 .nav-items {
   display: flex;
   list-style: none;
@@ -149,7 +159,14 @@ a:hover {
   height: 100%;
   position: absolute;
 }
-
+.login-left-container {
+  display: flex;
+  width: 50%;
+  height: 60vh;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 5px 5px 30px;
+}
 .LoginContent {
   width: 100%;
   height: 100%;
@@ -427,6 +444,19 @@ a:hover {
     background-color: #ffffff;
   }
 
+  .date{
+    width: 100%;
+    margin: auto;
+    align-items: center;
+    background-size: cover;
+    justify-content: center;
+    padding: 10px 80px 10px 30px;
+    box-shadow: 5px 15px 20px 15px rgba(0, 0, 0, 0.16);
+    flex-direction: row;
+    font-family: "Montserrat";
+    background-color: #ffffff;
+  }
+
   /*------------- User Activities -------------*/
 
   .userActivities {
@@ -493,6 +523,7 @@ a:hover {
   .buttonDelete {
     background-color: #f44336;
     border: none;
+    margin-left:30px ;
     color: white;
     padding: 0px 22px;
     text-align: center;
@@ -505,5 +536,11 @@ a:hover {
       0 6px 20px 0 rgba(0, 0, 0, 0.19);
     height: 30px;
     cursor: pointer;
+  }
+  .button{
+    margin: 13px 12px 12px 10px;
+  }
+  .select{
+    color: #000000;
   }
 }
