@@ -8,7 +8,9 @@ import { Navigate, Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import { DesktopDatePicker } from "@mui/x-date-pickers";
+import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { TextField } from "@mui/material";
+import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -19,10 +21,11 @@ const useStyles = makeStyles((theme) => ({
 
 const Proyect = () => {
   const classes = useStyles();
-
+  const currentTime = new Date();
+  
   const [project_name, setProyect_name] = useState("");
-  const [initial_date, setInitial_date] = useState("");
-  const [final_date, setfinal_date] = useState("");
+  const [initial_date, setInitial_date] = useState(currentTime);
+  const [final_date, setfinal_date] = useState(currentTime);
   const [project_status, setProject_Status] = useState("");
   const [created, setCreated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -40,13 +43,33 @@ const Proyect = () => {
     errors.final_dateError === false &&
     errors.project_statusError === false &&
     project_name.length > 1 &&
-    initial_date.length > 1;
+    project_status.length > 0;
+    // initial_date.length > 1;
 
   const regular_expression = {
     name: /^[a-zA-Z0-9_-]{4,10}$/, // Letras, numeros, guion y guion_bajo
-    letters: /^[a-zA-ZÀ-ÿ\s]{1,12}$/, // Letras y espacios,
-    regex_date_validator:
-      /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/,
+    letters: /^[a-zA-ZÀ-ÿ\s]{1,30}$/, // Letras y espacios,
+    regex_date_validator: /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/,
+  };
+
+  const handleChangeInitialDate = (newInitialDate) => {
+    // if (regular_expression.regex_date_validator === '') {
+    //   console.log('Fecha invalida');
+    //   setErrors({ ...errors, initial_dateError: true });
+    // } else {
+      console.log('Fecha valida');
+      setErrors({ ...errors, initial_dateError: false });
+      setInitial_date(newInitialDate.toISOString());
+    // }
+  };
+
+  const handleChangeFinalDate = (newFinalDate) => {
+    // if (!regular_expression.regex_date_validator.test(newFinalDate)) {
+    //   setErrors({ ...errors, final_dateError: true });
+    // } else {
+      setErrors({ ...errors, final_dateError: false });
+      setfinal_date(newFinalDate.toISOString());
+    // }
   };
 
   function handleChange(name, value) {
@@ -60,22 +83,22 @@ const Proyect = () => {
         }
         break;
 
-      case "initial_date":
-        if (!regular_expression.regex_date_validator.test(value)) {
-          setErrors({ ...errors, initial_dateError: true });
-        } else {
-          setErrors({ ...errors, initial_dateError: false });
-          setInitial_date(value);
-        }
-        break;
-      case "final_date":
-        if (!regular_expression.regex_date_validator.test(value)) {
-          setErrors({ ...errors, final_dateError: true });
-        } else {
-          setErrors({ ...errors, final_dateError: false });
-          setfinal_date(value);
-        }
-        break;
+      // case "initial_date":
+      //   if (!regular_expression.regex_date_validator.test(value)) {
+      //     setErrors({ ...errors, initial_dateError: true });
+      //   } else {
+      //     setErrors({ ...errors, initial_dateError: false });
+      //     setInitial_date(value);
+      //   }
+      //   break;
+      // case "final_date":
+      //   if (!regular_expression.regex_date_validator.test(value)) {
+      //     setErrors({ ...errors, final_dateError: true });
+      //   } else {
+      //     setErrors({ ...errors, final_dateError: false });
+      //     setfinal_date(value);
+      //   }
+      //   break;
       case "project_status":
         if (!regular_expression.letters.test(value)) {
           setErrors({ ...errors, project_statusError: true });
@@ -121,6 +144,7 @@ const Proyect = () => {
         );
       setTimeout(() => setCreated(true), 2000);
     }
+    console.log(account);
   }
 
   let open = true;
@@ -150,7 +174,8 @@ const Proyect = () => {
             <ErrorNotification text="Requerido. Ingrese solo letras max 12" />
           )}
 
-          {/* <Item text="Fecha de inicio" />
+          {/* 
+          <Item text="Fecha de inicio" />
           <Input
             attribute={{
               name: "initial_date",
@@ -159,17 +184,37 @@ const Proyect = () => {
             }}
             handleChange={handleChange}
             param={errors.initial_dateError}
-          /> */}
-          <DesktopDatePicker
-          label="Fecha inicial"
-          inputFormat="MM/dd/yyyy"
-          onChange={handleChange}
-          />
-          {errors.initial_dateError && (
+          /> 
+           {errors.initial_dateError && (
             <ErrorNotification text="Requerido. Ingrese segun el formato asignado" />
           )}
+          */}
+          <LocalizationProvider dateAdapter={AdapterMoment}>
+            <Item text="Fecha de inicio" />
+            <DesktopDatePicker
+              inputFormat="DD/MM/yyyy"
+              value={initial_date}
+              onChange={handleChangeInitialDate}
+              renderInput={(params) => <TextField {...params} />}
+            />
+             {errors.initial_dateError && (
+            <ErrorNotification text="Requerido. Ingrese segun el formato asignado" />
+          )}
+          </LocalizationProvider>
+          <LocalizationProvider dateAdapter={AdapterMoment}>
+            <Item text="Fecha final" />
+            <DesktopDatePicker
+              inputFormat="DD/MM/yyyy"
+              value={final_date}
+              onChange={handleChangeFinalDate}
+              renderInput={(params) => <TextField {...params} />}
+            />
+          {errors.final_dateError && (
+            <ErrorNotification text="Required.Ingrese segun el formato asignado" />
+          )}
+          </LocalizationProvider>
 
-          <Item text="Fecha final" />
+          {/* <Item text="Fecha final" />
           <Input
             attribute={{
               name: "final_date",
@@ -178,10 +223,12 @@ const Proyect = () => {
             }}
             handleChange={handleChange}
             param={errors.final_dateError}
-          />
+          /> 
           {errors.final_dateError && (
             <ErrorNotification text="Required.Ingrese segun el formato asignado" />
           )}
+          */}
+          
 
           <Item text="Estado" />
           <Input
