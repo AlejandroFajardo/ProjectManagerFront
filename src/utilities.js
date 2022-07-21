@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export const formatPriority = (string) => {
   switch (string) {
     case "A":
@@ -23,3 +25,7 @@ export const formatStatus = (string) => {
       break;
   }
 };
+
+export const formatDate = (date) => {
+  return moment(date).format('D / MM / YYYY');
+}

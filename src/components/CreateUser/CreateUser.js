@@ -8,6 +8,11 @@ import { Navigate, Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import Select from "react-select";
+import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+import { TextField } from "@mui/material";
+
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -16,14 +21,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const documentType = [
+  { label: "Cédula" },
+  { label: "Pasaporte" },
+  { label: "Tarjeta de identidad" },
+];
+
 const CreateUser = () => {
   const classes = useStyles();
+  const currentTime = new Date();
 
   const [user_name, setUser_name] = useState("");
   const [user_last_name, setUser_last_name] = useState("");
   const [identity_document_type, setIdentity_document_type] = useState("");
   const [identity_document_word, setIdentity_document_word] = useState("");
-  const [birth_date, setBird_date] = useState("");
+  const [birth_date, setBird_date] = useState(currentTime);
   const [salary, setSalary] = useState("");
   const [weekly_hours, setWeekly_hours] = useState("");
   const [user_email, setUser_email] = useState("");
@@ -70,10 +82,29 @@ const CreateUser = () => {
     number: /^\d{1,10}$/, // 1 a 10 numeros.
     hours: /^\d{1,2}$/, // 1 a2 numeros.
     email: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-    regex_date_validator:
-      /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/,
+    regex_date_validator: /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/,
     password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,20}$/,
   };
+
+  function handleDocument(value) {
+    if (value === null) {
+      setErrors({ ...errors, identity_document_typeError: true });
+    } else {
+      switch (value.label) {
+        case "Cédula":
+          setIdentity_document_type("C");
+          break;
+        case "Pasaporte":
+          setIdentity_document_type("P");
+          break;
+        case "Tarjeta de identidad":
+          setIdentity_document_type("T");
+          break;
+        default:
+          break;
+      }
+    }
+  }
 
   function handleChange(name, value) {
     switch (name) {
@@ -183,6 +214,11 @@ const CreateUser = () => {
     }
   }
 
+  const handleBirthDay = (newBirthDay) => {
+    setErrors({...errors, bird_dateError: false});
+    setBird_date(newBirthDay.toISOString())
+  }
+
   function handleSubmit() {
     setIsLoading(true);
     let account = {
@@ -238,46 +274,6 @@ const CreateUser = () => {
       setTimeout(() => setCreated(true), 2000);
     }
   }
-  /* function handleSubmit() {
-    setIsLoading(true);
-    let account = {
-      user_name,
-      user_last_name,
-      identity_document_type,
-      identity_document_word,
-      bird_date: birth_date,
-      salary,
-      weekly_hours,
-      user_mail: user_email,
-      phone_number,
-      user_password,
-    };
-    if (account) {
-      let ac = JSON.stringify(account);
-      localStorage.setItem("account", ac);
-      const xhr = new XMLHttpRequest();
-      xhr.open("POST", "http://localhost:4000/CreateUser", true);
-      xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-      xhr.onreadystatechange = function () {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-          alert(xhr.response);
-        }
-      };
-      const jsonToSend = {
-        user_name: user_name,
-        user_last_name: user_last_name,
-        identity_document_type: identity_document_type,
-        identity_document_word: identity_document_word,
-        birth_date: birth_date,
-        salary: salary,
-        weekly_hours: weekly_hours,
-        user_email: user_email,
-        phone_number: phone_number,
-        user_password: user_password,
-      };
-      xhr.send(JSON.stringify(jsonToSend));
-    }
-  }*/
 
   let open = true;
 
@@ -287,7 +283,7 @@ const CreateUser = () => {
 
   return (
     <>
-      {created && <Navigate to="/userList" />}
+      {created && <Navigate to="/admin/userList" />}
       <div className="createUserContent">
         <div className="formCreateUser">
           {screenWidth > 1030 && <Title text="Registrar" />}
@@ -321,14 +317,10 @@ const CreateUser = () => {
           )}
 
           <Item text="Seleccione  tipo de documento" />
-          <Input
-            attribute={{
-              name: "identity_document_type",
-              inputType: "text",
-              ph: "",
-            }}
-            handleChange={handleChange}
-            param={errors.identity_document_typeError}
+          <Select
+            className="select"
+            options={documentType}
+            onChange={handleDocument}
           />
           {errors.identity_document_typeError && (
             <ErrorNotification text="Required.ingrese solo dos caracteres" />
@@ -349,15 +341,14 @@ const CreateUser = () => {
           )}
 
           <Item text="Fecha de nacimiento" />
-          <Input
-            attribute={{
-              name: "bird_date",
-              inputType: "text",
-              ph: "dd/mm/aaaa",
-            }}
-            handleChange={handleChange}
-            param={errors.bird_dateError}
-          />
+          <LocalizationProvider dateAdapter={AdapterMoment}>
+            <DesktopDatePicker
+             inputFormat='DD/MM/yyyy'
+             value={birth_date}
+             onChange={handleBirthDay}
+             renderInput={(params) => <TextField {...params} />}
+            />
+          </LocalizationProvider>
           {errors.bird_dateError && (
             <ErrorNotification text="Requerido. Ingrese segun el formato asignado" />
           )}

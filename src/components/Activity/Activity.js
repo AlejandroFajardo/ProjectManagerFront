@@ -18,12 +18,12 @@ const useStyles = makeStyles((theme) => ({
     color: "#fff",
   },
 }));
-const statusSe = [
+const statusList = [
   { label: "Finalizado" },
   { label: "Pendiente" },
   { label: "En progreso" },
 ];
-const prioritySe = [{ label: "Alta" }, { label: "Media" }, { label: "Alta" }];
+const priorityList = [{ label: "Alta" }, { label: "Media" }, { label: "Alta" }];
 
 const Activity = (props) => {
   // const project_id = 6;
@@ -229,7 +229,7 @@ const Activity = (props) => {
           <Item text="Prioridad" />
           <Select
             className="select"
-            options={prioritySe}
+            options={priorityList}
             onChange={handlePriority}
           />
           {errors.priority_Error && (
@@ -239,7 +239,7 @@ const Activity = (props) => {
           <Item text="Estado" />
           <Select
             className="select"
-            options={statusSe}
+            options={statusList}
             onChange={handleStatus}
           />
 

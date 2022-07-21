@@ -8,6 +8,9 @@ import { Navigate, Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { TextField } from "@mui/material";
+import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -18,69 +21,66 @@ const useStyles = makeStyles((theme) => ({
 
 const Advance = () => {
   const classes = useStyles();
+  const currentTime = new Date();
 
-  let currentActivity = localStorage.getItem('currentActivityUser');
-  let currentUser = localStorage.getItem('user_id');
-  console.log('id activity' + currentActivity);
-  const [currentDay, setCurrentDay] = useState("");
-  const [Initial_Time, setInitial_Time] = useState("");
-  const [Final_Time, setFinal_Time] = useState("");
+  let currentActivity = localStorage.getItem("currentActivityUser");
+  let currentUser = localStorage.getItem("user_id");
+  const [Initial_Time, setInitial_Time] = useState(currentTime);
+  const [Final_Time, setFinal_Time] = useState(currentTime);
   const [advanceDescription, setAdvanceDescription] = useState("");
   const [created, setCreated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const [errors, setErrors] = useState({
-    currentDayError: false,
     Initial_TimeError: false,
     Final_TimeError: false,
     advanceDescriptionError: false,
   });
 
   let params =
-    errors.currentDayError === false &&
     errors.Initial_TimeError === false &&
     errors.Final_TimeError === false &&
     errors.advanceDescriptionError === false &&
-    currentDay.length > 1 &&
-    Initial_Time.length > 1 &&
-    Final_Time.length > 1;
+    advanceDescription.length > 1;
 
   const regular_expression = {
     name: /^[a-zA-Z0-9_-]{1,20}$/, // Letras, numeros, guion y guion_bajo
     letters: /^[\w'\-][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*\-(){}|~<>;:[\]]{1,60}$/, // Letras y espacios,
     number: /^\d{1,6}$/, // 1 a 10 numeros.,
-    regex_date_validator:
-      /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/,
+    regex_date_validator: /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/,
     hour: /^(?:0?[1-9]|1[0-2]):[0-5][0-9]\s?(?:[aApP](\.?)[mM]\1)$/,
+  };
+
+  const handleInitialHour = (newInitialTime) => {
+    setErrors({ ...errors, Initial_TimeError: false });
+    setInitial_Time(newInitialTime.toISOString());
+    setErrors({ ...errors, Final_TimeError: false });
+    setFinal_Time(newInitialTime.toISOString());
+  };
+
+  const handleFinalHour = (newFinalTime) => {
+    setErrors({ ...errors, Final_TimeError: false });
+    setFinal_Time(newFinalTime.toISOString());
   };
 
   function handleChange(name, value) {
     switch (name) {
-      case "currentDay":
-        if (!regular_expression.regex_date_validator.test(value)) {
-          setErrors({ ...errors, currentDayError: true });
-        } else {
-          setErrors({ ...errors, currentDayError: false });
-          setCurrentDay(value);
-        }
-        break;
-
-      case "Initial_Time":
-        if (!regular_expression.hour.test(value)) {
-          setErrors({ ...errors, Initial_TimeError: true });
-        } else {
-          setErrors({ ...errors, Initial_TimeError: false });
-          setInitial_Time(value);
-        }
-        break;
-      case "Final_Time":
-        if (!regular_expression.hour.test(value)) {
-          setErrors({ ...errors, Final_TimeError: true });
-        } else {
-          setErrors({ ...errors, Final_TimeError: false });
-          setFinal_Time(value);
-        }
-        break;
+      // case "Initial_Time":
+      //   if (!regular_expression.hour.test(value)) {
+      //     setErrors({ ...errors, Initial_TimeError: true });
+      //   } else {
+      //     setErrors({ ...errors, Initial_TimeError: false });
+      //     setInitial_Time(value);
+      //   }
+      //   break;
+      // case "Final_Time":
+      //   if (!regular_expression.hour.test(value)) {
+      //     setErrors({ ...errors, Final_TimeError: true });
+      //   } else {
+      //     setErrors({ ...errors, Final_TimeError: false });
+      //     setFinal_Time(value);
+      //   }
+      //   break;
       case "advanceDescription":
         if (!regular_expression.letters.test(value)) {
           setErrors({ ...errors, advanceDescriptionError: true });
@@ -100,7 +100,6 @@ const Advance = () => {
     let account = {
       activity_id: currentActivity,
       user_id: currentUser,
-      advance_day: currentDay,
       comments: advanceDescription,
       initial_hour: Initial_Time,
       final_hour: Final_Time,
@@ -117,7 +116,6 @@ const Advance = () => {
         body: JSON.stringify({
           user_id: currentUser,
           activity_id: currentActivity,
-          advance_day: currentDay,
           comments: advanceDescription,
           initial_hour: Initial_Time,
           final_hour: Final_Time,
@@ -150,44 +148,26 @@ const Advance = () => {
         <div className="formCreateProyect">
           {screenWidth > 1030 && <Title text="Nuevo Avance" />}
 
-          <Item text="Dia" />
-          <Input
-            attribute={{
-              name: "currentDay",
-              inputType: "text",
-              ph: "dd/mm/aaaa",
-            }}
-            handleChange={handleChange}
-            param={errors.currentDayError}
-          />
-          {errors.currentDayError && (
-            <ErrorNotification text="Requerido. Ingrese segun el formato" />
-          )}
-
           <Item text="Hora de inicio" />
-          <Input
-            attribute={{
-              name: "Initial_Time",
-              inputType: "text",
-              ph: "HH:mm",
-            }}
-            handleChange={handleChange}
-            param={errors.Initial_TimeError}
-          />
+          <LocalizationProvider dateAdapter={AdapterMoment}>
+            <DateTimePicker
+              value={Initial_Time}
+              onChange={handleInitialHour}
+              renderInput={(params) => <TextField {...params} />}
+            />
+          </LocalizationProvider>
           {errors.Initial_TimeError && (
             <ErrorNotification text="Requerido. Ingrese segun el formato asignado" />
           )}
 
           <Item text="Hora final" />
-          <Input
-            attribute={{
-              name: "Final_Time",
-              inputType: "text",
-              ph: "HH:mm",
-            }}
-            handleChange={handleChange}
-            param={errors.Final_TimeError}
-          />
+          <LocalizationProvider dateAdapter={AdapterMoment}>
+            <DateTimePicker
+              value={Final_Time}
+              onChange={handleFinalHour}
+              renderInput={(params) => <TextField {...params} />}
+            />
+          </LocalizationProvider>
           {errors.Final_TimeError && (
             <ErrorNotification text="Required.Ingrese segun el formato asignado" />
           )}

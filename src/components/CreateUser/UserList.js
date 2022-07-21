@@ -10,6 +10,8 @@ import {
   TableCell,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { formatDate } from "../../utilities";
+
 
 const useStyles = makeStyles((theme) => ({
   tablaMaterial: {
@@ -80,7 +82,7 @@ export default class Prueba extends Component {
                     <TableCell align="left">{celda.User_Name}</TableCell>
                     <TableCell align="center">{celda.User_Last_Name}</TableCell>
                     <TableCell align="center">{celda.Document_Id}</TableCell>
-                    <TableCell align="center">{celda.Birth_Date}</TableCell>
+                    <TableCell align="center">{formatDate(celda.Birth_Date)}</TableCell>
                     <TableCell align="center">{celda.Salary}</TableCell>
                     <TableCell align="center">{celda.Weekly_Hours}</TableCell>
                     <TableCell align="center">{celda.User_Email}</TableCell>

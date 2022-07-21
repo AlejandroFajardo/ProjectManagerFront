@@ -11,6 +11,8 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import React, { Component } from "react";
 import EditIcon from "@material-ui/icons/Edit";
+import { formatDate } from "../../utilities";
+
 
 let user_id = localStorage.getItem("user_id");
 let dataUser = { user_id: user_id };
@@ -77,8 +79,8 @@ export default class AdvanceList extends Component {
                   <TableRow>
                     <TableCell align="center">{celda.Advance_Id}</TableCell>
                     <TableCell align="center">{celda.Activity_Id}</TableCell>
-                    <TableCell align="center">{celda.Initial_Time}</TableCell>
-                    <TableCell align="center">{celda.Final_Time}</TableCell>
+                    <TableCell align="center">{formatDate(celda.Initial_Time)}</TableCell>
+                    <TableCell align="center">{formatDate(celda.Final_Time)}</TableCell>
                     <TableCell align="center">
                       {celda.Advance_Comments}
                     </TableCell>

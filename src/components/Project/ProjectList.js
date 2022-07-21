@@ -12,7 +12,7 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Cookies from "universal-cookie";
-import { formatStatus } from "../../utilities";
+import { formatStatus, formatDate } from "../../utilities";
 
 const cookies = new Cookies();
 export default class Prueba extends Component {
@@ -91,8 +91,8 @@ export default class Prueba extends Component {
                         {celda.Project_Name}
                       </Link>
                     </TableCell>
-                    <TableCell align="center">{celda.Initial_Date}</TableCell>
-                    <TableCell align="center">{celda.Final_Date}</TableCell>
+                    <TableCell align="center">{formatDate(celda.Initial_Date)}</TableCell>
+                    <TableCell align="center">{formatDate(celda.Final_Date)}</TableCell>
                     <TableCell align="center">{formatStatus(celda.Status_Id)}</TableCell>
                     <TableCell align="center">
                       <button
@@ -111,7 +111,4 @@ export default class Prueba extends Component {
       </div>
     );
   }
-}
-{
-  /* <ActivityList sendIdProject={this.state.current_projectId}/> */
 }

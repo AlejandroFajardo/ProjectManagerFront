@@ -8,6 +8,10 @@ import { Navigate, Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { TextField } from "@mui/material";
+import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -37,20 +41,16 @@ const EditAdvance = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const [errors, setErrors] = useState({
-    currentDayError: false,
     Initial_TimeError: false,
     Final_TimeError: false,
     advanceDescriptionError: false,
   });
 
   let params =
-    errors.currentDayError === false &&
     errors.Initial_TimeError === false &&
     errors.Final_TimeError === false &&
     errors.advanceDescriptionError === false &&
-    currentDay.length > 1 &&
-    Initial_Time.length > 1 &&
-    Final_Time.length > 1;
+    advanceDescription.length > 1;
 
   const regular_expression = {
     name: /^[a-zA-Z0-9_-]{1,20}$/, // Letras, numeros, guion y guion_bajo
@@ -61,33 +61,20 @@ const EditAdvance = () => {
     hour: /^(?:0?[1-9]|1[0-2]):[0-5][0-9]\s?(?:[aApP](\.?)[mM]\1)$/,
   };
 
+  const handleInitialHour = (newInitialTime) => {
+    setErrors({ ...errors, Initial_TimeError: false });
+    setInitial_Time(newInitialTime.toISOString());
+    setErrors({ ...errors, Final_TimeError: false });
+    setFinal_Time(newInitialTime.toISOString());
+  };
+
+  const handleFinalHour = (newFinalTime) => {
+    setErrors({ ...errors, Final_TimeError: false });
+    setFinal_Time(newFinalTime.toISOString());
+  };
+
   function handleChange(name, value) {
     switch (name) {
-      case "currentDay":
-        if (!regular_expression.regex_date_validator.test(value)) {
-          setErrors({ ...errors, currentDayError: true });
-        } else {
-          setErrors({ ...errors, currentDayError: false });
-          setCurrentDay(value);
-        }
-        break;
-
-      case "Initial_Time":
-        if (!regular_expression.hour.test(value)) {
-          setErrors({ ...errors, Initial_TimeError: true });
-        } else {
-          setErrors({ ...errors, Initial_TimeError: false });
-          setInitial_Time(value);
-        }
-        break;
-      case "Final_Time":
-        if (!regular_expression.hour.test(value)) {
-          setErrors({ ...errors, Final_TimeError: true });
-        } else {
-          setErrors({ ...errors, Final_TimeError: false });
-          setFinal_Time(value);
-        }
-        break;
       case "advanceDescription":
         if (!regular_expression.letters.test(value)) {
           setErrors({ ...errors, advanceDescriptionError: true });
@@ -107,7 +94,6 @@ const EditAdvance = () => {
     let account = {
       activity_id: currentActivity,
       user_id: currentUser,
-      advance_day: currentDay,
       comments: advanceDescription,
       initial_hour: Initial_Time,
       final_hour: Final_Time,
@@ -125,7 +111,6 @@ const EditAdvance = () => {
           user_id: currentUser,
           advance_id: advanceId,
           activity_id: currentActivityId,
-          advance_day: currentDay,
           comments: advanceDescription,
           initial_hour: Initial_Time,
           final_hour: Final_Time,
@@ -157,22 +142,31 @@ const EditAdvance = () => {
       <div className="createUserContent">
         <div className="formCreateProyect">
           {screenWidth > 1030 && <Title text="Editar Avance" />}
-
-          <Item text="Dia" />
-          <Input
-            attribute={{
-              name: "currentDay",
-              inputType: "text",
-              ph: "dd/mm/aaaa",
-            }}
-            handleChange={handleChange}
-            param={errors.currentDayError}
-          />
-          {errors.currentDayError && (
-            <ErrorNotification text="Requerido. Ingrese segun el formato" />
+          <Item text="Hora de inicio" />
+          <LocalizationProvider dateAdapter={AdapterMoment}>
+            <DateTimePicker
+              value={initialTime}
+              onChange={handleInitialHour}
+              renderInput={(params) => <TextField {...params} />}
+            />
+          </LocalizationProvider>
+          {errors.Initial_TimeError && (
+            <ErrorNotification text="Requerido. Ingrese segun el formato asignado" />
           )}
 
-          <Item text="Hora de inicio" />
+          <Item text="Hora final" />
+          <LocalizationProvider dateAdapter={AdapterMoment}>
+            <DateTimePicker
+              value={finalTime}
+              onChange={handleFinalHour}
+              renderInput={(params) => <TextField {...params} />}
+            />
+          </LocalizationProvider>
+          {errors.Final_TimeError && (
+            <ErrorNotification text="Required.Ingrese segun el formato asignado" />
+          )}
+
+          {/* <Item text="Hora de inicio" />
           <Input
             attribute={{
               name: "Initial_Time",
@@ -201,7 +195,7 @@ const EditAdvance = () => {
           />
           {errors.Final_TimeError && (
             <ErrorNotification text="Required.Ingrese segun el formato asignado" />
-          )}
+          )} */}
           <Item text="Descripcion" />
           <Input
             attribute={{

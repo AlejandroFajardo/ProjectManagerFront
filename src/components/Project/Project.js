@@ -11,6 +11,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { TextField } from "@mui/material";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+import Select from "react-select";
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -18,6 +19,12 @@ const useStyles = makeStyles((theme) => ({
     color: "#fff",
   },
 }));
+
+const statusList = [
+  { label: "Finalizado" },
+  { label: "Pendiente" },
+  { label: "En progreso" },
+];
 
 const Proyect = () => {
   const classes = useStyles();
@@ -51,6 +58,34 @@ const Proyect = () => {
     letters: /^[a-zA-ZÀ-ÿ\s]{1,30}$/, // Letras y espacios,
     regex_date_validator: /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/,
   };
+
+  function handleStatus(value) {
+    console.log(value);
+    if (value === null) {
+      console.log("entro if");
+      setErrors({ ...errors, project_statusError: true });
+    } else {
+      console.log("entro else");
+      // setErrors({ ...errors, status_Error: false });
+      console.log(value);
+      switch (value.label) {
+        case "Finalizado":
+          console.log("entro f");
+          setProject_Status("F");
+          break;
+        case "Pendiente":
+          console.log("entro p");
+          setProject_Status("P");
+          break;
+        case "En progreso":
+          setProject_Status("E");
+          break;
+        default:
+          console.log("No hay valores");
+          break;
+      }
+    }
+  }
 
   const handleChangeInitialDate = (newInitialDate) => {
     // if (regular_expression.regex_date_validator === '') {
@@ -174,25 +209,9 @@ const Proyect = () => {
             <ErrorNotification text="Requerido. Ingrese solo letras max 12" />
           )}
 
-          {/* 
-          <Item text="Fecha de inicio" />
-          <Input
-            attribute={{
-              name: "initial_date",
-              inputType: "text",
-              ph: "dd/mm/aaaa",
-            }}
-            handleChange={handleChange}
-            param={errors.initial_dateError}
-          /> 
-           {errors.initial_dateError && (
-            <ErrorNotification text="Requerido. Ingrese segun el formato asignado" />
-          )}
-          */}
           <LocalizationProvider dateAdapter={AdapterMoment} >
             <Item text="Fecha de inicio" />
             <DesktopDatePicker 
-            
               inputFormat="DD/MM/yyyy"
               value={initial_date}
               onChange={handleChangeInitialDate}
@@ -215,30 +234,11 @@ const Proyect = () => {
             )}
           </LocalizationProvider>
 
-          {/* <Item text="Fecha final" />
-          <Input
-            attribute={{
-              name: "final_date",
-              inputType: "text",
-              ph: "dd/mm/aaaa",
-            }}
-            handleChange={handleChange}
-            param={errors.final_dateError}
-          /> 
-          {errors.final_dateError && (
-            <ErrorNotification text="Required.Ingrese segun el formato asignado" />
-          )}
-          */}
-
           <Item text="Estado" />
-          <Input
-            attribute={{
-              name: "project_status",
-              inputType: "text",
-              ph: "",
-            }}
-            handleChange={handleChange}
-            param={errors.project_statusError}
+          <Select
+            className='select'
+            options={statusList}
+            onChange={handleStatus}
           />
           {errors.project_statusError && (
             <ErrorNotification text="Required. Ingrese el estado del proyecto" />
