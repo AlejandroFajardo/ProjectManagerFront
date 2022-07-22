@@ -63,6 +63,28 @@ const EditProyect = () => {
 
   console.log("nombre seteado " + projectName);
 
+  const [errors, setErrors] = useState({
+    project_nameError: false,
+    initial_dateError: false,
+    final_dateError: false,
+    project_statusError: false,
+  });
+
+  let params =
+    errors.project_nameError === false &&
+    errors.initial_dateError === false &&
+    errors.final_dateError === false &&
+    errors.project_statusError === false &&
+    project_name.length > 1 &&
+    project_status.length > 0;
+  // initial_date.length > 1;
+
+  const regular_expression = {
+    name: /^[a-zA-Z0-9_-]{4,10}$/, // Letras, numeros, guion y guion_bajo
+    letters: /^[a-zA-ZÀ-ÿ\s]{1,30}$/, // Letras y espacios,
+    regex_date_validator: /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/,
+  };
+
   function statusIndex() {
     switch (projectStatus) {
       case "F":
@@ -76,28 +98,6 @@ const EditProyect = () => {
       default:
     }
   }
-
-  const [errors, setErrors] = useState({
-    project_nameError: false,
-    initial_dateError: false,
-    final_dateError: false,
-    project_statusError: false,
-  });
-
-  let params =
-    errors.project_nameError === false &&
-    errors.initial_dateError === false &&
-    errors.final_dateError === false &&
-    errors.project_statusError === false;
-  // project_name.length > 1 &&
-  // project_status.length > 0;
-  // initial_date.length > 1;
-
-  const regular_expression = {
-    name: /^[a-zA-Z0-9_-]{4,10}$/, // Letras, numeros, guion y guion_bajo
-    letters: /^[a-zA-ZÀ-ÿ\s]{1,30}$/, // Letras y espacios,
-    regex_date_validator: /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/,
-  };
 
   function handleStatus(value) {
     console.log(value);
@@ -205,7 +205,7 @@ const EditProyect = () => {
           project_name: project_name,
           initial_date: initial_date,
           final_date: final_date,
-          project_status: project_status,
+          status_id: project_status,
         }),
       })
         .then((res) => res.json())
@@ -280,8 +280,8 @@ const EditProyect = () => {
           <Select
             className="select"
             options={statusList}
-            onChange={handleStatus}
             defaultValue={statusIndex}
+            onChange={handleStatus}
           />
           {errors.project_statusError && (
             <ErrorNotification text="Required. Ingrese el estado del proyecto" />
