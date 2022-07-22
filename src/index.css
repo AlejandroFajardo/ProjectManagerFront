@@ -24,7 +24,7 @@ code {
 
 /* ----------------NavBar-----------*/
 .navbar {
-  width: 98%;
+  width: 100%;
   min-height: 60px;
   display: flex;
   justify-content: space-around;

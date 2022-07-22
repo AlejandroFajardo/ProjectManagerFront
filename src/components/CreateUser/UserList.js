@@ -9,6 +9,8 @@ import {
   TableRow,
   TableCell,
 } from "@material-ui/core";
+import DeleteIcon from "@material-ui/icons/Delete";
+import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import { formatDate } from "../../utilities";
 
@@ -88,7 +90,15 @@ export default class Prueba extends Component {
                     <TableCell align="center">{celda.User_Email}</TableCell>
                     <TableCell align="center">{celda.Phone_Number}</TableCell>
                     <TableCell align="center">
-                      <button className="buttonDelete" onClick={() => this.selectUser(celda.User_Id)}>Eliminar</button>
+                      <Button
+                        align="center"
+                        variant="contained"
+                        color="secondary"
+                        startIcon={<DeleteIcon align="center" />}
+                        onClick={() => this.selectUser(celda.User_Id)}
+                      >
+                        Eliminar
+                      </Button>
                     </TableCell>
                   </TableRow>
                 );

@@ -9,13 +9,16 @@ import {
   TableBody,
   TableRow,
   TableCell,
+  Button,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Cookies from "universal-cookie";
 import { formatStatus, formatDate } from "../../utilities";
+import EditIcon from "@material-ui/icons/Edit";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 const cookies = new Cookies();
-export default class Prueba extends Component {
+export default class ProjectList extends Component {
   constructor() {
     super();
     this.state = {
@@ -33,6 +36,10 @@ export default class Prueba extends Component {
       .catch((error) => {
         console.log(error);
       });
+  }
+
+  saveProjectIdToEdit(projectId) {
+    localStorage.setItem("projec_to_edit", projectId);
   }
 
   componentDidMount = () => {
@@ -58,6 +65,20 @@ export default class Prueba extends Component {
     this.getAllProjects();
   }
 
+  getProjectToEdit(projectId) {
+    let baseUrl = "http://localhost:4000/getProjectToEdit";
+    axios.post(baseUrl, { project_id: projectId }).then((response) => {
+      if (response.data[0]) {
+        localStorage.setItem('projectIdToEdit', response.data[0].Project_Id);
+        localStorage.setItem('projectName', response.data[0].Project_Name);
+        localStorage.setItem('initialDate', response.data[0].Initial_Date);
+        localStorage.setItem('finalDate' , response.data[0].Final_Date);
+        localStorage.setItem('projectStatus', response.data[0].Status_Id);
+      } else {
+        console.log("NO Entro al response");
+      }
+    });
+  }
   render() {
     console.log(this.state.projects);
     return (
@@ -91,16 +112,36 @@ export default class Prueba extends Component {
                         {celda.Project_Name}
                       </Link>
                     </TableCell>
-                    <TableCell align="center">{formatDate(celda.Initial_Date)}</TableCell>
-                    <TableCell align="center">{formatDate(celda.Final_Date)}</TableCell>
-                    <TableCell align="center">{formatStatus(celda.Status_Id)}</TableCell>
                     <TableCell align="center">
-                      <button
-                        className="buttonDelete"
+                      {formatDate(celda.Initial_Date)}
+                    </TableCell>
+                    <TableCell align="center">
+                      {formatDate(celda.Final_Date)}
+                    </TableCell>
+                    <TableCell align="center">
+                      {formatStatus(celda.Status_Id)}
+                    </TableCell>
+                    <TableCell align="center">
+                      <Button
+                        align="center"
+                        variant="contained"
+                        color="secondary"
+                        startIcon={<DeleteIcon align="center" />}
                         onClick={() => this.deletProject(celda.Project_Id)}
                       >
                         Eliminar
-                      </button>
+                      </Button>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        startIcon={<EditIcon />}
+                        onClick={() =>
+                          this.getProjectToEdit(celda.Project_Id)
+                        }
+                        href="/admin/editProject"
+                      >
+                        Editar
+                      </Button>
                     </TableCell>
                   </TableRow>
                 );
