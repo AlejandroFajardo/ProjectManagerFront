@@ -539,8 +539,19 @@ a:hover {
   }
   .button{
     margin: 13px 12px 12px 10px;
+    cursor: pointer;
   }
   .select{
     color: #000000;
   }
+  .statistics {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+  }
+  .item-statistics {
+    margin: 5px;
+  }
 }
+
