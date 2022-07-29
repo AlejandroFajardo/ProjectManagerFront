@@ -47,4 +47,10 @@ export const UserItems = [
     path: "/admin/userList",
     cName: "submenu-item",
   },
+  {
+    id: 2,
+    title: "Estadisticas",
+    path: "/admin/statistics",
+    cName: "submenu-item",
+  },
 ];

@@ -19,7 +19,7 @@ function NavBar() {
 
   return (
     <nav className="navbar">
-      <Link to="/" className="navbar-logo">
+      <Link to="/admin" className="navbar-logo">
         <div className="logo">
           <img src={logo} alt="P-WorkFlow" width="200" />
         </div>

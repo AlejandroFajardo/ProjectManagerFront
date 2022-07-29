@@ -11,6 +11,7 @@ import RegisterAdmon from "./Register/RegisterAdmon";
 import UserActivities from "./UserComponents/UserActivities";
 import EditActivity from "./Activity/EditActivity";
 import EditProyect from "./Project/EditProject";
+import Statistics from "./CreateUser/Statistics";
 
 function PagesAdmon() {
   return (
@@ -28,6 +29,7 @@ function PagesAdmon() {
           <Route path="actividadList" exact element={<ActivityList />} />
           <Route path="editActividad" exact element={<EditActivity />} />
           <Route path="editProject" exact element={<EditProyect />} />
+          <Route path="statistics" exact element={<Statistics />} />
         </Routes>
       </div>
     </>

@@ -4,7 +4,7 @@ import logo from "../assets/arquitectura.jpg";
 
 const RegisterAdmon = () => {
   return (
-    <Link to="/" className="navbar-logo">
+    <Link to="/admin" className="navbar-logo">
       <div className="logo">
         <img src={logo} alt="P-WorkFlow" width="1000" height="570" />
       </div>
