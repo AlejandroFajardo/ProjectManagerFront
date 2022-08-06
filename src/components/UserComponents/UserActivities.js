@@ -52,6 +52,7 @@ export default class UserActivities extends Component {
     return (
       <div className="userActivities">
         <div>
+          <h3 className="LabelTitleComponent">Actividades Asignadas</h3>
           <Grid container spacing={3}>
             {this.state.activityList.map((item) => {
               return (

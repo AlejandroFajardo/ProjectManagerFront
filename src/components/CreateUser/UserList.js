@@ -44,6 +44,7 @@ export default class Prueba extends Component {
     axios
       .get(baseUrl)
       .then((response) => {
+        console.log(response.data);
         this.setState({ users: response.data });
       })
       .catch((error) => {

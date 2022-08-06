@@ -92,6 +92,7 @@ export default class ActivityList extends Component {
       activity_id: activityId,
       user_id: userId,
     });
+    window.alert("Usuario asignado")
   };
 
   getActivitiesAssignment = () => {
