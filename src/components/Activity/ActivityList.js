@@ -32,14 +32,12 @@ const useStyles = makeStyles((theme) => ({
 export default class ActivityList extends Component {
  
   constructor() {
-   
     super();
     this.state = {
       activitys: [],
       users: [],
       activitiesAssignment: [],
     };
-    
   }
 
   getActivitiesPerProject() {

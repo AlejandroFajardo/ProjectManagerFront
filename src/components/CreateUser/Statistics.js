@@ -16,6 +16,7 @@ export default class Statistics extends Component {
     this.state = {
       initial_date: currentTime,
       final_date: currentTime,
+      currentIdUser: 0,
       nameList: [],
       userList: [],
     };
@@ -27,9 +28,9 @@ export default class Statistics extends Component {
     axios
       .get(baseUrl)
       .then((response) => {
-        this.setState({userList : response.data});
+        this.setState({ userList: response.data });
         response.data.map((celda) => {
-          auxList.push({label: celda.User_Name})
+          auxList.push({ label: celda.User_Name, id: celda.User_Id });
         });
         this.setState({ nameList: auxList });
       })
@@ -40,8 +41,8 @@ export default class Statistics extends Component {
 
   componentDidMount = () => {
     this.getAllUsers();
-  }
-  
+  };
+
   handleChangeInitialDate = (value) => {
     let newDate = value.toISOString();
     this.setState({ initial_date: newDate });
@@ -54,10 +55,27 @@ export default class Statistics extends Component {
 
   handleList = (value) => {
     console.log(value);
+    this.setState({currentIdUser: value.User_Id});
+    console.log(this.state.currentIdUser);
+
   };
 
-  sendParametersEmployee() {
+  sendParametersEmployee(userId) {
     console.log("Envia información del  usuario");
+    let url = "http://localhost:4000/hoursStatsPerUser";
+    console.log(this.state.initial_date);
+    console.log(this.state.final_date);
+    axios
+      .post(url, {
+        initial_time: this.state.initial_date,
+        final_time: this.state.final_date,
+        user_id: 2,
+      })
+      .then((response) => {
+        if (response.data) {
+          console.log(response.data);
+        }
+      });
   }
 
   render() {
@@ -96,15 +114,15 @@ export default class Statistics extends Component {
             />
           </div>
           <div className="item-statistics">
-              <Button
-                variant="contained"
-                color="primary"
-                startIcon={<EditIcon />}
-                onClick={() => this.sendParametersEmployee()}
-              >
-                Buscar
-              </Button>
-            </div>
+            <Button
+              variant="contained"
+              color="primary"
+              startIcon={<EditIcon />}
+              onClick={() => this.sendParametersEmployee(this.state.currentIdUser)}
+            >
+              Buscar
+            </Button>
+          </div>
         </div>
       </div>
     );

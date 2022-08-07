@@ -31,23 +31,6 @@ const EditProyect = () => {
   const classes = useStyles();
   const currentTime = new Date();
 
-  //   useEffect(() => {
-  //     let pid = localStorage.getItem("projec_to_edit");
-  //     console.log("id del proyecto a editar " + pid);
-  //     let baseUrl = "http://localhost:4000/getProjectToEdit";
-  //     axios.post(baseUrl, { project_id: pid }).then((response) => {
-  //       if (response.data[0]) {
-  //         projectName = response.data[0].Project_Name;
-  //         console.log(projectName);
-  //         initialDate = response.data[0].Initial_Date;
-  //         finalDate = response.data[0].Final_Date;
-  //         projectStatus = response.data[0].Status_Id;
-  //       }else {
-  //         console.log("NO Entro al response");
-  //       }
-  //     });
-  //   });
-
   let projectIdToEdit = localStorage.getItem("projectIdToEdit");
   let projectName = localStorage.getItem("projectName");
   let initialDate = localStorage.getItem("initialDate");
@@ -55,8 +38,8 @@ const EditProyect = () => {
   let projectStatus = localStorage.getItem("projectStatus");
 
   const [project_name, setProyect_name] = useState("");
-  const [initial_date, setInitial_date] = useState("");
-  const [final_date, setfinal_date] = useState("");
+  const [initial_date, setInitial_date] = useState(initialDate);
+  const [final_date, setfinal_date] = useState(finalDate);
   const [project_status, setProject_Status] = useState("");
   const [created, setCreated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -255,7 +238,7 @@ const EditProyect = () => {
             <Item text="Fecha de inicio" />
             <DesktopDatePicker
               inputFormat="DD/MM/yyyy"
-              value={initialDate}
+              value={initial_date}
               onChange={handleChangeInitialDate}
               renderInput={(params) => <TextField {...params} />}
             />
@@ -267,7 +250,7 @@ const EditProyect = () => {
             <Item text="Fecha final" />
             <DesktopDatePicker
               inputFormat="DD/MM/yyyy"
-              value={finalDate}
+              value={final_date}
               onChange={handleChangeFinalDate}
               renderInput={(params) => <TextField {...params} />}
             />

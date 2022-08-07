@@ -34,8 +34,8 @@ const EditAdvance = () => {
 
   console.log('id activity' + currentActivity);
   const [currentDay, setCurrentDay] = useState("");
-  const [Initial_Time, setInitial_Time] = useState("");
-  const [Final_Time, setFinal_Time] = useState("");
+  const [Initial_Time, setInitial_Time] = useState(initialTime);
+  const [Final_Time, setFinal_Time] = useState(finalTime);
   const [advanceDescription, setAdvanceDescription] = useState("");
   const [created, setCreated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -108,9 +108,7 @@ const EditAdvance = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          user_id: currentUser,
           advance_id: advanceId,
-          activity_id: currentActivityId,
           comments: advanceDescription,
           initial_hour: Initial_Time,
           final_hour: Final_Time,
@@ -145,7 +143,7 @@ const EditAdvance = () => {
           <Item text="Hora de inicio" />
           <LocalizationProvider dateAdapter={AdapterMoment}>
             <DateTimePicker
-              value={initialTime}
+              value={Initial_Time}
               onChange={handleInitialHour}
               renderInput={(params) => <TextField {...params} />}
             />
@@ -157,7 +155,7 @@ const EditAdvance = () => {
           <Item text="Hora final" />
           <LocalizationProvider dateAdapter={AdapterMoment}>
             <DateTimePicker
-              value={finalTime}
+              value={Final_Time}
               onChange={handleFinalHour}
               renderInput={(params) => <TextField {...params} />}
             />
@@ -165,37 +163,6 @@ const EditAdvance = () => {
           {errors.Final_TimeError && (
             <ErrorNotification text="Required.Ingrese segun el formato asignado" />
           )}
-
-          {/* <Item text="Hora de inicio" />
-          <Input
-            attribute={{
-              name: "Initial_Time",
-              inputType: "text",
-              ph: "HH:mm",
-              defaultValue: initialTime,
-            }}
-            handleChange={handleChange}
-            param={errors.Initial_TimeError}
-          />
-          {errors.Initial_TimeError && (
-            <ErrorNotification text="Requerido. Ingrese segun el formato asignado" />
-          )}
-
-          <Item text="Hora final" />
-          <Input
-            attribute={{
-              name: "Final_Time",
-              inputType: "text",
-              ph: "HH:mm",
-              defaultValue: finalTime,
-
-            }}
-            handleChange={handleChange}
-            param={errors.Final_TimeError}
-          />
-          {errors.Final_TimeError && (
-            <ErrorNotification text="Required.Ingrese segun el formato asignado" />
-          )} */}
           <Item text="Descripcion" />
           <Input
             attribute={{
