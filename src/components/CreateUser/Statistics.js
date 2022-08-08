@@ -5,7 +5,7 @@ import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import Select from "react-select";
 import { Button } from "@material-ui/core";
-import EditIcon from "@material-ui/icons/Edit";
+import SearchIcon from "@material-ui/icons/Search";
 import axios from "axios";
 
 const currentTime = new Date();
@@ -72,7 +72,7 @@ export default class Statistics extends Component {
       .then((response) => {
         if (response.data) {
           console.log(response.data);
-          this.setState({hourWork: response.data});
+          this.setState({ hourWork: response.data });
           console.log(this.state.hourWork);
         }
       });
@@ -84,17 +84,17 @@ export default class Statistics extends Component {
         <h3 className="LabelTitleComponent">Estadisticas</h3>
         <div className="statistics">
           <div className="item-statistics">
-            <LocalizationProvider dateAdapter={AdapterMoment}>
+            <LocalizationProvider  dateAdapter={AdapterMoment}>
               <Item text="Fecha de inicio" />
-              <DesktopDatePicker
+              <DesktopDatePicker className= "date"
                 inputFormat="DD/MM/yyyy"
                 value={this.state.initial_date}
                 onChange={this.handleChangeInitialDate}
                 renderInput={(params) => <TextField {...params} />}
               />
             </LocalizationProvider>
-          </div>
-          <div className="item-statistics">
+            </div>
+            <div className="item-statistics">
             <LocalizationProvider dateAdapter={AdapterMoment}>
               <Item text="Fecha final" />
               <DesktopDatePicker
@@ -104,7 +104,6 @@ export default class Statistics extends Component {
                 renderInput={(params) => <TextField {...params} />}
               />
             </LocalizationProvider>
-          </div>
           <div className="item-statistics">
             <Item text="Usuario" />
             <Select
@@ -115,9 +114,10 @@ export default class Statistics extends Component {
           </div>
           <div className="item-statistics">
             <Button
+            className="button"
               variant="contained"
               color="primary"
-              startIcon={<EditIcon />}
+              startIcon={<SearchIcon />}
               onClick={() =>
                 this.sendParametersEmployee(this.state.currentIdUser)
               }
@@ -125,11 +125,18 @@ export default class Statistics extends Component {
               Buscar
             </Button>
           </div>
+          </div>
         </div>
         <div>
-          <h5 className="LabelTitleComponent">Horas Trabajadas: {this.state.hourWork.worked_hours}</h5>
-          <h5 className="LabelTitleComponent">Horas Agendadas: {this.state.hourWork.pending_hours}</h5>
-          <h5 className="LabelTitleComponent">Horas No Trabajadas: {this.state.hourWork.not_worked_hours}</h5>
+          <h5 className="LabelTitleComponent">
+            Horas Trabajadas: {this.state.hourWork.worked_hours}
+          </h5>
+          <h5 className="LabelTitleComponent">
+            Horas Agendadas: {this.state.hourWork.pending_hours}
+          </h5>
+          <h5 className="LabelTitleComponent">
+            Horas No Trabajadas: {this.state.hourWork.not_worked_hours}
+          </h5>
         </div>
       </div>
     );

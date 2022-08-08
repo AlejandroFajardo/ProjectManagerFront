@@ -203,9 +203,10 @@ a:hover {
 }
 
 .LabelTitleComponent {
-  font-size: 35px;
+  font-size: 25px;
   font-family: "Montserrat";
   color: #7b37a4;
+  text-align: center;
 }
 /*input*/
 .regularStyle {
@@ -249,6 +250,7 @@ a:hover {
   display: flex;
   justify-content: left;
   align-self: flex-start;
+  padding: 0px 2px 5px 2px;
 }
 
 .inputContainer {
@@ -444,18 +446,7 @@ a:hover {
     background-color: #ffffff;
   }
 
-  .date{
-    width: 100%;
-    margin: auto;
-    align-items: center;
-    background-size: cover;
-    justify-content: center;
-    padding: 10px 80px 10px 30px;
-    box-shadow: 5px 15px 20px 15px rgba(0, 0, 0, 0.16);
-    flex-direction: row;
-    font-family: "Montserrat";
-    background-color: #ffffff;
-  }
+  
 
   /*------------- User Activities -------------*/
 
@@ -543,15 +534,29 @@ a:hover {
   }
   .select{
     color: #000000;
+  
+    padding: 0px 10px 5px 5px;
+
   }
   .statistics {
+    
+    margin: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px;
+    box-shadow: 0px 5px 10px 5px rgba(0, 0, 0, 0.12);
+    padding: 10px 5px 5px 5px;
+  
+   
   }
   .item-statistics {
-    margin: 5px;
+   
+    display: flex;
+    justify-content: center;
+    padding: 5px 5px 5px 2px;
+  }
+  .date{
+    padding: 5px 30px 10px 10px;
   }
 }
 
