@@ -12,6 +12,7 @@ import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { TextField } from "@mui/material";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import moment from "moment";
+import toast, { Toaster } from "react-hot-toast";
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -21,6 +22,54 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Advance = () => {
+  const notify = () => {
+    toast.success("Avance creado.", {
+      position: "bottom-center",
+      autoClose: 5000,
+      style: {
+        background: "#0d151bba",
+        color: "#fff",
+        boxShadow: "0 4px 10px #3eecf2",
+        border: "1px solid #3eecf2",
+        padding: "10px 30px 10px 30px",
+        fontSize: 18,
+        fontFamily: "Montserrat",
+      },
+
+      hideProgressBar: false,
+      newestOnTop: false,
+      closeOnClickrtl: false,
+      pauseOnFocusLoss: false,
+      draggable: true,
+      pauseOnHover: true,
+    });
+  };
+  const notifyError = () => {
+    toast.error(
+      "Advertencia! Los avances agendados para esta actividad podrían no satisfacer el tiempo límite de entrega, se recomienda agendar un avance de mayor duración o liberar tiempo de avances en futuras actividades.",
+      {
+        position: "bottom-center",
+        autoClose: 5000,
+        style: {
+          background: "#0d151bba",
+          color: "#fff",
+          boxShadow: "0 4px 10px #3eecf2",
+          border: "1px solid #3eecf2",
+          padding: "10px 30px 10px 30px",
+          fontSize: 18,
+          fontFamily: "Montserrat",
+        },
+
+        hideProgressBar: false,
+        newestOnTop: false,
+        closeOnClickrtl: false,
+        pauseOnFocusLoss: false,
+        draggable: true,
+        pauseOnHover: true,
+      }
+    );
+  };
+
   const classes = useStyles();
   const currentTime = new Date();
 
@@ -128,6 +177,11 @@ const Advance = () => {
         .then(
           (result) => {
             console.log(result);
+            if (result.warning === true) {
+              notifyError();
+            } else {
+              notify();
+            }
           },
           (error) => {
             //alert("Registro fallo");
@@ -188,6 +242,7 @@ const Advance = () => {
             <ErrorNotification text="Requerido. Ingrese solo letras max 30" />
           )}
           <Button text="Guardar" handleOnClick={handleSubmit} param={params} />
+          <Toaster />
         </div>
 
         {isLoading && (

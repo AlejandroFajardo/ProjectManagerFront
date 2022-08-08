@@ -52,9 +52,9 @@ const Activity = (props) => {
     estimated_hours.length > 1;
 
   const regular_expression = {
-    name: /^[a-zA-Z0-9_-]{4,10}$/, // Letras, numeros, guion y guion_bajo
-    letters: /^[a-zA-ZÀ-ÿ\s]{1,12}$/, // Letras y espacios,
-    numbers: /^(([1-9]*)|(([1-9]*)\.([0-9]*)))$/,
+    name: /^[a-zA-Z0-9_-]{4,30}$/, // Letras, numeros, guion y guion_bajo
+    letters: /^[a-zA-ZÀ-ÿ\s]{1,30}$/, // Letras y espacios,
+    numbers: /^(([1-9])([0-9]*)){1,3}$/,
     regex_date_validator: /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/,
   };
 
