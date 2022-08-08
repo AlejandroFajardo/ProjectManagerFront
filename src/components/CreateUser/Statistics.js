@@ -19,6 +19,7 @@ export default class Statistics extends Component {
       currentIdUser: 0,
       nameList: [],
       userList: [],
+      hourWork: [],
     };
   }
 
@@ -55,25 +56,24 @@ export default class Statistics extends Component {
 
   handleList = (value) => {
     console.log(value);
-    this.setState({currentIdUser: value.User_Id});
-    console.log(this.state.currentIdUser);
-
+    this.setState({ currentIdUser: value.id });
+    console.log("el id actual es: ", this.state.currentIdUser);
   };
 
   sendParametersEmployee(userId) {
     console.log("Envia información del  usuario");
     let url = "http://localhost:4000/hoursStatsPerUser";
-    console.log(this.state.initial_date);
-    console.log(this.state.final_date);
     axios
       .post(url, {
         initial_time: this.state.initial_date,
         final_time: this.state.final_date,
-        user_id: 2,
+        user_id: userId,
       })
       .then((response) => {
         if (response.data) {
           console.log(response.data);
+          this.setState({hourWork: response.data});
+          console.log(this.state.hourWork);
         }
       });
   }
@@ -118,11 +118,18 @@ export default class Statistics extends Component {
               variant="contained"
               color="primary"
               startIcon={<EditIcon />}
-              onClick={() => this.sendParametersEmployee(this.state.currentIdUser)}
+              onClick={() =>
+                this.sendParametersEmployee(this.state.currentIdUser)
+              }
             >
               Buscar
             </Button>
           </div>
+        </div>
+        <div>
+          <h5 className="LabelTitleComponent">Horas Trabajadas: {this.state.hourWork.worked_hours}</h5>
+          <h5 className="LabelTitleComponent">Horas Agendadas: {this.state.hourWork.pending_hours}</h5>
+          <h5 className="LabelTitleComponent">Horas No Trabajadas: {this.state.hourWork.not_worked_hours}</h5>
         </div>
       </div>
     );
