@@ -108,6 +108,7 @@ const EditAdvance = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          user_id: currentUser,
           advance_id: advanceId,
           comments: advanceDescription,
           initial_hour: Initial_Time,

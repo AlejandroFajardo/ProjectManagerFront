@@ -127,8 +127,7 @@ const Advance = () => {
         .then((res) => res.json())
         .then(
           (result) => {
-            if (result === "El correo ya se encuentra registrado") {
-            }
+            console.log(result);
           },
           (error) => {
             //alert("Registro fallo");

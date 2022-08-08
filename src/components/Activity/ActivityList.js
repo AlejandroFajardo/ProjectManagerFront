@@ -37,6 +37,7 @@ export default class ActivityList extends Component {
       activitys: [],
       users: [],
       activitiesAssignment: [],
+      currentDate: new Date(),
     };
   }
 

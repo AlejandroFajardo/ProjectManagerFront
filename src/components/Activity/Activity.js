@@ -23,7 +23,7 @@ const statusList = [
   { label: "Pendiente" },
   { label: "En progreso" },
 ];
-const priorityList = [{ label: "Alta" }, { label: "Media" }, { label: "Alta" }];
+const priorityList = [{ label: "Alta" }, { label: "Media" }, { label: "Baja" }];
 
 const Activity = (props) => {
   // const project_id = 6;
