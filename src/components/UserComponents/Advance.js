@@ -11,6 +11,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { TextField } from "@mui/material";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+import moment from "moment";
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -53,14 +54,16 @@ const Advance = () => {
 
   const handleInitialHour = (newInitialTime) => {
     setErrors({ ...errors, Initial_TimeError: false });
-    setInitial_Time(newInitialTime.toISOString());
+    setInitial_Time(newInitialTime.toLocaleString());
     setErrors({ ...errors, Final_TimeError: false });
-    setFinal_Time(newInitialTime.toISOString());
+    // setFinal_Time(new Date(newInitialTime.toISOString().slice(0, -1)));
+    setFinal_Time(newInitialTime.toLocaleString());
+    // setFinal_Time(newInitialTime.toISOString());
   };
 
   const handleFinalHour = (newFinalTime) => {
     setErrors({ ...errors, Final_TimeError: false });
-    setFinal_Time(newFinalTime.toISOString());
+    setFinal_Time(newFinalTime.toLocaleString());
   };
 
   function handleChange(name, value) {
@@ -133,6 +136,7 @@ const Advance = () => {
         );
       setTimeout(() => setCreated(true), 2000);
     }
+    console.log(account);
   }
 
   let open = true;

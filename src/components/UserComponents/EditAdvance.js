@@ -63,14 +63,14 @@ const EditAdvance = () => {
 
   const handleInitialHour = (newInitialTime) => {
     setErrors({ ...errors, Initial_TimeError: false });
-    setInitial_Time(newInitialTime.toISOString());
+    setInitial_Time(newInitialTime.toLocaleString());
     setErrors({ ...errors, Final_TimeError: false });
-    setFinal_Time(newInitialTime.toISOString());
+    setFinal_Time(newInitialTime.toLocaleString());
   };
 
   const handleFinalHour = (newFinalTime) => {
     setErrors({ ...errors, Final_TimeError: false });
-    setFinal_Time(newFinalTime.toISOString());
+    setFinal_Time(newFinalTime.toLocaleString());
   };
 
   function handleChange(name, value) {
@@ -126,6 +126,7 @@ const EditAdvance = () => {
         );
       setTimeout(() => setCreated(true), 2000);
     }
+    console.log(account);
   }
 
   let open = true;

@@ -52,7 +52,7 @@ export default class CalendarAdvance extends Component {
         <div className="Calendar">
           <FullCalendar
             plugins={[dayGridPlugin, timeGridPlugin, listPlugin]}
-            timeZone='local'
+            // timeZone='local'
             headerToolbar={{
               left: "prev,next today",
               center: "title",
@@ -60,8 +60,8 @@ export default class CalendarAdvance extends Component {
             }}
             initialView="timeGridWeek"
             events={ this.generateEvent() }
-            slotMinTime="08:00:00"
-            slotMaxTime="18:00:00"
+            slotMinTime="04:00:00"
+            slotMaxTime="19:00:00"
           ></FullCalendar>
         </div>
       </div>
