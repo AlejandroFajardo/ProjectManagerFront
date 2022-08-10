@@ -143,7 +143,7 @@ const Activity = (props) => {
 
   const aux = () => {
     // const { project_id } = this.props.location
-    console.log(props);
+    // console.log(props);
   };
 
   function handleSubmit() {
@@ -194,7 +194,7 @@ const Activity = (props) => {
 
   return (
     <>
-      {created && <Navigate to="/admin/ProyectList" />}
+      {created && <Navigate to="/admin/ActividadList" />}
       <div className="createUserContent">
         <div className="formCreateProyect">
           {screenWidth > 1030 && <Title text="Nueva actividad" />}

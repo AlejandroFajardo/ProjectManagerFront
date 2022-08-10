@@ -80,7 +80,7 @@ export default class ProjectList extends Component {
     });
   }
   render() {
-    console.log(this.state.projects);
+    console.log(this.state.projects)
     return (
       <div className="Table">
         <h3 className="LabelTitleComponent">Lista de Proyectos </h3>
@@ -100,7 +100,7 @@ export default class ProjectList extends Component {
                 return (
                   <TableRow key={celda.Project_Id}>
                     <TableCell align="left">
-                      <Link
+                      {/* <Link
                         className="a2"
                         to={{
                           pathname: "/admin/ActividadList",
@@ -110,7 +110,13 @@ export default class ProjectList extends Component {
                         onClick={() => this.sendIdProject(celda.Project_Id)}
                       >
                         {celda.Project_Name}
-                      </Link>
+                      </Link> */}
+                      <Button
+                        onClick={() => this.sendIdProject(celda.Project_Id)}
+                        href="/admin/ActividadList"
+                        >
+                       {celda.Project_Name}
+                      </Button>
                     </TableCell>
                     <TableCell align="center">
                       {formatDate(celda.Initial_Date)}

@@ -19,6 +19,9 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import Cookies from "universal-cookie";
 import { formatPriority, formatStatus } from "../../utilities";
+import { TextField } from "@mui/material";
+import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -30,7 +33,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default class ActivityList extends Component {
- 
   constructor() {
     super();
     this.state = {
@@ -38,6 +40,7 @@ export default class ActivityList extends Component {
       users: [],
       activitiesAssignment: [],
       currentDate: new Date(),
+      finalizationDate: new Date(),
     };
   }
 
@@ -79,31 +82,31 @@ export default class ActivityList extends Component {
       });
   }
 
+  userAssign(userId) {
+    let auxUser = this.state.users.find((user) => user.User_Id === userId);
+    console.log(this.state.users)
+    console.log("usuario asignado es");
+    console.log(auxUser);
+    if(auxUser.hasOwnProperty('User_Name')){
+      return auxUser.User_Name;
+    }
+    return '.';
+  }
   componentDidMount = () => {
     this.getActivitiesPerProject();
     this.getAllUsers();
   };
 
-  sendAsignament = (activityId, userId) => {
+  sendAsignament = (activityId, userId, finalDate) => {
     console.log(activityId, userId);
     let baseUrl = "http://localhost:4000/assignActivityToUser";
     axios.post(baseUrl, {
       activity_id: activityId,
       user_id: userId,
+      initial_time: new Date(),
+      final_time: finalDate,
     });
-    window.alert("Usuario asignado")
-  };
-
-  getActivitiesAssignment = () => {
-    let baseUrl = "http://localhost:4000/";
-    axios
-      .get(baseUrl)
-      .then((response) => {
-        this.setState({ activitiesAssignment: response.data });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    window.alert("Usuario asignado");
   };
 
   deleteActivity(activityId) {
@@ -136,8 +139,11 @@ export default class ActivityList extends Component {
     this.getActivitiesPerProject();
   }
 
+  handleFinalizationDate = (finalDate, index) => {
+    this.setState({ finalizationDate: finalDate });
+  };
+
   render() {
-    
     return (
       <div className="Table">
         <div className="regularButtonActivity">
@@ -157,6 +163,7 @@ export default class ActivityList extends Component {
                 <TableCell align="center">HORAS ESTIMADAS</TableCell>
                 <TableCell align="center">PRIORIDAD</TableCell>
                 <TableCell align="center">ESTADO</TableCell>
+                <TableCell align="center">FINALIZACIÓN</TableCell>
                 <TableCell align="center">RESPONSABLE</TableCell>
                 <TableCell align="center">ACCIONES</TableCell>
               </TableRow>
@@ -165,11 +172,7 @@ export default class ActivityList extends Component {
               {this.state.activitys.map((celda) => {
                 return (
                   <TableRow key={celda.Activity_Id}>
-                    <TableCell align="left">
-                     
-                        {celda.Activity_Name}
-                   
-                    </TableCell>
+                    <TableCell align="left">{celda.Activity_Name}</TableCell>
                     <TableCell align="center">
                       {celda.Estimated_Hours}
                     </TableCell>
@@ -179,6 +182,16 @@ export default class ActivityList extends Component {
                     <TableCell align="center">
                       {formatStatus(celda.Status_Id)}
                     </TableCell>
+                    <TableCell>
+                      <LocalizationProvider dateAdapter={AdapterMoment}>
+                        <DesktopDatePicker
+                          inputFormat="DD/MM/yyyy"
+                          value={celda.Final_Time}
+                          onChange={this.handleFinalizationDate}
+                          renderInput={(params) => <TextField {...params} />}
+                        />
+                      </LocalizationProvider>
+                    </TableCell>
                     <TableCell align="center">
                       <FormControl fullWidth>
                         <InputLabel id="demo-simple-select-label">
@@ -187,8 +200,8 @@ export default class ActivityList extends Component {
                         <Select
                           labelId="demo-simple-select-label"
                           id="demo-simple-select"
-                          // value={age}
-                          label="Age"
+                          value={this.userAssign(celda.User_Id)}
+                          label="Employee"
                           // onChange={handleChange}
                         >
                           {this.state.users.map((userAux, index) => {
@@ -198,7 +211,8 @@ export default class ActivityList extends Component {
                                 onClick={() =>
                                   this.sendAsignament(
                                     celda.Activity_Id,
-                                    userAux.User_Id
+                                    userAux.User_Id,
+                                    celda.Final_Time
                                   )
                                 }
                               >
@@ -220,7 +234,7 @@ export default class ActivityList extends Component {
                         Eliminar
                       </Button>
 
-                      <Button 
+                      <Button
                         variant="contained"
                         color="primary"
                         startIcon={<EditIcon />}
@@ -229,7 +243,7 @@ export default class ActivityList extends Component {
                         }
                         href="/admin/editActividad"
                       >
-                          Editar
+                        Editar
                       </Button>
                     </TableCell>
                   </TableRow>

@@ -87,7 +87,8 @@ export default class AdvanceList extends Component {
                     </TableCell>
                     <TableCell align="center">
                       <Button
-                        className="buttonDelete "
+                        variant="contained"
+                        color="primary"
                         startIcon={<EditIcon />}
                         onClick={() => {
                           this.getAdvancetoEdit(celda.Advance_Id);
@@ -96,10 +97,9 @@ export default class AdvanceList extends Component {
                             celda.Activity_Id
                           );
                         }}
+                        href="/employee/editAdvance"
                       >
-                        <Link className="a2" to="/employee/editAdvance">
-                          Editar
-                        </Link>
+                        Editar
                       </Button>
                     </TableCell>
                   </TableRow>

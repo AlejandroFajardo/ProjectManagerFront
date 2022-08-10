@@ -82,15 +82,15 @@ export default class UserActivities extends Component {
                     </CardContent>
 
                     <Divider variant="middle" />
-                    <CardActionArea
+                    {/* <CardActionArea
                       className="a4"
                       component={Link}
                       to="/employee/advance"
                       justifyContent="center"
                       alignItems="center"
-                    >
+                    > */}
                       <CardActions justify="center">
-                        <Button className="a5" size="small" color="primary">
+                        {/* <Button className="a5" size="small" color="primary">
                           <Link
                             className="a5"
                             to="/employee/advance"
@@ -106,9 +106,20 @@ export default class UserActivities extends Component {
                               }
                             />
                           </Link>
-                        </Button>
+                        </Button> */}
+                        <Button
+                        variant="contained"
+                        color="primary"
+                        // startIcon={<EditIcon />}
+                        onClick={() =>
+                          this.sendIdActivity(item.Activity_Id)
+                        }
+                        href="/employee/advance"
+                      >
+                        Crear Avance
+                      </Button>
                       </CardActions>
-                    </CardActionArea>
+                    {/* </CardActionArea> */}
                   </Card>
                 </Grid>
               );
