@@ -108,8 +108,7 @@ export default class UserActivities extends Component {
                           </Link>
                         </Button> */}
                         <Button
-                        variant="contained"
-                        color="primary"
+                        // variant="contained"
                         // startIcon={<EditIcon />}
                         onClick={() =>
                           this.sendIdActivity(item.Activity_Id)

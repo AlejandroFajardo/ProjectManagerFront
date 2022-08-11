@@ -70,6 +70,31 @@ const EditAdvance = () => {
     );
   }
 
+  const notifyTimeOff = () => {
+    toast.error(
+      "Esta intentando asignar el avance fuera del horario laboral.",
+      {
+        position: "bottom-center",
+        autoClose: 7000,
+        style: {
+          background: "#0d151bba",
+          color: "#fff",
+          boxShadow: "0 4px 10px #3eecf2",
+          border: "1px solid #3eecf2",
+          padding: "10px 30px 10px 30px",
+          fontSize: 18,
+          fontFamily: "Montserrat",
+        },
+
+        hideProgressBar: false,
+        newestOnTop: false,
+        closeOnClickrtl: false,
+        pauseOnFocusLoss: false,
+        draggable: true,
+        pauseOnHover: true,
+      }
+    );
+  }
   const notifyOverlapping = () => {
     toast.error(
       "El avance se cruza con otro avance agendado.",
@@ -201,6 +226,12 @@ const EditAdvance = () => {
             } else if(result.overlapped === true){
               notifyOverlapping();
               setTimeout(() => setCreated(true), 3000);
+            }else if(result.time_off){
+              notifyTimeOff();
+              setTimeout(() => setCreated(true), 7000);
+            }else if(result.warning === false){
+              notify();
+              setTimeout(() => setCreated(true), 2000);
             }else {
               notify();
               setTimeout(() => setCreated(true), 2000);
