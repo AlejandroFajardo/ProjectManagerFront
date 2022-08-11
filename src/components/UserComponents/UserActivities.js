@@ -47,6 +47,8 @@ export default class UserActivities extends Component {
       .catch((error) => {
         console.log(error);
       });
+      console.log("Enviando usuario número", dataUser.user_id);
+      console.log(dataUser)
   }
   render() {
     return (

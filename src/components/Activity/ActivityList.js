@@ -40,7 +40,7 @@ export default class ActivityList extends Component {
       users: [],
       activitiesAssignment: [],
       currentDate: new Date(),
-      finalizationDate: new Date(),
+      finalizationDate: '',
     };
   }
 
@@ -85,11 +85,11 @@ export default class ActivityList extends Component {
   userAssign(userId) {
     let auxUser = this.state.users.find((user) => user.User_Id === userId);
     console.log(this.state.users)
-    console.log("usuario asignado es");
-    console.log(auxUser);
-    if(auxUser.hasOwnProperty('User_Name')){
-      return auxUser.User_Name;
-    }
+    // console.log("usuario asignado es");
+    // console.log(auxUser);
+    // if(auxUser.hasOwnProperty('User_Name')){
+    //   return auxUser.User_Name;
+    // }
     return '.';
   }
   componentDidMount = () => {
@@ -99,13 +99,15 @@ export default class ActivityList extends Component {
 
   sendAsignament = (activityId, userId, finalDate) => {
     console.log(activityId, userId);
-    let baseUrl = "http://localhost:4000/assignActivityToUser";
-    axios.post(baseUrl, {
-      activity_id: activityId,
+    let data = {activity_id: activityId,
       user_id: userId,
       initial_time: new Date(),
-      final_time: finalDate,
-    });
+      final_time: finalDate,}
+    let baseUrl = "http://localhost:4000/assignActivityToUser";
+    axios.post(baseUrl, data);
+    console.log("envio de assigment")
+    console.log(data)
+
     window.alert("Usuario asignado");
   };
 
@@ -212,7 +214,7 @@ export default class ActivityList extends Component {
                                   this.sendAsignament(
                                     celda.Activity_Id,
                                     userAux.User_Id,
-                                    celda.Final_Time
+                                    this.state.finalizationDate
                                   )
                                 }
                               >
