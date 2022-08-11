@@ -94,7 +94,33 @@ const Advance = () => {
       }
     );
   }
+  
+  const notifyTimeOut = () => {
+    toast.error(
+      "El avance excede el tiempo para su desarrollo.",
+      {
+        position: "bottom-center",
+        autoClose: 3000,
+        style: {
+          background: "#0d151bba",
+          color: "#fff",
+          boxShadow: "0 4px 10px #3eecf2",
+          border: "1px solid #3eecf2",
+          padding: "10px 30px 10px 30px",
+          fontSize: 18,
+          fontFamily: "Montserrat",
+        },
 
+        hideProgressBar: false,
+        newestOnTop: false,
+        closeOnClickrtl: false,
+        pauseOnFocusLoss: false,
+        draggable: true,
+        pauseOnHover: true,
+      }
+    );
+  }
+  
   const classes = useStyles();
   const currentTime = new Date();
 
@@ -209,6 +235,10 @@ const Advance = () => {
             } else if(result.overlapped === true){
               notifyOverlapping();
               setTimeout(() => setCreated(true), 3000);
+            }else if(result.time_out_of_bounds){
+              notifyTimeOut();
+              setTimeout(() => setCreated(true), 3000);
+
             }else {
               notify();
               setTimeout(() => setCreated(true), 2000);

@@ -60,16 +60,6 @@ export default class ActivityList extends Component {
       });
   }
 
-  // selectActivity(userId) {
-  //   let baseUrl = 'http://localhost:4000/deleteUser'
-  //   axios.post(baseUrl, {
-  //       User_Id : userId})
-  //   .then((response) => {
-  //     console.log(response);
-  //   })
-  //   this.getAllUsers();
-  // }
-
   getAllUsers() {
     let baseUrl = "http://localhost:4000/getUsers";
     axios
@@ -85,12 +75,12 @@ export default class ActivityList extends Component {
   userAssign(userId) {
     let auxUser = this.state.users.find((user) => user.User_Id === userId);
     console.log(this.state.users)
-    // console.log("usuario asignado es");
+    console.log("usuario asignado es");
     // console.log(auxUser);
-    // if(auxUser.hasOwnProperty('User_Name')){
+    // if(auxUser.hasOwnProperty(auxUser.User_Name)){
     //   return auxUser.User_Name;
     // }
-    return '.';
+    // return '.';
   }
   componentDidMount = () => {
     this.getActivitiesPerProject();
