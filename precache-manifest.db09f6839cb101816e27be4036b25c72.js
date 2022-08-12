@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "644b469ddbaa76e4ecbc",
+    "revision": "cabedf9d6aa7745948af",
     "url": "/ProjectManagerFront/static/css/main.0ebf404f.chunk.css"
   },
   {
-    "revision": "644b469ddbaa76e4ecbc",
-    "url": "/ProjectManagerFront/static/js/main.644b469d.chunk.js"
+    "revision": "cabedf9d6aa7745948af",
+    "url": "/ProjectManagerFront/static/js/main.cabedf9d.chunk.js"
   },
   {
     "revision": "5888597e8b0a2ec029f5",
@@ -40,7 +40,7 @@ self.__precacheManifest = [
     "url": "/ProjectManagerFront/static/media/arquitectura.9883e489.jpg"
   },
   {
-    "revision": "93324e093a78e4a2879935f24c542c59",
+    "revision": "dcef4752db1f997db7ab2d20fc3f5de1",
     "url": "/ProjectManagerFront/index.html"
   }
 ];
