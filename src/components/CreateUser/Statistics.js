@@ -24,7 +24,8 @@ export default class Statistics extends Component {
   }
 
   getAllUsers() {
-    let baseUrl = "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/getUsers";
+    let baseUrl =
+      " https://corsanywhere.herokuapp.com/projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/getUsers";
     let auxList = [];
     axios
       .get(baseUrl)
@@ -62,7 +63,8 @@ export default class Statistics extends Component {
 
   sendParametersEmployee(userId) {
     console.log("Envia información del  usuario");
-    let url = "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/hoursStatsPerUser";
+    let url =
+      " https://corsanywhere.herokuapp.com/projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/hoursStatsPerUser";
     axios
       .post(url, {
         initial_time: this.state.initial_date,
@@ -84,17 +86,18 @@ export default class Statistics extends Component {
         <h3 className="LabelTitleComponent">Estadisticas</h3>
         <div className="statistics">
           <div className="item-statistics">
-            <LocalizationProvider  dateAdapter={AdapterMoment}>
+            <LocalizationProvider dateAdapter={AdapterMoment}>
               <Item text="Fecha de inicio" />
-              <DesktopDatePicker className= "date"
+              <DesktopDatePicker
+                className="date"
                 inputFormat="DD/MM/yyyy"
                 value={this.state.initial_date}
                 onChange={this.handleChangeInitialDate}
                 renderInput={(params) => <TextField {...params} />}
               />
             </LocalizationProvider>
-            </div>
-            <div className="item-statistics">
+          </div>
+          <div className="item-statistics">
             <LocalizationProvider dateAdapter={AdapterMoment}>
               <Item text="Fecha final" />
               <DesktopDatePicker
@@ -104,27 +107,27 @@ export default class Statistics extends Component {
                 renderInput={(params) => <TextField {...params} />}
               />
             </LocalizationProvider>
-          <div className="item-statistics">
-            <Item text="Usuario" />
-            <Select
-              className="select"
-              options={this.state.nameList}
-              onChange={this.handleList}
-            />
-          </div>
-          <div className="item-statistics">
-            <Button
-            className="button"
-              variant="contained"
-              color="primary"
-              startIcon={<SearchIcon />}
-              onClick={() =>
-                this.sendParametersEmployee(this.state.currentIdUser)
-              }
-            >
-              Buscar
-            </Button>
-          </div>
+            <div className="item-statistics">
+              <Item text="Usuario" />
+              <Select
+                className="select"
+                options={this.state.nameList}
+                onChange={this.handleList}
+              />
+            </div>
+            <div className="item-statistics">
+              <Button
+                className="button"
+                variant="contained"
+                color="primary"
+                startIcon={<SearchIcon />}
+                onClick={() =>
+                  this.sendParametersEmployee(this.state.currentIdUser)
+                }
+              >
+                Buscar
+              </Button>
+            </div>
           </div>
         </div>
         <div>

@@ -11,7 +11,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import logo from "../assets/logo2.png";
 
-
 const useStyles = makeStyles((theme) => ({
   backdrop: {
     zIndex: 2,
@@ -72,7 +71,8 @@ const Login = () => {
 
   function handleOnClick() {
     setIsLoading(true);
-    let baseUrl = "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/login";
+    let baseUrl =
+      " https://corsanywhere.herokuapp.com/projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/login";
     let login = { login_user: login_user, user_password: user_password };
     axios
       .post(baseUrl, login)
@@ -102,11 +102,11 @@ const Login = () => {
   return (
     <>
       <div className="LoginContent">
-      <div className="login-container">
+        <div className="login-container">
           <div className="login-left-container">
             <img src={logo} alt="P-WorkFlow" width="450" />
           </div>
-          </div>
+        </div>
         <div className="Login">
           <div className="LoginHigher" />
           <div className="LoginLower">

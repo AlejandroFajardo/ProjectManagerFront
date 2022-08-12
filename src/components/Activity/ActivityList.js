@@ -40,13 +40,14 @@ export default class ActivityList extends Component {
       users: [],
       activitiesAssignment: [],
       currentDate: new Date(),
-      finalizationDate: '',
+      finalizationDate: "",
     };
   }
 
   getActivitiesPerProject() {
     const cookies = new Cookies();
-    let baseUrl = "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/getActivity";
+    let baseUrl =
+      " https://corsanywhere.herokuapp.com/projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/getActivity";
     let projectId = cookies.get("currentProjectId");
     let data = { project_id: projectId };
     axios
@@ -61,7 +62,8 @@ export default class ActivityList extends Component {
   }
 
   getAllUsers() {
-    let baseUrl = "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/getUsers";
+    let baseUrl =
+      " https://corsanywhere.herokuapp.com/projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/getUsers";
     axios
       .get(baseUrl)
       .then((response) => {
@@ -74,7 +76,7 @@ export default class ActivityList extends Component {
 
   userAssign(userId) {
     let auxUser = this.state.users.find((user) => user.User_Id === userId);
-    console.log(this.state.users)
+    console.log(this.state.users);
     console.log("usuario asignado es");
     // console.log(auxUser);
     // if(auxUser.hasOwnProperty(auxUser.User_Name)){
@@ -89,20 +91,24 @@ export default class ActivityList extends Component {
 
   sendAsignament = (activityId, userId, finalDate) => {
     console.log(activityId, userId);
-    let data = {activity_id: activityId,
+    let data = {
+      activity_id: activityId,
       user_id: userId,
       initial_time: new Date(),
-      final_time: finalDate,}
-    let baseUrl = "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/assignActivityToUser";
+      final_time: finalDate,
+    };
+    let baseUrl =
+      " https://corsanywhere.herokuapp.com/projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/assignActivityToUser";
     axios.post(baseUrl, data);
-    console.log("envio de assigment")
-    console.log(data)
+    console.log("envio de assigment");
+    console.log(data);
 
     window.alert("Usuario asignado");
   };
 
   deleteActivity(activityId) {
-    let baseUrl = "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/deleteActivity";
+    let baseUrl =
+      " https://corsanywhere.herokuapp.comprojectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/deleteActivity";
     axios
       .delete(baseUrl, {
         data: { activity_id: activityId },
@@ -114,7 +120,8 @@ export default class ActivityList extends Component {
   }
 
   getActivityToEdit(activityId) {
-    let baseUrl = "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/getActivityToEdit";
+    let baseUrl =
+      " https://corsanywhere.herokuapp.com/projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/getActivityToEdit";
     axios.post(baseUrl, { activity_id: activityId }).then((response) => {
       if (response.data) {
         localStorage.setItem("activity_id", response.data.Activity_Id);

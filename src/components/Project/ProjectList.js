@@ -27,7 +27,8 @@ export default class ProjectList extends Component {
   }
 
   getAllProjects() {
-    let baseUrl = "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/getProjects";
+    let baseUrl =
+      " https://corsanywhere.herokuapp.com/projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/getProjects";
     axios
       .get(baseUrl)
       .then((response) => {
@@ -52,7 +53,8 @@ export default class ProjectList extends Component {
   }
 
   deletProject(projectId) {
-    let baseUrl = "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/deleteProject";
+    let baseUrl =
+      " https://corsanywhere.herokuapp.com/projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/deleteProject";
     axios
       .delete(baseUrl, {
         data: {
@@ -66,21 +68,22 @@ export default class ProjectList extends Component {
   }
 
   getProjectToEdit(projectId) {
-    let baseUrl = "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/getProjectToEdit";
+    let baseUrl =
+      " https://corsanywhere.herokuapp.com/projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/getProjectToEdit";
     axios.post(baseUrl, { project_id: projectId }).then((response) => {
       if (response.data[0]) {
-        localStorage.setItem('projectIdToEdit', response.data[0].Project_Id);
-        localStorage.setItem('projectName', response.data[0].Project_Name);
-        localStorage.setItem('initialDate', response.data[0].Initial_Date);
-        localStorage.setItem('finalDate' , response.data[0].Final_Date);
-        localStorage.setItem('projectStatus', response.data[0].Status_Id);
+        localStorage.setItem("projectIdToEdit", response.data[0].Project_Id);
+        localStorage.setItem("projectName", response.data[0].Project_Name);
+        localStorage.setItem("initialDate", response.data[0].Initial_Date);
+        localStorage.setItem("finalDate", response.data[0].Final_Date);
+        localStorage.setItem("projectStatus", response.data[0].Status_Id);
       } else {
         console.log("NO Entro al response");
       }
     });
   }
   render() {
-    console.log(this.state.projects)
+    console.log(this.state.projects);
     return (
       <div className="Table">
         <h3 className="LabelTitleComponent">Lista de Proyectos </h3>
@@ -114,8 +117,8 @@ export default class ProjectList extends Component {
                       <Button
                         onClick={() => this.sendIdProject(celda.Project_Id)}
                         href="/admin/ActividadList"
-                        >
-                       {celda.Project_Name}
+                      >
+                        {celda.Project_Name}
                       </Button>
                     </TableCell>
                     <TableCell align="center">
@@ -141,9 +144,7 @@ export default class ProjectList extends Component {
                         variant="contained"
                         color="primary"
                         startIcon={<EditIcon />}
-                        onClick={() =>
-                          this.getProjectToEdit(celda.Project_Id)
-                        }
+                        onClick={() => this.getProjectToEdit(celda.Project_Id)}
                         href="/admin/editProject"
                       >
                         Editar

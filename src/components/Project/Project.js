@@ -154,19 +154,22 @@ const Proyect = () => {
     if (account) {
       let ac = JSON.stringify(account);
       localStorage.setItem("account", ac);
-      fetch("http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/createProject", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          project_name: project_name,
-          initial_date: initial_date,
-          final_date: final_date,
-          project_status: project_status,
-        }),
-      })
+      fetch(
+        " https://corsanywhere.herokuapp.com/projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/createProject",
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            project_name: project_name,
+            initial_date: initial_date,
+            final_date: final_date,
+            project_status: project_status,
+          }),
+        }
+      )
         .then((res) => res.json())
         .then(
           (result) => {
@@ -209,9 +212,9 @@ const Proyect = () => {
             <ErrorNotification text="Requerido. Ingrese solo letras max 12" />
           )}
 
-          <LocalizationProvider dateAdapter={AdapterMoment} >
+          <LocalizationProvider dateAdapter={AdapterMoment}>
             <Item text="Fecha de inicio" />
-            <DesktopDatePicker 
+            <DesktopDatePicker
               inputFormat="DD/MM/yyyy"
               value={initial_date}
               onChange={handleChangeInitialDate}
@@ -236,7 +239,7 @@ const Proyect = () => {
 
           <Item text="Estado" />
           <Select
-            className='select'
+            className="select"
             options={statusList}
             onChange={handleStatus}
           />

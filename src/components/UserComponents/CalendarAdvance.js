@@ -21,7 +21,8 @@ export default class CalendarAdvance extends Component {
   };
 
   getAdvancesForUser() {
-    let baseUrl = "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/getAdvancesByUser";
+    let baseUrl =
+      " https://corsanywhere.herokuapp.com/projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/getAdvancesByUser";
     axios
       .post(baseUrl, dataUser)
       .then((response) => {
@@ -34,14 +35,14 @@ export default class CalendarAdvance extends Component {
 
   generateEvent() {
     let advances = this.state.advances;
-    let myEvent = {}
-    let eventsArray = []
+    let myEvent = {};
+    let eventsArray = [];
     for (let i = 0; i < advances.length; i++) {
       myEvent.id = advances[i].Advance_Id;
       myEvent.title = advances[i].Advance_Comments;
       myEvent.start = advances[i].Initial_Time;
       myEvent.end = advances[i].Final_Time;
-      eventsArray.push({...myEvent});
+      eventsArray.push({ ...myEvent });
     }
     return eventsArray;
   }
@@ -59,7 +60,7 @@ export default class CalendarAdvance extends Component {
               right: "dayGridMonth,timeGridWeek,timeGridDay",
             }}
             initialView="timeGridWeek"
-            events={ this.generateEvent() }
+            events={this.generateEvent()}
             slotMinTime="04:00:00"
             slotMaxTime="19:00:00"
           ></FullCalendar>

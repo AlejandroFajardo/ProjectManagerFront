@@ -17,7 +17,6 @@ import Item from "../Login/components/Item";
 import AdvanceList from "./AdvanceList";
 import { formatPriority, formatStatus } from "../../utilities";
 
-
 let user_id = localStorage.getItem("user_id");
 let dataUser = { user_id: user_id };
 
@@ -38,7 +37,8 @@ export default class UserActivities extends Component {
   };
 
   getActivitiesUser() {
-    let baseUrl = "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/getAllActivityUser";
+    let baseUrl =
+      " https://corsanywhere.herokuapp.com/projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/getAllActivityUser";
     axios
       .post(baseUrl, dataUser)
       .then((response) => {
@@ -47,8 +47,8 @@ export default class UserActivities extends Component {
       .catch((error) => {
         console.log(error);
       });
-      console.log("Enviando usuario número", dataUser.user_id);
-      console.log(dataUser)
+    console.log("Enviando usuario número", dataUser.user_id);
+    console.log(dataUser);
   }
   render() {
     return (
@@ -91,8 +91,8 @@ export default class UserActivities extends Component {
                       justifyContent="center"
                       alignItems="center"
                     > */}
-                      <CardActions justify="center">
-                        {/* <Button className="a5" size="small" color="primary">
+                    <CardActions justify="center">
+                      {/* <Button className="a5" size="small" color="primary">
                           <Link
                             className="a5"
                             to="/employee/advance"
@@ -109,17 +109,15 @@ export default class UserActivities extends Component {
                             />
                           </Link>
                         </Button> */}
-                        <Button
+                      <Button
                         // variant="contained"
                         // startIcon={<EditIcon />}
-                        onClick={() =>
-                          this.sendIdActivity(item.Activity_Id)
-                        }
+                        onClick={() => this.sendIdActivity(item.Activity_Id)}
                         href="/employee/advance"
                       >
                         Crear Avance
                       </Button>
-                      </CardActions>
+                    </CardActions>
                     {/* </CardActionArea> */}
                   </Card>
                 </Grid>

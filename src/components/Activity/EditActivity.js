@@ -61,8 +61,7 @@ const Activity = (props) => {
     name: /^[a-zA-Z0-9_-]{4,10}$/, // Letras, numeros, guion y guion_bajo
     letters: /^[a-zA-ZÀ-ÿ\s]{1,12}$/, // Letras y espacios,
     numbers: /^(([1-9]*)|(([1-9]*)\.([0-9]*)))$/,
-    regex_date_validator:
-      /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/,
+    regex_date_validator: /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/,
   };
 
   function priorityIndex() {
@@ -194,22 +193,25 @@ const Activity = (props) => {
     if (account) {
       let ac = JSON.stringify(account);
       localStorage.setItem("account", ac);
-      fetch("http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/editActivity", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          Activity_Id: Activity_Id,
-          Project_Id: Project_Id,
-          Activity_Name: Activity_Name,
-          Activity_Description: "DGHDHDHDHD",
-          Estimated_Hours: Estimated_Hours,
-          Priority_Id: Priority_Id,
-          Status_Id: Status_Id,
-        }),
-      })
+      fetch(
+        " https://corsanywhere.herokuapp.com/projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/editActivity",
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            Activity_Id: Activity_Id,
+            Project_Id: Project_Id,
+            Activity_Name: Activity_Name,
+            Activity_Description: "DGHDHDHDHD",
+            Estimated_Hours: Estimated_Hours,
+            Priority_Id: Priority_Id,
+            Status_Id: Status_Id,
+          }),
+        }
+      )
         .then((res) => res.json())
         .then(
           (result) => {

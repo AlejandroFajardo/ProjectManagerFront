@@ -13,7 +13,6 @@ import { TextField } from "@mui/material";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import toast, { Toaster } from "react-hot-toast";
 
-
 const useStyles = makeStyles((theme) => ({
   backdrop: {
     zIndex: 2,
@@ -68,7 +67,7 @@ const EditAdvance = () => {
         pauseOnHover: true,
       }
     );
-  }
+  };
 
   const notifyTimeOff = () => {
     toast.error(
@@ -94,37 +93,34 @@ const EditAdvance = () => {
         pauseOnHover: true,
       }
     );
-  }
+  };
   const notifyOverlapping = () => {
-    toast.error(
-      "El avance se cruza con otro avance agendado.",
-      {
-        position: "bottom-center",
-        autoClose: 3000,
-        style: {
-          background: "#0d151bba",
-          color: "#fff",
-          boxShadow: "0 4px 10px #3eecf2",
-          border: "1px solid #3eecf2",
-          padding: "10px 30px 10px 30px",
-          fontSize: 18,
-          fontFamily: "Montserrat",
-        },
+    toast.error("El avance se cruza con otro avance agendado.", {
+      position: "bottom-center",
+      autoClose: 3000,
+      style: {
+        background: "#0d151bba",
+        color: "#fff",
+        boxShadow: "0 4px 10px #3eecf2",
+        border: "1px solid #3eecf2",
+        padding: "10px 30px 10px 30px",
+        fontSize: 18,
+        fontFamily: "Montserrat",
+      },
 
-        hideProgressBar: false,
-        newestOnTop: false,
-        closeOnClickrtl: false,
-        pauseOnFocusLoss: false,
-        draggable: true,
-        pauseOnHover: true,
-      }
-    );
-  }
+      hideProgressBar: false,
+      newestOnTop: false,
+      closeOnClickrtl: false,
+      pauseOnFocusLoss: false,
+      draggable: true,
+      pauseOnHover: true,
+    });
+  };
 
   const classes = useStyles();
 
-  let currentActivity = localStorage.getItem('currentActivityUser');
-  let currentUser = localStorage.getItem('user_id');
+  let currentActivity = localStorage.getItem("currentActivityUser");
+  let currentUser = localStorage.getItem("user_id");
 
   let advanceId = localStorage.getItem("advance_id");
   let initialTime = localStorage.getItem("initial_time");
@@ -132,12 +128,11 @@ const EditAdvance = () => {
   let description = localStorage.getItem("description");
   let currentActivityId = localStorage.getItem("currentActivityId");
 
-  console.log('id activity' + currentActivity);
-  console.log('adv id' + advanceId);
-  console.log('init' + initialTime);
-  console.log('ft ' + finalTime);
-  console.log('desc ' + description);
-
+  console.log("id activity" + currentActivity);
+  console.log("adv id" + advanceId);
+  console.log("init" + initialTime);
+  console.log("ft " + finalTime);
+  console.log("desc " + description);
 
   const [currentDay, setCurrentDay] = useState("");
   const [Initial_Time, setInitial_Time] = useState(initialTime);
@@ -162,8 +157,7 @@ const EditAdvance = () => {
     name: /^[a-zA-Z0-9_-]{1,20}$/, // Letras, numeros, guion y guion_bajo
     letters: /^[\w'\-][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*\-(){}|~<>;:[\]]{1,60}$/, // Letras y espacios,
     number: /^\d{1,6}$/, // 1 a 10 numeros.,
-    regex_date_validator:
-      /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/,
+    regex_date_validator: /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/,
     hour: /^(?:0?[1-9]|1[0-2]):[0-5][0-9]\s?(?:[aApP](\.?)[mM]\1)$/,
   };
 
@@ -209,39 +203,42 @@ const EditAdvance = () => {
     if (account) {
       let ac = JSON.stringify(account);
       localStorage.setItem("account", ac);
-      fetch("http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/editAdvance", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          user_id: currentUser,
-          advance_id: advanceId,
-          comments: advanceDescription,
-          initial_hour: Initial_Time,
-          final_hour: Final_Time,
-        }),
-      })
+      fetch(
+        " https://corsanywhere.herokuapp.com/projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/editAdvance",
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            user_id: currentUser,
+            advance_id: advanceId,
+            comments: advanceDescription,
+            initial_hour: Initial_Time,
+            final_hour: Final_Time,
+          }),
+        }
+      )
         .then((res) => res.json())
         .then(
           (result) => {
-            console.log("Entramos al resultado del server")
+            console.log("Entramos al resultado del server");
             console.log(result);
             newResult = result;
             if (result.warning === true) {
               notifyError();
               setTimeout(() => setCreated(true), 7000);
-            } else if(result.overlapped === true){
+            } else if (result.overlapped === true) {
               notifyOverlapping();
               setTimeout(() => setCreated(true), 3000);
-            }else if(result.time_off){
+            } else if (result.time_off) {
               notifyTimeOff();
               setTimeout(() => setCreated(true), 7000);
-            }else if(result.warning === false){
+            } else if (result.warning === false) {
               notify();
               setTimeout(() => setCreated(true), 2000);
-            }else {
+            } else {
               // notify();
               setTimeout(() => setCreated(true), 2000);
             }
@@ -252,7 +249,7 @@ const EditAdvance = () => {
         );
       // setTimeout(() => setCreated(true), 2000);
     }
-    console.log('new result');
+    console.log("new result");
     console.log(newResult);
     console.log(account);
   }

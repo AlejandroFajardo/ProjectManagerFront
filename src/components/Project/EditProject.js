@@ -177,20 +177,23 @@ const EditProyect = () => {
     if (account) {
       let ac = JSON.stringify(account);
       localStorage.setItem("account", ac);
-      fetch("http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/editProject", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          project_id: projectIdToEdit,
-          project_name: project_name,
-          initial_date: initial_date,
-          final_date: final_date,
-          status_id: project_status,
-        }),
-      })
+      fetch(
+        " https://corsanywhere.herokuapp.com/projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/editProject",
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            project_id: projectIdToEdit,
+            project_name: project_name,
+            initial_date: initial_date,
+            final_date: final_date,
+            status_id: project_status,
+          }),
+        }
+      )
         .then((res) => res.json())
         .then(
           (result) => {

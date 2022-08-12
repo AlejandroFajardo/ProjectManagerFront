@@ -28,7 +28,8 @@ export default class AdvanceList extends Component {
   };
 
   getAdvacesForUser() {
-    let baseUrl = "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/getAdvancesByUser";
+    let baseUrl =
+      " https://corsanywhere.herokuapp.com/projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/getAdvancesByUser";
     axios
       .post(baseUrl, dataUser)
       .then((response) => {
@@ -40,13 +41,14 @@ export default class AdvanceList extends Component {
   }
 
   getAdvancetoEdit(advanceId) {
-    let baseUrl = "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/getAdvanceToEdit";
-    console.log(advanceId)
-    let data = {advance_id: advanceId}
-    console.log(data)
+    let baseUrl =
+      " https://corsanywhere.herokuapp.com/projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/getAdvanceToEdit";
+    console.log(advanceId);
+    let data = { advance_id: advanceId };
+    console.log(data);
     axios.post(baseUrl, data).then((response) => {
       if (response.data) {
-        console.log('si hay respuesta del avance');
+        console.log("si hay respuesta del avance");
         console.log(response.data);
         localStorage.setItem("advance_id", response.data.Advance_Id);
         localStorage.setItem("initial_time", response.data.Initial_Time);

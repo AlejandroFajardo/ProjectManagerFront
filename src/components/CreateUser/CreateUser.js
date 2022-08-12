@@ -13,7 +13,6 @@ import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { TextField } from "@mui/material";
 
-
 const useStyles = makeStyles((theme) => ({
   backdrop: {
     zIndex: 2,
@@ -215,9 +214,9 @@ const CreateUser = () => {
   }
 
   const handleBirthDay = (newBirthDay) => {
-    setErrors({...errors, bird_dateError: false});
-    setBird_date(newBirthDay.toISOString())
-  }
+    setErrors({ ...errors, bird_dateError: false });
+    setBird_date(newBirthDay.toISOString());
+  };
 
   function handleSubmit() {
     setIsLoading(true);
@@ -238,27 +237,30 @@ const CreateUser = () => {
     if (account) {
       let ac = JSON.stringify(account);
       localStorage.setItem("account", ac);
-      fetch("http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/createUser", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          user_name: user_name,
-          user_last_name: user_last_name,
-          identity_document_type: identity_document_type,
-          identity_document_word: identity_document_word,
-          birth_date: birth_date,
-          salary: salary,
-          weekly_hours: weekly_hours,
-          user_email: user_email,
-          phone_number: phone_number,
-          user_password: user_password,
-          user_status: 1,
-          boss_id: 1,
-        }),
-      })
+      fetch(
+        " https://corsanywhere.herokuapp.com/projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/createUser",
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            user_name: user_name,
+            user_last_name: user_last_name,
+            identity_document_type: identity_document_type,
+            identity_document_word: identity_document_word,
+            birth_date: birth_date,
+            salary: salary,
+            weekly_hours: weekly_hours,
+            user_email: user_email,
+            phone_number: phone_number,
+            user_password: user_password,
+            user_status: 1,
+            boss_id: 1,
+          }),
+        }
+      )
         .then((res) => {
           JSON.stringify(res);
           // alert(res);
@@ -343,10 +345,10 @@ const CreateUser = () => {
           <Item text="Fecha de nacimiento" />
           <LocalizationProvider dateAdapter={AdapterMoment}>
             <DesktopDatePicker
-             inputFormat='DD/MM/yyyy'
-             value={birth_date}
-             onChange={handleBirthDay}
-             renderInput={(params) => <TextField {...params} />}
+              inputFormat="DD/MM/yyyy"
+              value={birth_date}
+              onChange={handleBirthDay}
+              renderInput={(params) => <TextField {...params} />}
             />
           </LocalizationProvider>
           {errors.bird_dateError && (

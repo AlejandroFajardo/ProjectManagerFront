@@ -159,20 +159,23 @@ const Activity = (props) => {
     if (account) {
       let ac = JSON.stringify(account);
       localStorage.setItem("account", ac);
-      fetch("http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/createActivity", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          project_id: project_id,
-          activity_name: activity_name,
-          estimated_hours: estimated_hours,
-          priority: priority,
-          status: status,
-        }),
-      })
+      fetch(
+        "https://corsanywhere.herokuapp.com/projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/createActivity",
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            project_id: project_id,
+            activity_name: activity_name,
+            estimated_hours: estimated_hours,
+            priority: priority,
+            status: status,
+          }),
+        }
+      )
         .then((res) => res.json())
         .then(
           (result) => {
