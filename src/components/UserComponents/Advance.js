@@ -120,6 +120,32 @@ const Advance = () => {
       }
     );
   }
+
+  const notifyTimeOff = () => {
+    toast.error(
+      "El avance excede la jornada laboral.",
+      {
+        position: "bottom-center",
+        autoClose: 3000,
+        style: {
+          background: "#0d151bba",
+          color: "#fff",
+          boxShadow: "0 4px 10px #3eecf2",
+          border: "1px solid #3eecf2",
+          padding: "10px 30px 10px 30px",
+          fontSize: 18,
+          fontFamily: "Montserrat",
+        },
+
+        hideProgressBar: false,
+        newestOnTop: false,
+        closeOnClickrtl: false,
+        pauseOnFocusLoss: false,
+        draggable: true,
+        pauseOnHover: true,
+      }
+    );
+  }
   
   const classes = useStyles();
   const currentTime = new Date();
@@ -200,6 +226,7 @@ const Advance = () => {
 
   function handleSubmit() {
     setIsLoading(true);
+    let newResult;
     let account = {
       activity_id: currentActivity,
       user_id: currentUser,
@@ -229,6 +256,7 @@ const Advance = () => {
           (result) => {
             console.log("Entramos al resultado del server")
             console.log(result);
+            newResult = result;
             if (result.warning === true) {
               notifyError();
               setTimeout(() => setCreated(true), 7000);
@@ -239,8 +267,11 @@ const Advance = () => {
               notifyTimeOut();
               setTimeout(() => setCreated(true), 3000);
 
+            }else if (result.time_off){
+              notifyTimeOut();
+              setTimeout(() => setCreated(true), 3000);
             }else {
-              notify();
+              // notify();
               setTimeout(() => setCreated(true), 2000);
             }
           },
@@ -251,6 +282,8 @@ const Advance = () => {
           setTimeout(() => setCreated(true), 2000);
     }
     console.log(account);
+    console.log('resoult');
+    console.log(newResult);
   }
 
   let open = true;
