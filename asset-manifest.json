@@ -1,7 +1,7 @@
 {
   "main.css": "/ProjectManagerFront/static/css/main.0ebf404f.chunk.css",
-  "main.js": "/ProjectManagerFront/static/js/main.f729de34.chunk.js",
-  "main.js.map": "/ProjectManagerFront/static/js/main.f729de34.chunk.js.map",
+  "main.js": "/ProjectManagerFront/static/js/main.97e3725a.chunk.js",
+  "main.js.map": "/ProjectManagerFront/static/js/main.97e3725a.chunk.js.map",
   "static/js/1.5888597e.chunk.js": "/ProjectManagerFront/static/js/1.5888597e.chunk.js",
   "static/js/1.5888597e.chunk.js.map": "/ProjectManagerFront/static/js/1.5888597e.chunk.js.map",
   "static/css/2.05803c21.chunk.css": "/ProjectManagerFront/static/css/2.05803c21.chunk.css",
@@ -13,9 +13,9 @@
   "static/media/client.jpg": "/ProjectManagerFront/static/media/client.c3d6d817.jpg",
   "static/media/logo2.png": "/ProjectManagerFront/static/media/logo2.43248112.png",
   "static/media/arquitectura.jpg": "/ProjectManagerFront/static/media/arquitectura.9883e489.jpg",
-  "static/css/2.05803c21.chunk.css.map": "/ProjectManagerFront/static/css/2.05803c21.chunk.css.map",
   "static/css/main.0ebf404f.chunk.css.map": "/ProjectManagerFront/static/css/main.0ebf404f.chunk.css.map",
+  "static/css/2.05803c21.chunk.css.map": "/ProjectManagerFront/static/css/2.05803c21.chunk.css.map",
   "index.html": "/ProjectManagerFront/index.html",
-  "precache-manifest.4f51477370a8989b521906cc64789d5a.js": "/ProjectManagerFront/precache-manifest.4f51477370a8989b521906cc64789d5a.js",
+  "precache-manifest.7eccacc2ca2428472159c12aedfdadb7.js": "/ProjectManagerFront/precache-manifest.7eccacc2ca2428472159c12aedfdadb7.js",
   "service-worker.js": "/ProjectManagerFront/service-worker.js"
 }
