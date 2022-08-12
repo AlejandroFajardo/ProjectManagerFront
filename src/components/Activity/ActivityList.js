@@ -46,7 +46,7 @@ export default class ActivityList extends Component {
 
   getActivitiesPerProject() {
     const cookies = new Cookies();
-    let baseUrl = "http://localhost:4000/getActivity";
+    let baseUrl = "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/getActivity";
     let projectId = cookies.get("currentProjectId");
     let data = { project_id: projectId };
     axios
@@ -61,7 +61,7 @@ export default class ActivityList extends Component {
   }
 
   getAllUsers() {
-    let baseUrl = "http://localhost:4000/getUsers";
+    let baseUrl = "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/getUsers";
     axios
       .get(baseUrl)
       .then((response) => {
@@ -93,7 +93,7 @@ export default class ActivityList extends Component {
       user_id: userId,
       initial_time: new Date(),
       final_time: finalDate,}
-    let baseUrl = "http://localhost:4000/assignActivityToUser";
+    let baseUrl = "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/assignActivityToUser";
     axios.post(baseUrl, data);
     console.log("envio de assigment")
     console.log(data)
@@ -102,7 +102,7 @@ export default class ActivityList extends Component {
   };
 
   deleteActivity(activityId) {
-    let baseUrl = "http://localhost:4000/deleteActivity";
+    let baseUrl = "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/deleteActivity";
     axios
       .delete(baseUrl, {
         data: { activity_id: activityId },
@@ -114,7 +114,7 @@ export default class ActivityList extends Component {
   }
 
   getActivityToEdit(activityId) {
-    let baseUrl = "http://localhost:4000/getActivityToEdit";
+    let baseUrl = "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/getActivityToEdit";
     axios.post(baseUrl, { activity_id: activityId }).then((response) => {
       if (response.data) {
         localStorage.setItem("activity_id", response.data.Activity_Id);

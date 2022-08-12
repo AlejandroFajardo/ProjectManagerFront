@@ -28,7 +28,7 @@ export default class AdvanceList extends Component {
   };
 
   getAdvacesForUser() {
-    let baseUrl = "http://localhost:4000/getAdvancesByUser";
+    let baseUrl = "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/getAdvancesByUser";
     axios
       .post(baseUrl, dataUser)
       .then((response) => {
@@ -40,14 +40,18 @@ export default class AdvanceList extends Component {
   }
 
   getAdvancetoEdit(advanceId) {
-    let baseUrl = "http://localhost:4000/getAdvanceToEdit";
-    axios.post(baseUrl, { advance_id: advanceId }).then((response) => {
+    let baseUrl = "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/getAdvanceToEdit";
+    console.log(advanceId)
+    let data = {advance_id: advanceId}
+    console.log(data)
+    axios.post(baseUrl, data).then((response) => {
       if (response.data) {
+        console.log('si hay respuesta del avance');
+        console.log(response.data);
         localStorage.setItem("advance_id", response.data.Advance_Id);
         localStorage.setItem("initial_time", response.data.Initial_Time);
         localStorage.setItem("final_time", response.data.Final_Time);
         localStorage.setItem("description", response.data.Advance_Comments);
-        console.log(response.data);
       }
     });
     this.getAdvacesForUser();
@@ -97,7 +101,7 @@ export default class AdvanceList extends Component {
                             celda.Activity_Id
                           );
                         }}
-                        href="/employee/editAdvance"
+                        // href="/employee/editAdvance"
                       >
                         Editar
                       </Button>

@@ -133,6 +133,12 @@ const EditAdvance = () => {
   let currentActivityId = localStorage.getItem("currentActivityId");
 
   console.log('id activity' + currentActivity);
+  console.log('adv id' + advanceId);
+  console.log('init' + initialTime);
+  console.log('ft ' + finalTime);
+  console.log('desc ' + description);
+
+
   const [currentDay, setCurrentDay] = useState("");
   const [Initial_Time, setInitial_Time] = useState(initialTime);
   const [Final_Time, setFinal_Time] = useState(finalTime);
@@ -191,8 +197,10 @@ const EditAdvance = () => {
 
   function handleSubmit() {
     setIsLoading(true);
+    let newResult;
     let account = {
       activity_id: currentActivity,
+      advance_id: advanceId,
       user_id: currentUser,
       comments: advanceDescription,
       initial_hour: Initial_Time,
@@ -201,7 +209,7 @@ const EditAdvance = () => {
     if (account) {
       let ac = JSON.stringify(account);
       localStorage.setItem("account", ac);
-      fetch("http://localhost:4000/editAdvance", {
+      fetch("http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/editAdvance", {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -220,6 +228,7 @@ const EditAdvance = () => {
           (result) => {
             console.log("Entramos al resultado del server")
             console.log(result);
+            newResult = result;
             if (result.warning === true) {
               notifyError();
               setTimeout(() => setCreated(true), 7000);
@@ -233,7 +242,7 @@ const EditAdvance = () => {
               notify();
               setTimeout(() => setCreated(true), 2000);
             }else {
-              notify();
+              // notify();
               setTimeout(() => setCreated(true), 2000);
             }
           },
@@ -243,6 +252,8 @@ const EditAdvance = () => {
         );
       // setTimeout(() => setCreated(true), 2000);
     }
+    console.log('new result');
+    console.log(newResult);
     console.log(account);
   }
 

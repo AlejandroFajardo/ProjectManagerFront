@@ -27,7 +27,7 @@ export default class ProjectList extends Component {
   }
 
   getAllProjects() {
-    let baseUrl = "http://localhost:4000/getProjects";
+    let baseUrl = "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/getProjects";
     axios
       .get(baseUrl)
       .then((response) => {
@@ -52,7 +52,7 @@ export default class ProjectList extends Component {
   }
 
   deletProject(projectId) {
-    let baseUrl = "http://localhost:4000/deleteProject";
+    let baseUrl = "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/deleteProject";
     axios
       .delete(baseUrl, {
         data: {
@@ -66,7 +66,7 @@ export default class ProjectList extends Component {
   }
 
   getProjectToEdit(projectId) {
-    let baseUrl = "http://localhost:4000/getProjectToEdit";
+    let baseUrl = "http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/getProjectToEdit";
     axios.post(baseUrl, { project_id: projectId }).then((response) => {
       if (response.data[0]) {
         localStorage.setItem('projectIdToEdit', response.data[0].Project_Id);

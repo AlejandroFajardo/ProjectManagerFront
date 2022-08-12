@@ -177,7 +177,7 @@ const EditProyect = () => {
     if (account) {
       let ac = JSON.stringify(account);
       localStorage.setItem("account", ac);
-      fetch("http://localhost:4000/editProject", {
+      fetch("http://projectsmanagerapp-env.eba-hc2swjbm.sa-east-1.elasticbeanstalk.com/editProject", {
         method: "POST",
         headers: {
           Accept: "application/json",
