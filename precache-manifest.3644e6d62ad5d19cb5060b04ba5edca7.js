@@ -40,7 +40,7 @@ self.__precacheManifest = [
     "url": "/ProjectManagerFront/static/media/arquitectura.9883e489.jpg"
   },
   {
-    "revision": "981a274ba2990bdc236e164431c1c6e7",
+    "revision": "104776e2cd1a9fdadbc59961dfdf0422",
     "url": "/ProjectManagerFront/index.html"
   }
 ];
