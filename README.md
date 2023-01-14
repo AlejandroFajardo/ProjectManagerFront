@@ -1,4 +1,4 @@
-# P-WorkFlow
+# P-WorkFlow Front-end
 academic project; task and project manager, where there are two types of users (administration and worker)
 
 The administrator can:
